@@ -17,12 +17,12 @@ Questions and Answers is a React Single Page App, where you can ask a question a
 - Details with additional options
 - Edit 
 - User Profile / All questions / All answers / Sorted by newest
-- Spaces / Sorted by likes
+- Tags / Sorted by likes
 
 ### Users can:
 - Post questions
 - Answer questions
 - Upvote and Downvote answers
-- Create spaces
+- Create tags
 - Optional: Create personal feed by subscribing to different spaces
 - Optional: Save best answers in personal collection
