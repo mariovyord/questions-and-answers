@@ -1,6 +1,6 @@
 import React from 'react';
 import Stats from '../sidebar/Stats';
-import TagList from '../sidebar/TagList';
+import CirlclesList from '../sidebar/CirclesList';
 import QuestionCard from './QuestionCard';
 
 const mockQuestions = [
@@ -20,7 +20,7 @@ export default function Questions({ questions }) {
 		<div className='grid grid-cols-5 gap-2 max-w-5xl py-2'>
 			{/* Sidebar */}
 			<div className='col-span-1'>
-				<TagList />
+				<CirlclesList />
 			</div>
 			{/* Main Feed */}
 			<div className='col-span-3'>

@@ -1,7 +1,7 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom';
 import { BsHouseDoor, BsCardChecklist, BsPerson, BsBookmarks } from 'react-icons/bs';
-import { AiOutlineInfoCircle } from 'react-icons/ai'
+import { AiOutlineInfoCircle, AiOutlineQuestionCircle } from 'react-icons/ai'
 
 export default function NavList({ isMobile }) {
 
@@ -17,8 +17,14 @@ export default function NavList({ isMobile }) {
 			</li>
 			<li>
 				<NavLink to="/questions" className={tooltipClasses} data-tip='Questions'>
-					<BsCardChecklist size={'24px'} />
+					<AiOutlineQuestionCircle size={'24px'} />
 					{isMobile ? 'Questions' : ''}
+				</NavLink>
+			</li>
+			<li>
+				<NavLink to="/circles" className={tooltipClasses} data-tip='Circles'>
+					<BsCardChecklist size={'24px'} />
+					{isMobile ? 'Circles' : ''}
 				</NavLink>
 			</li>
 			<li>
