@@ -20,7 +20,7 @@ export default function TagList() {
 
 	return (
 		<div className='shadow bg-white rounded-2xl p-3 '>
-			<h2 className='text-2xl text-primary font-bold'>Tags</h2>
+			<h2 className='text-2xl font-bold'>Tags</h2>
 			<ul>
 				{tags.map(x => <li className='py-1' key={x}><Link to='/'>{toTitleCase(x)}</Link></li >)}
 			</ul>

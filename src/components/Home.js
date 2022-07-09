@@ -1,6 +1,8 @@
 import React from 'react'
 import AnswerCard from './AnswerCard'
+import Stats from './sidebar/Stats'
 import TagList from './sidebar/TagList'
+import SortSelect from './SortSelect'
 
 export default function Home() {
 	return (
@@ -11,12 +13,13 @@ export default function Home() {
 			</div>
 			{/* Main Feed */}
 			<div className='col-span-3 grid gap-2'>
+				<SortSelect />
 				<AnswerCard />
 				<AnswerCard />
 				<AnswerCard />
 			</div>
 			<div className='col-span-1'>
-				<TagList />
+				<Stats />
 			</div>
 		</div>
 
