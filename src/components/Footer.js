@@ -12,12 +12,12 @@ export default function Footer() {
 			<div>
 				<div className="grid grid-flow-col gap-4">
 					<a href="https://github.com/mariovyord/questions-and-answers">
-						<BsGithub size={'2rem'} />
+						<BsGithub size={'30px'} />
 					</a>
 				</div>
 			</div>
 			<div>
-				<p>Copyright © 2022 - By Mario Yordanov</p>
+				<p>Copyright © 2022 - Mario Yordanov</p>
 			</div>
 		</footer>
 	)

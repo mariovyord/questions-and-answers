@@ -1,4 +1,5 @@
 import NavList from './NavList';
+import { Link } from 'react-router-dom';
 
 export default function Navbar() {
 	return (
@@ -13,7 +14,7 @@ export default function Navbar() {
 							<NavList isMobile={true} />
 						</ul>
 					</div>
-					<button to="/" className="btn btn-ghost normal-case text-2xl">Q&amp;A</button>
+					<Link to="/" className="btn btn-ghost normal-case text-2xl">Q&amp;A</Link>
 				</div>
 				<div className="navbar-center hidden lg:flex">
 					<ul className="menu menu-horizontal p-0">

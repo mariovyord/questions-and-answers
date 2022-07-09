@@ -9,6 +9,7 @@ Questions and Answers is a React Single Page App, where you can ask a question a
 ### Common
 - Home page / Answers Sorted by likes / Pagination
 - Details
+- Search
 - Login / Logout
 - Register
 
@@ -18,6 +19,9 @@ Questions and Answers is a React Single Page App, where you can ask a question a
 - Edit 
 - User Profile / All questions / All answers / Sorted by newest
 - Tags / Sorted by likes
+
+### Main gimmick
+- Scoreboard of the users with most upvoted answers
 
 ### Users can:
 - Post questions
