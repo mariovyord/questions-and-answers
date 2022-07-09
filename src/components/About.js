@@ -2,9 +2,34 @@ import React from 'react'
 
 export default function About() {
 	return (
-		<div>
-			<h1>About Questions and Answers</h1>
-			<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae, fugiat dolorem temporibus quae tempore ullam minima ad sed repellendus tenetur cumque enim perferendis nihil incidunt ipsam sunt earum porro. Unde voluptate ipsa, quas veritatis error illo sapiente natus ea omnis soluta voluptatibus culpa similique. Reiciendis veritatis voluptas a itaque repudiandae accusantium quibusdam ducimus modi blanditiis fugit incidunt dolorum hic, non neque vitae reprehenderit tempore quod facere assumenda officia. Consequatur, aliquam reiciendis sunt debitis inventore ex voluptas sapiente sint laboriosam tempora quos consequuntur distinctio voluptate cupiditate tenetur commodi dicta asperiores nemo libero necessitatibus odit ducimus. Quos inventore deserunt voluptatum sint animi!</p>
+		<div className='max-w-5xl py-3'>
+			<div className="carousel carousel-center rounded-box">
+				<div className="carousel-item">
+					<img src="https://placeimg.com/400/300/arch" alt="Pizza" />
+				</div>
+				<div className="carousel-item">
+					<img src="https://placeimg.com/400/300/arch" alt="Pizza" />
+				</div>
+				<div className="carousel-item">
+					<img src="https://placeimg.com/400/300/arch" alt="Pizza" />
+				</div>
+				<div className="carousel-item">
+					<img src="https://placeimg.com/400/300/arch" alt="Pizza" />
+				</div>
+				<div className="carousel-item">
+					<img src="https://placeimg.com/400/300/arch" alt="Pizza" />
+				</div>
+				<div className="carousel-item">
+					<img src="https://placeimg.com/400/300/arch" alt="Pizza" />
+				</div>
+				<div className="carousel-item">
+					<img src="https://placeimg.com/400/300/arch" alt="Pizza" />
+				</div>
+			</div>
+			<h1 className='font-bold text-3xl my-5'>About Questions and Answers</h1>
+			<div>
+				<p>Questions and Answers is a student project for SoftUni ReactJS project defence.</p>
+			</div>
 		</div>
 	)
 }
