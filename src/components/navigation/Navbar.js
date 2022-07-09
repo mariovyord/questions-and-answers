@@ -22,7 +22,7 @@ export default function Navbar() {
 					</ul>
 				</div>
 				<div className="navbar-end">
-					<button className="btn">Add question</button>
+					<button className="btn btn-secondary">Add question</button>
 				</div>
 			</div>
 		</div>

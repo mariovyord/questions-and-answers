@@ -19,10 +19,10 @@ export default function TagList() {
 	const tags = tagsMockup;
 
 	return (
-		<div className='shadow bg-white rounded-2xl p-3 '>
+		<div className='p-3 '>
 			<h2 className='text-2xl font-bold'>Tags</h2>
 			<ul>
-				{tags.map(x => <li className='py-1' key={x}><Link to='/'>{toTitleCase(x)}</Link></li >)}
+				{tags.map(x => <li className='py-1 link link-hover' key={x}><Link to='/'>{toTitleCase(x)}</Link></li >)}
 			</ul>
 		</div>
 	)

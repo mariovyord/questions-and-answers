@@ -7,7 +7,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 function App() {
 	return (
 		<Router>
-			<div className='bg-slate-200 h-full'>
+			<div className='bg-base-200 h-full'>
 				<header>
 					<Navbar />
 				</header>

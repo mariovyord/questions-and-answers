@@ -4,7 +4,7 @@ import { BsArrowDownCircle, BsArrowUpCircle } from 'react-icons/bs'
 
 export default function AnswerCard() {
 	return (
-		<div className='w-full bg-white rounded-2xl shadow p-4'>
+		<div className='w-full bg-base-100 shadow p-4 rounded-sm'>
 
 			{/* User info */}
 			<div className='flex'>
@@ -14,17 +14,17 @@ export default function AnswerCard() {
 					</div>
 				</div>
 				<span className='font-bold flex ml-3'>
-					<Link to="/user/1234" className='place-self-center'>Mario Yordanov</Link>
+					<Link to="/user/1234" className='place-self-center link-hover'>Mario Yordanov</Link>
 				</span>
 			</div>
 
 			{/* Question */}
 			<div className='py-2'>
 				<div className='font-bold'>
-					<Link to="/question/1234">When did England become an island?</Link>
+					<Link to="/question/1234" className='link-hover'>When did England become an island?</Link>
 				</div>
 				<div>
-					<span className='text-xs text-gray-500'>Tags: <Link to="">history</Link>, <Link to="">geography</Link></span>
+					<span className='text-xs text-gray-500'>Tags: <Link to="" className='link-hover'>history</Link>, <Link to="" className='link-hover'>geography</Link></span>
 				</div>
 			</div>
 

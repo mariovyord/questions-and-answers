@@ -2,7 +2,7 @@ import React from 'react'
 
 export default function Stats() {
 	return (
-		<div class="stats stats-vertical shadow w-full">
+		<div class="stats stats-vertical bg-base-200 w-full">
 
 			<div class="stat">
 				<div class="stat-title">Questions</div>
