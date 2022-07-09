@@ -22,9 +22,9 @@ export default function Navbar() {
 					</ul>
 				</div>
 				<div className="navbar-end">
-					<button className="btn btn-secondary">Add question</button>
+					<button className="btn btn-secondary modal-button">Add question</button>
 				</div>
 			</div>
-		</div>
+		</div >
 	)
 }

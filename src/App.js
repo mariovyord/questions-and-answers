@@ -3,6 +3,8 @@ import Home from './components/Home';
 import Navbar from './components/navigation/Navbar';
 import About from './components/About';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Questions from './components/questions/Questions';
+import Profile from './components/Profile';
 
 function App() {
 	return (
@@ -14,6 +16,8 @@ function App() {
 				<main className="flex justify-center w-full" >
 					<Routes>
 						<Route path='/' exact element={<Home />} />
+						<Route path='/questions' element={<Questions />} />
+						<Route path='/profile' element={<Profile />} />
 						<Route path='/about' element={<About />} />
 					</Routes>
 				</main>

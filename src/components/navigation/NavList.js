@@ -22,12 +22,6 @@ export default function NavList({ isMobile }) {
 				</NavLink>
 			</li>
 			<li>
-				<NavLink to="/tags" className={tooltipClasses} data-tip='Tags'>
-					<BsBookmarks size={'24px'} />
-					{isMobile ? 'Tags' : ''}
-				</NavLink>
-			</li>
-			<li>
 				<NavLink to="/profile" className={tooltipClasses} data-tip='Profile'>
 					<BsPerson size={'24px'} />
 					{isMobile ? 'Profile' : ''}
