@@ -8,12 +8,13 @@ import Profile from './components/Profile';
 import Circles from './components/Circles';
 import Auth from './components/auth/Auth';
 import Signup from './components/auth/Signup';
+import PageNotFound from './components/PageNotFound';
 
 function App() {
 
 	return (
 		<Router>
-			<div className='bg-base-200 h-full'>
+			<div className='bg-base-200 min-h-screen'>
 				<header>
 					<Navbar />
 				</header>
@@ -26,6 +27,7 @@ function App() {
 						<Route path='/auth/signup' element={<Signup />} />
 						<Route path='/auth' element={<Auth />} />
 						<Route path='/about' element={<About />} />
+						<Route path="*" element={<PageNotFound />} />
 					</Routes>
 				</main>
 				<footer>
