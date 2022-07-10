@@ -1,13 +1,14 @@
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Footer from './components/Footer';
 import Home from './components/Home';
 import Navbar from './components/navigation/Navbar';
 import About from './components/About';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Questions from './components/questions/Questions';
 import Profile from './components/Profile';
 import Circles from './components/Circles';
 
 function App() {
+
 	return (
 		<Router>
 			<div className='bg-base-200 h-full'>
