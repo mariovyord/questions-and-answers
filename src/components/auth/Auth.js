@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 
 export default function Auth() {
 	return (
-		<div className='flex flex-col justify-center px-2 w-full max-w-5xl min-h-[calc(100vh-100px)]'>
-			<div className='p-8 px-4'>
+		<div className='flex flex-col justify-center px-2 w-full max-w-5xl min-h-[calc(100vh-290px)]'>
+			<div className='p-8'>
 				<h1 className='font-bold text-6xl text-center mb-4'>Questions!</h1>
 				<h3 className='font-bold italic text-xl text-center '>Ask a question and have the world help you out!</h3>
 			</div>
