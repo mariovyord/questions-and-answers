@@ -14,18 +14,14 @@ export default function Auth() {
 
 
 				<div class="flex flex-col justify-between bg-base-100 rounded-box place-items-center basis-1/2 w-full shadow-2xl">
-					<div class="card w-full max-w-sm">
-						<form class="card-body">
+					<div class="card w-full max-w-sm p-8">
+						<form class="form-control">
 							<h2 className='font-bold text-xl text-center'>Login</h2>
-							<label class="label">
-								<span class="label-text">Username</span>
-							</label>
-							<input type="text" placeholder="username" class="input input-bordered" />
-							<label className="label">
-								<span className="label-text">Password</span>
-							</label>
-							<input type="text" placeholder="password" class="input input-bordered" />
-							<button className="btn btn-primary">Login</button>
+							<label htmlFor="username" className='label'>Username</label>
+							<input type="text" className='input input-bordered' placeholder='Your username.' />
+							<label htmlFor="password" className='label'>Password</label>
+							<input type="text" placeholder="Your password." class="input input-bordered" />
+							<button className="btn btn-primary mt-4">Login</button>
 						</form>
 					</div>
 				</div>
@@ -33,11 +29,13 @@ export default function Auth() {
 				<div class="divider lg:divider-horizontal">OR</div>
 
 				<div class="flex flex-col justify-between card bg-base-100 rounded-box place-items-center basis-1/2 w-full shadow-2xl p-8">
-					<div className='mb-4'>
+					<div className='mb-4  max-w-sm'>
 						<h2 className='font-bold text-xl text-center'>Sign up</h2>
 						<p className='text-center'>Fill a short form and start you journey in Questions!</p>
 					</div>
-					<Link to='/auth/signup' className='btn btn-accent'>Continue</Link>
+					<div className='w-full px-8 max-w-sm'>
+						<Link to='/auth/signup' className='btn btn-accent w-full'>Continue</Link>
+					</div>
 				</div>
 			</div>
 		</div>

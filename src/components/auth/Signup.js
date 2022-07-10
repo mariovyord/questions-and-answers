@@ -22,6 +22,13 @@ export default function Signup() {
 
 					<input type="submit" className='btn btn-accent mt-6' placeholder='username' value={'Next'} />
 				</form>
+				<div className='flex justify-center py-4'>
+					<ul class="steps">
+						<li class="step step-primary">Sign up</li>
+						<li class="step">Upload picture</li>
+						<li class="step">Enjoy!</li>
+					</ul>
+				</div>
 			</div>
 		</div>
 	)
