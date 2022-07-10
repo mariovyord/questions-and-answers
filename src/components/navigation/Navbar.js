@@ -14,7 +14,7 @@ export default function Navbar() {
 							<NavList isMobile={true} />
 						</ul>
 					</div>
-					<Link to="/" className="btn btn-ghost normal-case text-2xl">Q&amp;A</Link>
+					<Link to="/" className="btn btn-ghost normal-case text-2xl">Questions!</Link>
 				</div>
 				<div className="navbar-center hidden lg:flex">
 					<ul className="menu menu-horizontal p-0">
@@ -22,7 +22,7 @@ export default function Navbar() {
 					</ul>
 				</div>
 				<div className="navbar-end">
-					<button className="btn btn-secondary modal-button">Add question</button>
+					<button className="btn btn-secondary modal-button">Ask question</button>
 				</div>
 			</div>
 		</div >

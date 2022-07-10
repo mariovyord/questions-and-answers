@@ -1,7 +1,7 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom';
 import { BsHouseDoor, BsPerson } from 'react-icons/bs';
-import { AiOutlineInfoCircle, AiOutlineQuestionCircle, AiOutlineCheckCircle } from 'react-icons/ai'
+import { AiOutlineInfoCircle, AiOutlineQuestionCircle, AiOutlineCheckCircle, AiOutlineLogin } from 'react-icons/ai'
 
 export default function NavList({ isMobile }) {
 
@@ -33,10 +33,17 @@ export default function NavList({ isMobile }) {
 					{isMobile ? 'Profile' : ''}
 				</NavLink></li>
 			<li>
+				<NavLink to="/auth" className={tooltipClasses} data-tip='Login'>
+					<AiOutlineLogin size={'24px'} />
+					{isMobile ? 'Login' : ''}
+				</NavLink>
+			</li>
+			<li>
 				<NavLink to="/about" className={tooltipClasses} data-tip='About'>
 					<AiOutlineInfoCircle size={'24px'} />
 					{isMobile ? 'About' : ''}
-				</NavLink></li>
+				</NavLink>
+			</li>
 		</>
 	)
 }

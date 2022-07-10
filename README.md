@@ -30,3 +30,14 @@ Questions and Answers is a React Single Page App, where you can ask a question a
 - Create tags
 - Optional: Create personal feed by subscribing to different spaces
 - Optional: Save best answers in personal collection
+
+## Circles
+- History
+- Programming
+- Technology
+- Science
+- Movies
+- Books
+- World politics
+- Economics
++ User generated circles
