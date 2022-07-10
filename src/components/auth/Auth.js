@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 export default function Auth() {
 	return (
@@ -36,9 +37,8 @@ export default function Auth() {
 						<h2 className='font-bold text-xl text-center'>Sign up</h2>
 						<p className='text-center'>Fill a short form and start you journey in Questions!</p>
 					</div>
-					<button className='btn btn-accent'>Continue</button>
+					<Link to='/auth/signup' className='btn btn-accent'>Continue</Link>
 				</div>
-
 			</div>
 		</div>
 	)
