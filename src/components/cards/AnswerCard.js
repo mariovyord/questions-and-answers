@@ -4,7 +4,7 @@ import { BsArrowDownCircle, BsArrowUpCircle } from 'react-icons/bs'
 
 export default function AnswerCard() {
 	return (
-		<div className='w-full bg-base-100 shadow p-4 rounded-sm'>
+		<div className='w-full bg-base-100 shadow p-4 rounded-2xl'>
 
 			{/* User info */}
 			<div className='flex'>
