@@ -9,7 +9,7 @@ import Circles from './components/Circles';
 import Auth from './components/auth/Auth';
 import Signup from './components/auth/Signup';
 import PageNotFound from './components/PageNotFound';
-import QuestionDetails from './components/QuestionDetails';
+import QuestionDetails from './components/questions/QuestionDetails';
 
 function App() {
 

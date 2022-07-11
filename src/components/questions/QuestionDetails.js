@@ -1,12 +1,20 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import AnswerCard from './cards/AnswerCard';
-import SortSelect from './common/SortSelect';
-import { BsPencilSquare } from 'react-icons/bs';
+import AnswerCard from '../cards/AnswerCard';
+import SortSelect from '../common/SortSelect';
+import MDEditor from '@uiw/react-md-editor';
+import rehypeSanitize from "rehype-sanitize";
 
 export default function QuestionDetails() {
 
 	const [isOpen, setIsOpen] = useState(false);
+	const [textValue, setTextValue] = useState("**Hello world!!!**");
+
+	const handleOnClear = (e) => {
+		e.preventDefault();
+		setTextValue('');
+	}
+
 
 	const swapAddAsnwerBtn = (e) => {
 		setIsOpen(!isOpen);
@@ -28,15 +36,29 @@ export default function QuestionDetails() {
 						</div>
 						<div className="collapse-content">
 							<form>
-								<textarea name='answer' className='textarea textarea-bordered w-full' placeholder='Write your answer.'></textarea>
+								{/* <textarea name='answer' className='textarea textarea-bordered w-full' placeholder='Write your answer.'></textarea> */}
+
+								<div className="container" data-theme="cmyk">
+
+									<MDEditor
+										value={textValue}
+										onChange={setTextValue}
+										preview={'edit'}
+										previewOptions={{
+											rehypePlugins: [[rehypeSanitize]],
+										}}
+									/>
+
+								</div>
+
 								<div className='flex justify-end gap-4 my-2'>
-									<button className='btn'>Clear</button>
+									<button className='btn' onClick={handleOnClear}>Clear</button>
 									<button className='btn btn-primary'>Submit</button>
 								</div>
 							</form>
-							<div class="alert shadow-lg">
+							<div className="alert shadow-lg">
 								<div>
-									<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-current flex-shrink-0 w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+									<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="stroke-current flex-shrink-0 w-6 h-6"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
 									<span>You can use <a href="https://www.markdownguide.org/" className='link'>markdown</a>  in writing your answer!</span>
 								</div>
 							</div>
