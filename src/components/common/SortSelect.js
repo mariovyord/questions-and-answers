@@ -2,7 +2,7 @@ import React from 'react'
 
 export default function SortSelect() {
 	return (
-		<div className='w-full bg-base-100 shadow px-4 py-2 rounded-2xl'>
+		<div className='w-full bg-base-100 shadow px-4 py-2 rounded-lg'>
 			<div>
 				<span className='font-bold text-sm mr-4'>Sort by:</span>
 				<select className="select select-sm w-full max-w-xs">

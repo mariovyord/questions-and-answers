@@ -9,6 +9,7 @@ import Circles from './components/Circles';
 import Auth from './components/auth/Auth';
 import Signup from './components/auth/Signup';
 import PageNotFound from './components/PageNotFound';
+import QuestionDetails from './components/QuestionDetails';
 
 function App() {
 
@@ -22,6 +23,7 @@ function App() {
 					<Routes>
 						<Route path='/' exact element={<Home />} />
 						<Route path='/questions' element={<Questions />} />
+						<Route path='/questions/:id' element={<QuestionDetails />} />
 						<Route path='/profile' element={<Profile />} />
 						<Route path='/circles' element={<Circles />} />
 						<Route path='/auth/signup' element={<Signup />} />
