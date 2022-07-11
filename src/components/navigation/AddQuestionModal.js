@@ -1,7 +1,18 @@
-import React, { useEffect, useRef, userRef } from 'react';
+import React, { useEffect } from 'react';
 import { AiOutlineCloseCircle } from 'react-icons/ai';
+import { enablePageScroll, disablePageScroll } from 'scroll-lock';
 
 export default function AddQuestionModal({ handleModal }) {
+
+	useEffect(() => {
+		disablePageScroll();
+		return () => enablePageScroll();
+	}, [])
+
+	// useEffect(() => {
+	// 	document.body.style.overflow = "hidden";
+	// 	return () => document.body.style.overflow = "auto";
+	// }, []);
 
 	return (
 		<div onClick={() => handleModal()} className='overflow-hidden absolute w-full h-full bg-slate-400 bg-opacity-70 z-50 top-0 left-0 flex flex-col items-center justify-center p-3 '>

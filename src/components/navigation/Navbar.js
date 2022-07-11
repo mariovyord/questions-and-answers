@@ -1,6 +1,6 @@
 import NavList from './NavList';
 import { Link } from 'react-router-dom';
-import { useRef, useState, useEffect } from 'react';
+import { useState } from 'react';
 import AddQuestionModal from './AddQuestionModal';
 
 export default function Navbar() {
