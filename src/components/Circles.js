@@ -1,5 +1,5 @@
 import React from 'react';
-import CircleCard from './CircleCard';
+import CircleCard from './cards/CircleCard';
 
 export default function Circles() {
 	return (

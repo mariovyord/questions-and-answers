@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
-import AnswerCard from './AnswerCard';
+import AnswerCard from './cards/AnswerCard';
 import Stats from './sidebar/Stats';
 import CirlclesList from './sidebar/CirclesList';
-import SortSelect from './SortSelect';
+import SortSelect from './common/SortSelect';
 import { themeChange } from 'theme-change';
 
 export default function Home() {

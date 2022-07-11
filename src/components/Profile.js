@@ -1,6 +1,6 @@
 import React from 'react';
-import AnswerCard from './AnswerCard';
-import SortSelect from './SortSelect';
+import AnswerCard from './cards/AnswerCard';
+import SortSelect from './common/SortSelect';
 
 export default function Profile() {
 	return (
