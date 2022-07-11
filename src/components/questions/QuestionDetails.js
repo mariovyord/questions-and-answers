@@ -8,7 +8,7 @@ import rehypeSanitize from "rehype-sanitize";
 export default function QuestionDetails() {
 
 	const [isOpen, setIsOpen] = useState(false);
-	const [textValue, setTextValue] = useState("**Hello world!!!**");
+	const [textValue, setTextValue] = useState("**Hello World**");
 
 	const handleOnClear = (e) => {
 		e.preventDefault();
@@ -36,14 +36,13 @@ export default function QuestionDetails() {
 						</div>
 						<div className="collapse-content">
 							<form>
-								{/* <textarea name='answer' className='textarea textarea-bordered w-full' placeholder='Write your answer.'></textarea> */}
-
 								<div className="container" data-theme="cmyk">
 
 									<MDEditor
 										value={textValue}
 										onChange={setTextValue}
 										preview={'edit'}
+										autoFocus={true}
 										previewOptions={{
 											rehypePlugins: [[rehypeSanitize]],
 										}}
