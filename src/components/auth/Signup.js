@@ -3,8 +3,8 @@ import React from 'react'
 export default function Signup() {
 	return (
 		<div className='flex justify-center w-full p-3 bg-base-100'>
-			<div className='w-96'>
-				<h1 className='font-bold text-5xl text-center my-8'>Sign up</h1>
+			<div className='w-96 py-8'>
+				<h1 className='font-bold text-5xl text-center mb-8'>Sign up</h1>
 				<form className='form-control max-w-sm'>
 					<label htmlFor="username" className='label'>Username</label>
 					<input type="text" className='input input-bordered' placeholder='Make it short and memorable.' />
@@ -20,15 +20,8 @@ export default function Signup() {
 					<label htmlFor="username" className='label'>Repeat password</label>
 					<input type="password" className='input input-bordered' placeholder='... and repeat if here.' />
 
-					<input type="submit" className='btn btn-accent mt-6' placeholder='username' value={'Next'} />
+					<input type="submit" className='btn btn-accent mt-6' placeholder='username' value={'Sign up'} />
 				</form>
-				<div className='flex justify-center py-4'>
-					<ul class="steps">
-						<li class="step step-primary">Sign up</li>
-						<li class="step">Upload picture</li>
-						<li class="step">Enjoy!</li>
-					</ul>
-				</div>
 			</div>
 		</div>
 	)
