@@ -8,7 +8,7 @@ import rehypeSanitize from "rehype-sanitize";
 export default function QuestionDetails() {
 
 	const [isOpen, setIsOpen] = useState(false);
-	const [textValue, setTextValue] = useState("**Hello World**");
+	const [textValue, setTextValue] = useState("");
 
 	const handleOnClear = (e) => {
 		e.preventDefault();
@@ -64,6 +64,7 @@ export default function QuestionDetails() {
 						</div>
 					</div>
 				</div>
+
 				{/* Sort options */}
 				<SortSelect />
 
