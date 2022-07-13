@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { BsArrowDownCircle, BsArrowUpCircle } from 'react-icons/bs';
 import MDEditor from '@uiw/react-md-editor';
+import rehypeSanitize from "rehype-sanitize";
 
 export default function AnswerCard({ answer }) {
 	return (
@@ -31,7 +32,17 @@ export default function AnswerCard({ answer }) {
 
 			{/* Answer */}
 			<div>
-				<MDEditor.Markdown source={answer.body} style={{ whiteSpace: 'pre-wrap' }} />
+				<MDEditor.Markdown
+					source={answer.body}
+					style={{
+						whiteSpace: 'pre-wrap',
+						backgroundColor: 'hsl(var(--b1))',
+						color: 'hsl(var(--bc))',
+					}}
+					previewOptions={{
+						rehypePlugins: [[rehypeSanitize]],
+					}}
+				/>
 			</div>
 
 			{/* Menu buttons */}
