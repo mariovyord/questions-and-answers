@@ -71,7 +71,7 @@ export default function AnswerCard({ answer }) {
 			</div>
 
 			{/* Menu buttons */}
-			<AnswerCardMenu userVote={userVote} handleVote={handleVote} />
+			<AnswerCardMenu userVote={userVote} handleVote={handleVote} score={answer.score} answerId={answer._id} />
 		</div>
 	)
 }
