@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import AnswerCard from '../cards/AnswerCard';
-import SortSelect from '../common/SortSelect';
+import AnswerCard from './cards/AnswerCard';
+import SortSelect from './utils/SortSelect';
 import MDEditor from '@uiw/react-md-editor';
 import rehypeSanitize from "rehype-sanitize";
 

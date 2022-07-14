@@ -3,13 +3,13 @@ import Footer from './components/Footer';
 import Home from './components/Home';
 import Navbar from './components/navigation/Navbar';
 import About from './components/About';
-import Questions from './components/questions/Questions';
+import Questions from './components/Questions';
+import QuestionDetails from './components/QuestionDetails';
 import Profile from './components/Profile';
 import Circles from './components/Circles';
 import Auth from './components/auth/Auth';
 import Signup from './components/auth/Signup';
 import PageNotFound from './components/PageNotFound';
-import QuestionDetails from './components/questions/QuestionDetails';
 
 function App() {
 

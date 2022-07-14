@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import AnswerCard from './cards/AnswerCard';
-import Stats from './sidebar/Stats';
-import CirlclesList from './sidebar/CirclesList';
-import SortSelect from './common/SortSelect';
+import Stats from './feautures/Stats';
+import CirlclesList from './feautures/CirclesList';
+import SortSelect from './utils/SortSelect';
 import { themeChange } from 'theme-change';
 
 export default function Home() {
@@ -65,7 +65,7 @@ export default function Home() {
 					<h3 className='text-center font-bold'>Select theme</h3>
 					<div className='flex justify-around py-2'>
 						<button className='btn btn-outline' data-set-theme="dark" data-act-class="btn-success">Dark</button>
-						<button className='btn btn-outline' data-set-theme="pink" data-act-class="btn-success">Light</button>
+						<button className='btn btn-outline' data-set-theme="cmyk" data-act-class="btn-success">Light</button>
 					</div>
 				</div>
 				<Stats />

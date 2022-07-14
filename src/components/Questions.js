@@ -1,7 +1,7 @@
 import React from 'react';
-import Stats from '../sidebar/Stats';
-import CirlclesList from '../sidebar/CirclesList';
-import QuestionCard from './QuestionCard';
+import Stats from './feautures/Stats';
+import CirlclesList from './feautures/CirclesList';
+import QuestionCard from './cards/QuestionCard';
 
 const mockQuestions = [
 	{ question: 'When did Spain lose Italy?', tags: ['history'] },
