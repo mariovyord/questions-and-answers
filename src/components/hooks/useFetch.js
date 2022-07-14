@@ -35,6 +35,6 @@ export default function useFetch(url, method, body) {
 				setError(err.message);
 			})
 	}, [url, method, body])
-	console.log(data, loading, error)
+
 	return { data, loading, error }
 }

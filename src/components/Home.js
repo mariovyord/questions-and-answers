@@ -20,10 +20,11 @@ export default function Home() {
 	});
 
 	useEffect(() => {
-		// Needed for the theme change lib to work
+		// Needed for the theme change lib to work!
 		themeChange(false);
 	}, [isDesktop]);
 
+	// TODO Add error handling!
 	const { data, loading, error } = useFetch(`/collections/answers?${sort}&populate=owner parent`)
 
 	const handleSort = (e) => {
@@ -35,7 +36,6 @@ export default function Home() {
 			setSort('sortBy=score%20desc')
 		}
 	}
-
 
 	return (
 		<div className='grid grid-cols-5 gap-2 max-w-5xl p-2 w-full'>
