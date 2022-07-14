@@ -6,3 +6,15 @@ export const toTitleCase = (str) => {
 		}
 	);
 }
+
+export const spaceToDashAndLowerCase = (str) => {
+	return str
+		.trim()
+		.replace(
+			/\s+/g,
+			function (txt) {
+				return '-';
+			}
+		)
+		.toLowerCase();
+}

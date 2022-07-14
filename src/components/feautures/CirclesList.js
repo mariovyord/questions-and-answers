@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { toTitleCase } from '../../utils/utils';
+import { spaceToDashAndLowerCase, toTitleCase } from '../../utils/stringUtils';
 
 export default function CirlclesList() {
 
@@ -13,14 +13,14 @@ export default function CirlclesList() {
 		'movies',
 		'world politics',
 		'economics',
-	]
+	];
 
 	return (
 		<div className='p-3'>
 			<h2 className='text-2xl font-bold'>Circles</h2>
 			<ul>
 				{mainCircles.map(x => {
-					const url = `/circles/${encodeURIComponent(x)}`
+					const url = `/circles/${spaceToDashAndLowerCase(x)}`
 					return <li className='py-1 link link-hover' key={x}><Link to={url}>{toTitleCase(x)}</Link></li >
 				})}
 			</ul>
