@@ -1,12 +1,19 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { BsArrowDownCircle, BsArrowUpCircle } from 'react-icons/bs';
 import MDEditor from '@uiw/react-md-editor';
 import rehypeSanitize from "rehype-sanitize";
 
 export default function AnswerCard({ answer }) {
+
+	const [open, setOpen] = useState(false);
+
+	useEffect(() => {
+		setOpen(true);
+	}, [])
+
 	return (
-		<div className='w-full bg-base-100 shadow p-4 rounded-lg'>
+		<div className={open ? 'w-full bg-base-100 shadow p-4 rounded-lg transition-all' : 'opacity-0 h-0 transition-all'}>
 
 			{/* User info */}
 			<div className='flex'>

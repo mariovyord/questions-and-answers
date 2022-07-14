@@ -56,7 +56,6 @@ export default function Home() {
 				: <div className='col-span-5 md:col-span-3 grid gap-2'>
 					<SortSelect handleSort={handleSort} />
 					{data.result.map(x => <AnswerCard key={x._id} answer={x} />)}
-
 				</div>
 			}
 
