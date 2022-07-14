@@ -20,7 +20,7 @@ export default function CirlclesList() {
 			<h2 className='text-2xl font-bold'>Circles</h2>
 			<ul>
 				{mainCircles.map(x => {
-					const url = `/circles/${x}`
+					const url = `/circles/${encodeURIComponent(x)}`
 					return <li className='py-1 link link-hover' key={x}><Link to={url}>{toTitleCase(x)}</Link></li >
 				})}
 			</ul>
