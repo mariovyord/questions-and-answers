@@ -12,7 +12,7 @@ import Signup from './components/auth/Signup';
 import PageNotFound from './components/PageNotFound';
 
 function App() {
-
+	console.log(process.env.)
 	return (
 		<Router>
 			<div className='bg-base-200 min-h-screen'>
