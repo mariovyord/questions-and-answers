@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import AnswerCard from './cards/AnswerCard/AnswerCard';
-import FeedOptions from './utils/FeedOptions';
 import MDEditor from '@uiw/react-md-editor';
 import rehypeSanitize from "rehype-sanitize";
 
@@ -66,10 +64,8 @@ export default function QuestionDetails() {
 				</div>
 
 				{/* Sort options */}
-				<FeedOptions />
 
 				{/* Answers */}
-				<AnswerCard />
 			</div>
 			<div className='col-span-2 p-3 flex flex-col gap-2'>
 				<h2 className='font-bold text-xl'>Related questions</h2>

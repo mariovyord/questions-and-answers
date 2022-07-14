@@ -1,6 +1,4 @@
 import React from 'react';
-import AnswerCard from './cards/AnswerCard/AnswerCard';
-import FeedOptions from './utils/FeedOptions';
 
 export default function Profile() {
 	return (
@@ -12,10 +10,7 @@ export default function Profile() {
 			</div>
 			{/* Main Feed */}
 			<div className='col-span-3 grid gap-2'>
-				<FeedOptions />
-				<AnswerCard />
-				<AnswerCard />
-				<AnswerCard />
+
 			</div>
 		</div>
 

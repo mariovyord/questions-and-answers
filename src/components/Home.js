@@ -1,19 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import AnswerCard from './cards/AnswerCard/AnswerCard';
 import Stats from './feautures/Stats';
 import CirlclesList from './feautures/CirclesList';
-import FeedOptions from './utils/FeedOptions';
 import { themeChange } from 'theme-change';
-import useFetch from './hooks/useFetch';
-import { PAGE_SIZE } from '../constants';
+import Feed from './feed/Feed';
+
 
 export default function Home() {
 	const [isDesktop, setDesktop] = useState(window.innerWidth > 768);
-	const [sort, setSort] = useState('sortBy=score%20desc')
-	const [page, setPage] = useState(0);
-
-	// TODO Add error handling!
-	const { data, loading, error } = useFetch(`/collections/answers?${sort}&offset=${page * PAGE_SIZE}&pageSize=${PAGE_SIZE}}&populate=owner parent`)
 
 	useEffect(() => {
 		window.addEventListener("resize", updateMedia);
@@ -29,19 +22,6 @@ export default function Home() {
 		setDesktop(window.innerWidth > 768);
 	};
 
-	const handleSort = (e) => {
-		const sort = e.target.value;
-		if (sort === 'most-recent') {
-			setSort('sortBy=createdAt%20desc')
-		} else {
-			setSort('sortBy=score%20desc')
-		}
-	}
-
-	const handlePage = (pageNum) => {
-		setPage(pageNum);
-	}
-
 	return (
 		<div className='grid grid-cols-5 gap-2 max-w-5xl p-2 w-full'>
 
@@ -54,16 +34,7 @@ export default function Home() {
 			}
 
 			{/* Main Feed */}
-			{loading
-				? <div className='col-span-5 md:col-span-3 grid gap-2 h-screen bg-base-100 rounded-lg'>
-					<FeedOptions handleSort={handleSort} />
-				</div>
-				: <div className='col-span-5 md:col-span-3 grid gap-2'>
-					<FeedOptions handleSort={handleSort} handlePage={handlePage} page={page} />
-					{data.map(x => <AnswerCard key={x._id} answer={x} />)}
-					<FeedOptions handleSort={handleSort} handlePage={handlePage} page={page} />
-				</div>
-			}
+			<Feed />
 
 			{/* Sidebar Right */}
 			{isDesktop

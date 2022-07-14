@@ -1,9 +1,7 @@
-import React from 'react'
+import React from 'react';
+import { PAGE_SIZE } from '../../constants';
 
-export default function FeedOptions({ handleSort, handlePage, page }) {
-
-	const maxPage = 1;
-
+export default function FeedOptions({ handleSort, handlePage, page, docsCount }) {
 	return (
 		<div className="btn-group grid grid-cols-3 gap-2" >
 			<button className="btn btn-outline" disabled={page <= 0} onClick={() => handlePage(page - 1)}>Previous page</button>
@@ -11,7 +9,7 @@ export default function FeedOptions({ handleSort, handlePage, page }) {
 				<option value={'highest-score'}>Sort by most stars</option>
 				<option value={'most-recent'}>Sort by most recent</option>
 			</select>
-			<button className="btn btn-outline" disabled={page >= maxPage} onClick={() => handlePage(page + 1)}>Next Page</button>
+			<button className="btn btn-outline" disabled={page >= Math.floor(docsCount / PAGE_SIZE)} onClick={() => handlePage(page + 1)}>Next Page</button>
 		</div >
 	)
 }
