@@ -1,5 +1,5 @@
 import React from 'react';
-import AnswerCard from './cards/AnswerCard';
+import AnswerCard from './cards/AnswerCard/AnswerCard';
 import SortSelect from './utils/SortSelect';
 
 export default function Profile() {

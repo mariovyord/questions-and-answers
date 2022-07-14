@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import AnswerCard from './cards/AnswerCard';
+import AnswerCard from './cards/AnswerCard/AnswerCard';
 import Stats from './feautures/Stats';
 import CirlclesList from './feautures/CirclesList';
 import SortSelect from './utils/SortSelect';

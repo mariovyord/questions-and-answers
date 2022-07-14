@@ -1,12 +1,28 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { BsArrowDownCircle, BsArrowUpCircle } from 'react-icons/bs';
 import MDEditor from '@uiw/react-md-editor';
 import rehypeSanitize from "rehype-sanitize";
+import AnswerCardMenu from './AnswerCardMenu';
 
 export default function AnswerCard({ answer }) {
 
 	const [open, setOpen] = useState(false);
+	const [userVote, setUserVote] = useState({ upvote: false, downvote: false })
+
+	// TODO Add request to API
+	const handleVote = (action) => {
+		const vote = { ...userVote };
+
+		if (action === 'upvote') {
+			vote.upvote = !vote.upvote;
+			if (vote.downvote === true) vote.downvote = false;
+		} else if (action === 'downvote') {
+			vote.downvote = !vote.downvote;
+			if (vote.upvote === true) vote.upvote = false;
+		}
+
+		setUserVote(vote);
+	}
 
 	useEffect(() => {
 		setOpen(true);
@@ -19,7 +35,9 @@ export default function AnswerCard({ answer }) {
 			<div className='flex'>
 				<div className="avatar">
 					<div className="w-10 rounded-full">
-						<img src="https://placeimg.com/192/192/people" alt='Profile' />
+						<Link to={'/users/' + answer.owner._id} className='place-self-center link-hover'>
+							<img src={answer.owner.imageUrl} alt='Profile' />
+						</Link>
 					</div>
 				</div>
 				<span className='font-bold flex ml-3'>
@@ -53,10 +71,7 @@ export default function AnswerCard({ answer }) {
 			</div>
 
 			{/* Menu buttons */}
-			<div className='flex justify-center gap-2 border-t-2 pt-3 mt-3'>
-				<button><BsArrowUpCircle size={'25px'} /></button>
-				<button><BsArrowDownCircle size={'25px'} /></button>
-			</div>
+			<AnswerCardMenu userVote={userVote} handleVote={handleVote} />
 		</div>
 	)
 }
