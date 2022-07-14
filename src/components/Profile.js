@@ -1,6 +1,6 @@
 import React from 'react';
 import AnswerCard from './cards/AnswerCard/AnswerCard';
-import SortSelect from './utils/SortSelect';
+import FeedOptions from './utils/FeedOptions';
 
 export default function Profile() {
 	return (
@@ -12,7 +12,7 @@ export default function Profile() {
 			</div>
 			{/* Main Feed */}
 			<div className='col-span-3 grid gap-2'>
-				<SortSelect />
+				<FeedOptions />
 				<AnswerCard />
 				<AnswerCard />
 				<AnswerCard />

@@ -2,17 +2,18 @@ import React, { useEffect, useState } from 'react';
 import AnswerCard from './cards/AnswerCard/AnswerCard';
 import Stats from './feautures/Stats';
 import CirlclesList from './feautures/CirclesList';
-import SortSelect from './utils/SortSelect';
+import FeedOptions from './utils/FeedOptions';
 import { themeChange } from 'theme-change';
 import useFetch from './hooks/useFetch';
+import { PAGE_SIZE } from '../constants';
 
 export default function Home() {
-	const [sort, setSort] = useState('sortBy=score%20desc')
 	const [isDesktop, setDesktop] = useState(window.innerWidth > 768);
+	const [sort, setSort] = useState('sortBy=score%20desc')
+	const [page, setPage] = useState(0);
 
-	const updateMedia = () => {
-		setDesktop(window.innerWidth > 768);
-	};
+	// TODO Add error handling!
+	const { data, loading, error } = useFetch(`/collections/answers?${sort}&offset=${page * PAGE_SIZE}&pageSize=${PAGE_SIZE}}&populate=owner parent`)
 
 	useEffect(() => {
 		window.addEventListener("resize", updateMedia);
@@ -24,17 +25,21 @@ export default function Home() {
 		themeChange(false);
 	}, [isDesktop]);
 
-	// TODO Add error handling!
-	const { data, loading, error } = useFetch(`/collections/answers?${sort}&populate=owner parent`)
+	const updateMedia = () => {
+		setDesktop(window.innerWidth > 768);
+	};
 
 	const handleSort = (e) => {
 		const sort = e.target.value;
-		console.log(sort)
 		if (sort === 'most-recent') {
 			setSort('sortBy=createdAt%20desc')
 		} else {
 			setSort('sortBy=score%20desc')
 		}
+	}
+
+	const handlePage = (pageNum) => {
+		setPage(pageNum);
 	}
 
 	return (
@@ -51,11 +56,12 @@ export default function Home() {
 			{/* Main Feed */}
 			{loading
 				? <div className='col-span-5 md:col-span-3 grid gap-2 h-screen bg-base-100 rounded-lg'>
-					<SortSelect handleSort={handleSort} />
+					<FeedOptions handleSort={handleSort} />
 				</div>
 				: <div className='col-span-5 md:col-span-3 grid gap-2'>
-					<SortSelect handleSort={handleSort} />
-					{data.result.map(x => <AnswerCard key={x._id} answer={x} />)}
+					<FeedOptions handleSort={handleSort} handlePage={handlePage} page={page} />
+					{data.map(x => <AnswerCard key={x._id} answer={x} />)}
+					<FeedOptions handleSort={handleSort} handlePage={handlePage} page={page} />
 				</div>
 			}
 
@@ -73,7 +79,6 @@ export default function Home() {
 				</div>
 				: null
 			}
-
 		</div>
 	)
 }

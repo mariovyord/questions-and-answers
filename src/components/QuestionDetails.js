@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import AnswerCard from './cards/AnswerCard/AnswerCard';
-import SortSelect from './utils/SortSelect';
+import FeedOptions from './utils/FeedOptions';
 import MDEditor from '@uiw/react-md-editor';
 import rehypeSanitize from "rehype-sanitize";
 
@@ -66,7 +66,7 @@ export default function QuestionDetails() {
 				</div>
 
 				{/* Sort options */}
-				<SortSelect />
+				<FeedOptions />
 
 				{/* Answers */}
 				<AnswerCard />
