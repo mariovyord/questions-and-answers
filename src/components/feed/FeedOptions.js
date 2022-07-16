@@ -9,7 +9,7 @@ export default function FeedOptions({ handleSort, handlePage, page, docsCount })
 				<option value={'highest-score'}>Sort by most stars</option>
 				<option value={'most-recent'}>Sort by most recent</option>
 			</select>
-			<button className="btn btn-outline" disabled={page >= Math.floor(docsCount / PAGE_SIZE)} onClick={() => handlePage(page + 1)}>Next Page</button>
+			<button className="btn btn-outline" disabled={page >= Math.ceil(docsCount / PAGE_SIZE - 1)} onClick={() => handlePage(page + 1)}>Next Page</button>
 		</div >
 	)
 }

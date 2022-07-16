@@ -9,7 +9,7 @@ export default function Feed() {
 	const [page, setPage] = useState(0);
 
 	// TODO Add error handling!
-	const { data, loading, error } = useFetch(`/collections/answers?${sort}&offset=${page * PAGE_SIZE}&pageSize=${PAGE_SIZE}}&populate=owner parent`)
+	const { data, loading, error } = useFetch(`/collections/answers?${sort}&offset=${page * PAGE_SIZE}&pageSize=${PAGE_SIZE}}&populate=owner`)
 	const { data: docsCount } = useFetch(`/collections/answers?count=true`);
 
 	const handleSort = (e) => {
@@ -25,6 +25,8 @@ export default function Feed() {
 		setPage(pageNum);
 	}
 
+	console.log(docsCount)
+
 	return (
 		<>
 			{loading
@@ -34,7 +36,7 @@ export default function Feed() {
 				: <div className='col-span-5 md:col-span-3 grid gap-2'>
 					<FeedOptions handleSort={handleSort} handlePage={handlePage} page={page} docsCount={docsCount} />
 					{data.map(x => <AnswerCard key={x._id} answer={x} />)}
-					<FeedOptions handleSort={handleSort} handlePage={handlePage} page={page} />
+					<FeedOptions handleSort={handleSort} handlePage={handlePage} page={page} docsCount={docsCount} />
 				</div>
 			}
 		</>)
