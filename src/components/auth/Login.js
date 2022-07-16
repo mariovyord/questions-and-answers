@@ -3,6 +3,7 @@ import { login } from '../../services/auth.service';
 import { AuthContext } from '../../contexts/AuthContext';
 import { useNavigate } from 'react-router-dom';
 
+// TODO Full refactor and Add abstraction
 export default function Login() {
 	const [errors, setErrors] = useState({
 		username: false,
