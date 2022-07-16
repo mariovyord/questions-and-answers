@@ -43,11 +43,12 @@ export default function Login() {
 
 		login(username, password)
 			.then(data => {
-				// Add error handling
-				// Save refresh token
+				// TODO Add error handling
+				// TODO Move refresh token elsewhere
 				handleLogin({
 					_id: data._id,
 					accessToken: data.tokens.accessToken,
+					refreshToken: data.tokens.refreshToken,
 				});
 				navigate('/')
 			}).catch((err) => {

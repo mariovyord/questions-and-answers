@@ -15,21 +15,22 @@ import Auth from './components/auth/Auth';
 import Signup from './components/auth/Signup';
 import PageNotFound from './components/PageNotFound';
 import useLocalStorage from './components/hooks/useLocalStorage';
-
-
-// mariopernik123 
+import { logout } from './services/auth.service';
 
 function App() {
 	const [userData, setUserData] = useLocalStorage('userData');
 
+	// TODO Move auth logic out of App
 	const handleLogin = (authData) => {
 		setUserData(authData);
-		console.log('userData', authData);
 	}
 	const handleLogout = () => {
 		// TODO Add modal
-		const confirmation = window.confirm('Are you sure?')
+		const confirmation = window.confirm('Are you sure?');
 		if (confirmation) {
+			const refreshToken = userData.refreshToken;
+
+			logout(refreshToken)
 			setUserData(undefined);
 		}
 	}

@@ -15,11 +15,15 @@ export default function useLocalStorage(key, initialValue) {
 		}
 	});
 
-	// TODO Add support for functions 
 	const setItem = (value) => {
 		try {
-			localStorage.setItem(key, JSON.stringify(value));
-			setState(value);
+			// TODO Needs more testing
+			if (typeof value === 'function') {
+				setState((x) => value(x));
+			} else {
+				localStorage.setItem(key, JSON.stringify(value));
+				setState(value);
+			}
 		} catch (err) {
 			console.log(err.message);
 		}
