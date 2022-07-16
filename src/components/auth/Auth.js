@@ -10,19 +10,19 @@ export default function Auth() {
 				<h3 className='font-bold italic text-xl text-center '>Ask a question and have the world help you out!</h3>
 			</div>
 
-			<div class="flex flex-col w-full lg:flex-row">
+			<div className="flex flex-col w-full lg:flex-row">
 
 
 
-				<div class="flex flex-col justify-between bg-base-100 rounded-box place-items-center basis-1/2 w-full shadow-2xl">
-					<div class="card w-full max-w-sm p-8">
+				<div className="flex flex-col justify-between bg-base-100 rounded-box place-items-center basis-1/2 w-full shadow-2xl">
+					<div className="card w-full max-w-sm p-8">
 						<Login />
 					</div>
 				</div>
 
-				<div class="divider lg:divider-horizontal">OR</div>
+				<div className="divider lg:divider-horizontal">OR</div>
 
-				<div class="flex flex-col justify-between card bg-base-100 rounded-box place-items-center basis-1/2 w-full shadow-2xl p-8">
+				<div className="flex flex-col justify-between card bg-base-100 rounded-box place-items-center basis-1/2 w-full shadow-2xl p-8">
 					<div className='mb-4  max-w-sm'>
 						<h2 className='font-bold text-xl text-center'>Sign up</h2>
 						<p className='text-center'>Fill a short form and start you journey in Questions!</p>

@@ -14,26 +14,28 @@ import Circles from './components/Circles';
 import Auth from './components/auth/Auth';
 import Signup from './components/auth/Signup';
 import PageNotFound from './components/PageNotFound';
+import useLocalStorage from './components/hooks/useLocalStorage';
+
+
+// mariopernik123 
 
 function App() {
-	const [userData, setUserData] = useState({
-		_id: '',
-		accessToken: '',
-	});
+	const [userData, setUserData] = useLocalStorage('userData');
 
 	const handleLogin = (authData) => {
 		setUserData(authData);
 		console.log('userData', authData);
 	}
 	const handleLogout = () => {
-		setUserData({
-			_id: '',
-			accessToken: '',
-		});
+		// TODO Add modal
+		const confirmation = window.confirm('Are you sure?')
+		if (confirmation) {
+			setUserData(undefined);
+		}
 	}
 
 	return (
-		<AuthContext.Provider value={{ userData, handleLogin }}>
+		<AuthContext.Provider value={{ userData, handleLogin, handleLogout }}>
 			<Router>
 				<div className='bg-base-200 min-h-screen'>
 					<header>

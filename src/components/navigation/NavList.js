@@ -1,12 +1,42 @@
-import React from 'react'
+import React, { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
 import { BsHouseDoor, BsPerson } from 'react-icons/bs';
-import { IoTrophyOutline } from 'react-icons/io5';
-import { AiOutlineInfoCircle, AiOutlineQuestionCircle, AiOutlineCheckCircle, AiOutlineLogin } from 'react-icons/ai';
+import { AiOutlineInfoCircle, AiOutlineQuestionCircle, AiOutlineCheckCircle, AiOutlineLogin, AiOutlineLogout } from 'react-icons/ai';
+import { AuthContext } from '../../contexts/AuthContext';
 
 export default function NavList({ isMobile }) {
 
 	const tooltipClasses = isMobile ? 'z-10' : 'tooltip tooltip-bottom z-10';
+	const { userData, handleLogout } = useContext(AuthContext);
+
+	const userNav = (
+		<>
+			<li>
+				<NavLink to="/profile" className={tooltipClasses} data-tip='Profile'>
+					<BsPerson size={'24px'} />
+					{isMobile ? 'Profile' : ''}
+				</NavLink>
+			</li>
+			<li>
+				<button
+					onClick={() => handleLogout()}
+					className={tooltipClasses + ' text-error'}
+					data-tip='Logout'>
+					<AiOutlineLogout size={'24px'} />
+					{isMobile ? 'Logout' : ''}
+				</button>
+			</li>
+		</>
+	);
+
+	const guestNav = (
+		<li>
+			<NavLink to="/auth" className={tooltipClasses} data-tip='Login'>
+				<AiOutlineLogin size={'24px'} />
+				{isMobile ? 'Login' : ''}
+			</NavLink>
+		</li>
+	)
 
 	return (
 		<>
@@ -28,23 +58,9 @@ export default function NavList({ isMobile }) {
 					{isMobile ? 'Circles' : ''}
 				</NavLink>
 			</li>
-			<li>
-				<NavLink to="/leaderboard" className={tooltipClasses} data-tip='Leaderboard'>
-					<IoTrophyOutline size={'24px'} />
-					{isMobile ? 'Leaderboard' : ''}
-				</NavLink></li>
-			<li>
-				<NavLink to="/profile" className={tooltipClasses} data-tip='Profile'>
-					<BsPerson size={'24px'} />
-					{isMobile ? 'Profile' : ''}
-				</NavLink>
-			</li>
-			<li>
-				<NavLink to="/auth" className={tooltipClasses} data-tip='Login'>
-					<AiOutlineLogin size={'24px'} />
-					{isMobile ? 'Login' : ''}
-				</NavLink>
-			</li>
+
+			{userData ? userNav : guestNav}
+
 			<li>
 				<NavLink to="/about" className={tooltipClasses} data-tip='About'>
 					<AiOutlineInfoCircle size={'24px'} />
