@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Login from './Login';
 
 export default function Auth() {
 	return (
@@ -15,14 +16,7 @@ export default function Auth() {
 
 				<div class="flex flex-col justify-between bg-base-100 rounded-box place-items-center basis-1/2 w-full shadow-2xl">
 					<div class="card w-full max-w-sm p-8">
-						<form class="form-control">
-							<h2 className='font-bold text-xl text-center'>Login</h2>
-							<label htmlFor="username" className='label'>Username</label>
-							<input type="text" className='input input-bordered' placeholder='Your username.' />
-							<label htmlFor="password" className='label'>Password</label>
-							<input type="text" placeholder="Your password." class="input input-bordered" />
-							<button className="btn btn-primary mt-4">Login</button>
-						</form>
+						<Login />
 					</div>
 				</div>
 
