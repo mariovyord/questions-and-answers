@@ -3,6 +3,13 @@ import { API_URL } from "../constants";
 async function request(url, options) {
 	const response = await fetch(url, options);
 	const data = await response.json();
+
+	if (response.ok === false) {
+		throw {
+			errors: data.errors || ['Request error'],
+		}
+	}
+
 	return data;
 }
 
@@ -11,7 +18,6 @@ function createOptions(method = 'get', data) {
 		'method': method,
 	};
 
-	console.log(options)
 	// if (user) {
 	// 	options.headers['X-Auth-Token'] = user.accessToken;
 	// }

@@ -1,11 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { login } from '../../services/auth.service';
+import { AuthContext } from '../../contexts/AuthContext';
+import { useNavigate } from 'react-router-dom';
 
 export default function Login() {
 	const [errors, setErrors] = useState({
 		username: false,
 		password: false,
 	});
+
+	const { handleLogin } = useContext(AuthContext);
+	const navigate = useNavigate();
 
 	const isNotValid = (str) => {
 		if (str.length < 3) return true;
@@ -38,7 +43,15 @@ export default function Login() {
 
 		login(username, password)
 			.then(data => {
-				console.log(data);
+				// Add error handling
+				// Save refresh token
+				handleLogin({
+					_id: data._id,
+					accessToken: data.tokens.accessToken,
+				});
+				navigate('/')
+			}).catch((err) => {
+				console.log(err.errors);
 			})
 	}
 
