@@ -5,7 +5,6 @@ import rehypeSanitize from "rehype-sanitize";
 import AnswerCardMenu from './AnswerCardMenu';
 
 export default function AnswerCard({ answer }) {
-	console.log(answer)
 	const [isCardOpen, setIsCardOpen] = useState(false);
 	const [userVote, setUserVote] = useState({ upvote: false, downvote: false })
 

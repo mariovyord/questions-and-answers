@@ -4,12 +4,12 @@ import AnswerCard from '../cards/AnswerCard/AnswerCard';
 import useFetch from '../hooks/useFetch';
 import { PAGE_SIZE } from '../../constants';
 
-export default function Feed() {
+export default function Feed({ urlOptions }) {
 	const [sort, setSort] = useState('sortBy=score%20desc')
 	const [page, setPage] = useState(0);
 
 	// TODO Add error handling!
-	const { data, loading, error } = useFetch(`/collections/answers?${sort}&offset=${page * PAGE_SIZE}&pageSize=${PAGE_SIZE}}&populate=owner`)
+	const { data, loading, error } = useFetch(`/collections/answers?${sort}&offset=${page * PAGE_SIZE}&pageSize=${PAGE_SIZE}}&populate=owner${urlOptions}`)
 	const { data: docsCount } = useFetch(`/collections/answers?count=true`);
 
 	const handleSort = (e) => {
@@ -24,8 +24,6 @@ export default function Feed() {
 	const handlePage = (pageNum) => {
 		setPage(pageNum);
 	}
-
-	console.log(docsCount)
 
 	return (
 		<>

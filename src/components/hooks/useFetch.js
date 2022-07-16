@@ -13,6 +13,10 @@ export default function useFetch(url, method, body) {
 			'headers': {}
 		};
 
+		// if (user) {
+		// 	options.headers['X-Auth-Token'] = user.accessToken;
+		// }
+
 		if (body !== undefined) {
 			options.headers['Content-Type'] = 'application/json';
 			options.body = JSON.stringify(body);

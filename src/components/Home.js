@@ -34,7 +34,7 @@ export default function Home() {
 			}
 
 			{/* Main Feed */}
-			<Feed />
+			<Feed urlOptions='' />
 
 			{/* Sidebar Right */}
 			{isDesktop
