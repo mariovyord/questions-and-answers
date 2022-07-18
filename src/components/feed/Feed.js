@@ -1,23 +1,23 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import FeedOptions from './FeedOptions';
 import AnswerCard from '../cards/AnswerCard/AnswerCard';
 import useFetch from '../hooks/useFetch';
 import { PAGE_SIZE } from '../../constants';
 
 export default function Feed({ urlOptions }) {
-	const [sort, setSort] = useState('sortBy=score%20desc')
 	const [page, setPage] = useState(0);
-
+	const [query, setQuery] = useSearchParams();
 	// TODO Add error handling!
-	const { data, loading, error } = useFetch(`/collections/answers?${sort}&offset=${page * PAGE_SIZE}&pageSize=${PAGE_SIZE}}&populate=owner${urlOptions}`)
+	const { data, loading, error } = useFetch(`/collections/answers?${query.get('sortBy') || 'sortBy=score%20desc'}&offset=${page * PAGE_SIZE}&pageSize=${PAGE_SIZE}}&populate=owner${urlOptions}`)
 	const { data: docsCount } = useFetch(`/collections/answers?count=true`);
 
 	const handleSort = (e) => {
 		const sort = e.target.value;
 		if (sort === 'most-recent') {
-			setSort('sortBy=createdAt%20desc')
+			setQuery({ 'sortBy': 'sortBy=createdAt%20desc' });
 		} else {
-			setSort('sortBy=score%20desc')
+			setQuery({ 'sortBy': 'sortBy=score%20desc' });
 		}
 	}
 
