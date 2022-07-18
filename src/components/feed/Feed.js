@@ -37,7 +37,7 @@ export default function Feed({ urlOptions }) {
 		<>
 			{loading
 				// TODO Add Loading spinner and stuff
-				? <div className='col-span-5 md:col-span-3 grid gap-2 h-screen bg-base-100 rounded-lg'>
+				? <div className='col-span-5 md:col-span-3 grid gap-2 h-screen bg-base-100 rounded-lg w-full'>
 					< FeedOptions handleSort={handleSort} />
 				</div >
 				: <div className='col-span-5 md:col-span-3 grid gap-2'>

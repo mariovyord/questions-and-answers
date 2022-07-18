@@ -38,10 +38,10 @@ function App() {
 	return (
 		<AuthContext.Provider value={{ userData, handleLogin, handleLogout }}>
 			<Router>
+				<header>
+					<Navbar />
+				</header>
 				<div className='bg-base-200 min-h-screen'>
-					<header>
-						<Navbar />
-					</header>
 					<main className="flex justify-center w-full " >
 						<Routes>
 							<Route path='/' element={<Home />} />
