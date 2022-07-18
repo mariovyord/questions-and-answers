@@ -22,7 +22,6 @@ function createOptions(method = 'get', data) {
 		'method': method,
 	};
 
-	// TODO Change it all...
 	const userData = JSON.parse(localStorage.getItem('userData'));
 
 	if (userData) {

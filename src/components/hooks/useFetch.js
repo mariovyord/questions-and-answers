@@ -1,31 +1,36 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext, useCallback } from 'react';
+import { AuthContext } from '../../contexts/AuthContext';
 import { API_URL } from '../../constants';
 
 // TODO Add authorization and more error handling
 export default function useFetch(url, method, body) {
+	const { userData } = useContext(AuthContext);
 	const [data, setData] = useState([]);
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState(null);
 
-	const createOptions = (method = 'GET', body) => {
+	const createOptions = useCallback((method = 'get', body) => {
 		const options = {
 			'method': method,
-			'headers': {}
 		};
 
-		// if (user) {
-		// 	options.headers['X-Auth-Token'] = user.accessToken;
-		// }
+		if (userData) {
+			if (options.headers === undefined) options.headers = {};
+			options.headers['X-Auth-Token'] = userData.accessToken;
+		}
 
-		if (body !== undefined) {
+		if (body) {
+			if (options.headers === undefined) options.headers = {};
 			options.headers['Content-Type'] = 'application/json';
 			options.body = JSON.stringify(body);
 		}
-	}
+
+		return options;
+	},
+		[userData]);
 
 	useEffect(() => {
 		setLoading(true)
-		setData([]);
 		setError(null);
 
 		fetch(API_URL + url, createOptions(method, body))
@@ -38,7 +43,7 @@ export default function useFetch(url, method, body) {
 				setLoading(false);
 				setError(err.message);
 			})
-	}, [url, method, body])
+	}, [url, method, body, createOptions])
 
 	return { data, loading, error }
 }
