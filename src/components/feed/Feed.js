@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useParams, useSearchParams, useNavigate, useLocation } from 'react-router-dom';
 import FeedOptions from './FeedOptions';
 import AnswerCard from '../cards/AnswerCard/AnswerCard';
@@ -12,16 +12,17 @@ export default function Feed({ urlOptions }) {
 	const location = useLocation();
 
 	// TODO Add error handling!
-	const { data, loading, error } = useFetch(`/collections/answers?${query.get('sortBy') || 'sortBy=score%20desc'}&page=${pageParam || 1}&pageSize=${PAGE_SIZE}}&populate=owner${urlOptions}`)
+	const { data, loading, error } = useFetch(`/collections/answers?${query.get('sortBy')
+		? 'sortBy=' + query.get('sortBy')
+		: 'sortBy=score%20desc'}&page=${pageParam || 1}&pageSize=${PAGE_SIZE}}&populate=owner${urlOptions}`)
 	const { data: docsCount } = useFetch(`/collections/answers?count=true`);
 
 	const handleSort = (e) => {
 		const sort = e.target.value;
-		console.log(sort)
 		if (sort === 'most-recent') {
-			setQuery({ 'sortBy': 'sortBy=createdAt%20desc' });
+			setQuery({ 'sortBy': 'createdAt%20desc' });
 		} else {
-			setQuery({ 'sortBy': 'sortBy=score%20desc' });
+			setQuery({ 'sortBy': 'score%20desc' });
 		}
 	}
 
