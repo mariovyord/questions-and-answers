@@ -17,15 +17,19 @@ async function request(url, options) {
 	return data;
 }
 
-function createOptions(method = 'get', data, accessToken) {
+function createOptions(method = 'get', data) {
 	const options = {
 		'method': method,
 	};
 
-	if (accessToken) {
+	// TODO Change it all...
+	const userData = JSON.parse(localStorage.getItem('userData'));
+	console.log(userData)
+	if (userData) {
 		if (options.headers === undefined) options.headers = {};
 
-		options.headers['X-Auth-Token'] = accessToken;
+		console.log(userData.accessToken);
+		options.headers['X-Auth-Token'] = userData.accessToken;
 	}
 
 	if (data !== undefined) {
@@ -38,22 +42,22 @@ function createOptions(method = 'get', data, accessToken) {
 }
 
 // TODO Refactor all...
-export async function get(url, undefined, accessToken) {
+export async function get(url) {
 	return request(API_URL + url, createOptions());
 }
 
-export async function post(url, data, accessToken) {
-	return request(API_URL + url, createOptions('post', data, accessToken));
+export async function post(url, data) {
+	return request(API_URL + url, createOptions('post', data));
 }
 
-export async function put(url, data, accessToken) {
-	return request(API_URL + url, createOptions('put', data, accessToken));
+export async function put(url, data) {
+	return request(API_URL + url, createOptions('put', data));
 }
 
-export async function patch(url, data, accessToken) {
-	return request(API_URL + url, createOptions('patch', data, accessToken));
+export async function patch(url, data) {
+	return request(API_URL + url, createOptions('patch', data));
 }
 
-export async function del(url, data, accessToken) {
-	return request(API_URL + url, createOptions('delete', data, accessToken));
+export async function del(url, data) {
+	return request(API_URL + url, createOptions('delete', data));
 }

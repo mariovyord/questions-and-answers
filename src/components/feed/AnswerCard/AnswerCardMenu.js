@@ -5,7 +5,7 @@ import { BsHandThumbsUpFill, BsHandThumbsUp, BsHandThumbsDown, BsHandThumbsDownF
 export default function AnswerCardMenu({ userVote, handleVote, score, answerId }) {
 
 	const asnwerUrl = '/answers/' + answerId;
-
+	console.log(score)
 	return (
 		<div className='flex justify-between gap-2 border-t-2 pt-3 mt-3'>
 			<div className='flex justify-center gap-2'>
@@ -16,7 +16,7 @@ export default function AnswerCardMenu({ userVote, handleVote, score, answerId }
 					{userVote.downvote ? <BsHandThumbsDownFill size={'25px'} /> : <BsHandThumbsDown size={'25px'} />}
 				</button>
 
-				<div className='pt-[13%] text-lg'>{score || 0}</div>
+				<div className='pt-[13%] text-lg'>{score}</div>
 			</div>
 			<div className='w-1/2'>
 				<Link to={asnwerUrl} className='btn btn-primary w-full'>

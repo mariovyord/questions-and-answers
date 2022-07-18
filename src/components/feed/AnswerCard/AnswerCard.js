@@ -6,32 +6,51 @@ import rehypeSanitize from "rehype-sanitize";
 import AnswerCardMenu from './AnswerCardMenu';
 import * as dataService from '../../../services/data.service';
 
-export default function AnswerCard({ answer }) {
+export default function AnswerCard({ answer: data }) {
+	const { userData } = useContext(AuthContext);
 	const [isCardOpen, setIsCardOpen] = useState(false);
+	const [answer, setAnswer] = useState(data);
 	const [userVote, setUserVote] = useState({
 		"upvote": false,
 		"downvote": false
 	})
 
-	const { userData } = useContext(AuthContext);
+	useEffect(() => {
+		if (data.upvotes.includes(userData._id)) {
+			setUserVote({
+				"upvote": true,
+				"downvote": false
+			})
+		} else if (data.downvotes.includes(userData._id)) {
+			setUserVote({
+				"upvote": false,
+				"downvote": true
+			})
+		}
+		setAnswer(data);
+	}, [data, userData])
 
-	// TODO Add request to API
 	const handleVote = (action) => {
 		const vote = { ...userVote };
 
 		if (action === 'upvote') {
 			vote.upvote = !vote.upvote;
 			if (vote.downvote === true) vote.downvote = false;
-			dataService.vote(answer._id, userVote, userData.accessToken)
+
+			dataService.vote(answer._id, vote, userData.accessToken)
 				.then(x => {
 					setUserVote(vote);
+					setAnswer(x.result);
 				});
 		} else if (action === 'downvote') {
 			vote.downvote = !vote.downvote;
 			if (vote.upvote === true) vote.upvote = false;
-			dataService.vote(answer._id, userVote, userData.accessToken)
+
+			dataService.vote(answer._id, vote)
 				.then(x => {
 					setUserVote(vote);
+					setAnswer(x.result)
+					console.log(answer);
 				});
 		}
 

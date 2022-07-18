@@ -63,9 +63,9 @@ export default function Login() {
 	return (
 		<form className="form-control" onSubmit={handleSubmit}>
 			<h2 className='font-bold text-xl text-center'>Login</h2>
-			<label htmlFor="username" className='label' for="username">Username</label>
+			<label htmlFor="username" className='label' >Username</label>
 			<input type="text" className={errors.username ? inputStylesError : inputStyles} placeholder='Your username.' name="username" id="username" />
-			<label htmlFor="password" className='label' for="password">Password</label>
+			<label htmlFor="password" className='label' >Password</label>
 			<input type="password" placeholder="Your password." className={errors.password ? inputStylesError : inputStyles} name="password" id="password" />
 			<button className="btn btn-primary mt-4">Login</button>
 		</form>
