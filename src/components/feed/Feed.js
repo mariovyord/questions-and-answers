@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSearchParams } from 'react-router-dom';
 import FeedOptions from './FeedOptions';
-import AnswerCard from '../cards/AnswerCard/AnswerCard';
+import AnswerCard from './AnswerCard/AnswerCard';
 import useFetch from '../hooks/useFetch';
 import { PAGE_SIZE } from '../../constants';
 
