@@ -16,18 +16,20 @@ export default function AnswerCard({ answer: data }) {
 	})
 
 	useEffect(() => {
-		if (data.upvotes.includes(userData._id)) {
-			setUserVote({
-				"upvote": true,
-				"downvote": false
-			})
-		} else if (data.downvotes.includes(userData._id)) {
-			setUserVote({
-				"upvote": false,
-				"downvote": true
-			})
+		if (userData) {
+			if (data.upvotes.includes(userData._id)) {
+				setUserVote({
+					"upvote": true,
+					"downvote": false
+				})
+			} else if (data.downvotes.includes(userData._id)) {
+				setUserVote({
+					"upvote": false,
+					"downvote": true
+				})
+			}
+			setAnswer(data);
 		}
-		setAnswer(data);
 	}, [data, userData])
 
 	const handleVote = (action) => {
@@ -107,7 +109,7 @@ export default function AnswerCard({ answer: data }) {
 			</div>
 
 			{/* Menu buttons */}
-			<AnswerCardMenu userVote={userVote} handleVote={handleVote} score={answer.score} answerId={answer._id} />
+			<AnswerCardMenu isLoggedIn={userData ? true : false} userVote={userVote} handleVote={handleVote} score={answer.score} answerId={answer._id} />
 		</div>
 	)
 }

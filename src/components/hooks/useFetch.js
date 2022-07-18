@@ -2,7 +2,7 @@ import { useState, useEffect, useContext, useCallback } from 'react';
 import { AuthContext } from '../../contexts/AuthContext';
 import { API_URL } from '../../constants';
 
-// TODO Add authorization and more error handling
+// TODO Add more error handling
 export default function useFetch(url, method, body) {
 	const { userData } = useContext(AuthContext);
 	const [data, setData] = useState([]);
