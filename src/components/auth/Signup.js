@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react';
 import { signup } from '../../services/auth.service';
 import { AuthContext } from '../../contexts/AuthContext';
 import { useNavigate } from 'react-router-dom';
+import useFetch from '../hooks/useFetch';
 
 // TODO Full refactor and Add abstraction
 export default function Signup() {
@@ -16,7 +17,6 @@ export default function Signup() {
 	const isNotValid = (str) => {
 		if (str.length < 3) return true;
 		if (str.length > 30) return true;
-		if (/\W/.test(str)) return true;
 		return false;
 	}
 

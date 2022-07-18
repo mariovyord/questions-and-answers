@@ -22,7 +22,12 @@ function createOptions(method = 'get', data) {
 		'method': method,
 	};
 
-	const userData = JSON.parse(localStorage.getItem('userData'));
+	// TODO Full refactor
+	const localUser = localStorage.getItem('userData');
+	let userData;
+	if (localUser !== 'undefined') {
+		userData = JSON.parse(localUser);
+	}
 
 	if (userData) {
 		if (options.headers === undefined) options.headers = {};

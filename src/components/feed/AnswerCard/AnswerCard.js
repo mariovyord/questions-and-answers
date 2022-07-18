@@ -52,7 +52,6 @@ export default function AnswerCard({ answer: data }) {
 				.then(x => {
 					setUserVote(vote);
 					setAnswer(x.result)
-					console.log(answer);
 				});
 		}
 
