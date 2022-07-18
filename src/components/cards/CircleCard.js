@@ -1,14 +1,18 @@
-import React from 'react'
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { toTitleCase } from '../../utils/stringUtils';
 
-export default function CircleCard() {
+export default function CircleCard({ data }) {
+	const circleUrl = '/circles/' + data._id;;
+
 	return (
-		<div className="card card-compact w-56 bg-base-100 shadow-xl">
-			<figure><img src="https://placeimg.com/400/225/arch" alt="Shoes" /></figure>
+		<div className="card card-compact w-full sm:w-56 bg-base-100 shadow-xl">
+			<div className='max-h-24 overflow-hidden' ><img src={data.imageUrl} alt="Shoes" /></div>
 			<div className="card-body">
-				<h2 className="card-title">History</h2>
-				<p>The History of War across the Globe and its historical impact.</p>
+				<h2 className="card-title">{toTitleCase(data.title)}</h2>
+				<p>{data.description}</p>
 				<div className="card-actions justify-end">
-					<button className="btn btn-primary">See more</button>
+					<Link to={circleUrl} className="btn btn-primary">See more</Link>
 				</div>
 			</div>
 		</div>
