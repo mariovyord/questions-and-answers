@@ -24,11 +24,10 @@ function createOptions(method = 'get', data) {
 
 	// TODO Change it all...
 	const userData = JSON.parse(localStorage.getItem('userData'));
-	console.log(userData)
+
 	if (userData) {
 		if (options.headers === undefined) options.headers = {};
 
-		console.log(userData.accessToken);
 		options.headers['X-Auth-Token'] = userData.accessToken;
 	}
 
