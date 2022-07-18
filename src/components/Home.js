@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import Stats from './feautures/Stats';
 import CirlclesList from './feautures/CirclesList';
 import { themeChange } from 'theme-change';
-import Feed from './feed/Feed';
 import { Outlet } from 'react-router-dom';
 
 
@@ -35,7 +34,6 @@ export default function Home() {
 			}
 
 			{/* Main Feed */}
-			{/* <Feed urlOptions='' /> */}
 			<Outlet />
 
 			{/* Sidebar Right */}
