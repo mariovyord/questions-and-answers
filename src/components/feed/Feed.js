@@ -12,7 +12,7 @@ export default function Feed({ urlOptions = '' }) {
 	const { data, loading, error } = useFetch(`/collections/answers?${query.get('sortBy')
 		? 'sortBy=' + query.get('sortBy')
 		: 'sortBy=score%20desc'}&page=${query.get('page') || 1}&pageSize=${PAGE_SIZE}&populate=owner${urlOptions}`)
-	const { data: docsCount } = useFetch(`/collections/answers?count=true`);
+	const { data: docsCount } = useFetch(`/collections/answers?count=true${urlOptions}`);
 
 	const handleQuery = (page, sortBy) => setQuery({
 		page: page || 1,
