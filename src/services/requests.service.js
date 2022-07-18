@@ -13,7 +13,7 @@ async function request(url, options) {
 	}
 
 	const data = await response.json();
-	console.log(data);
+
 	return data;
 }
 
@@ -24,13 +24,13 @@ function createOptions(method = 'get', data, accessToken) {
 
 	if (accessToken) {
 		if (options.headers === undefined) options.headers = {};
-		console.log(accessToken);
+
 		options.headers['X-Auth-Token'] = accessToken;
 	}
 
 	if (data !== undefined) {
 		if (options.headers === undefined) options.headers = {};
-		console.log(data)
+
 		options.headers['Content-Type'] = 'application/json';
 		options.body = JSON.stringify(data);
 	}

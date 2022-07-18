@@ -14,7 +14,7 @@ export default function Feed({ urlOptions }) {
 	// TODO Add error handling!
 	const { data, loading, error } = useFetch(`/collections/answers?${query.get('sortBy')
 		? 'sortBy=' + query.get('sortBy')
-		: 'sortBy=score%20desc'}&page=${pageParam || 1}&pageSize=${PAGE_SIZE}}&populate=owner${urlOptions}`)
+		: 'sortBy=score%20desc'}&page=${pageParam || 1}&pageSize=${PAGE_SIZE}&populate=owner${urlOptions}`)
 	const { data: docsCount } = useFetch(`/collections/answers?count=true`);
 
 	const handleSort = (e) => {
