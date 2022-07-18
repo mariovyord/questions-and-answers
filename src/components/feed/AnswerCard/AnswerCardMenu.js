@@ -5,7 +5,7 @@ import { BsHandThumbsUpFill, BsHandThumbsUp, BsHandThumbsDown, BsHandThumbsDownF
 export default function AnswerCardMenu({ userVote, handleVote, score, answerId }) {
 
 	const asnwerUrl = '/answers/' + answerId;
-	console.log(score)
+
 	return (
 		<div className='flex justify-between gap-2 border-t-2 pt-3 mt-3'>
 			<div className='flex justify-center gap-2'>
