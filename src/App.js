@@ -44,7 +44,7 @@ function App() {
 					</header>
 					<main className="flex justify-center w-full " >
 						<Routes>
-							<Route path='/' exact element={<Home />} />
+							<Route path='/' element={<Home />} />
 							<Route path='/questions' element={<Questions />} />
 							<Route path='/questions/:id' element={<QuestionDetails />} />
 							<Route path='/profile' element={<Profile />} />

@@ -1,12 +1,19 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
+import { AuthContext } from '../../../contexts/AuthContext';
 import { Link } from 'react-router-dom';
 import MDEditor from '@uiw/react-md-editor';
 import rehypeSanitize from "rehype-sanitize";
 import AnswerCardMenu from './AnswerCardMenu';
+import * as dataService from '../../../services/data.service';
 
 export default function AnswerCard({ answer }) {
 	const [isCardOpen, setIsCardOpen] = useState(false);
-	const [userVote, setUserVote] = useState({ upvote: false, downvote: false })
+	const [userVote, setUserVote] = useState({
+		"upvote": false,
+		"downvote": false
+	})
+
+	const { userData } = useContext(AuthContext);
 
 	// TODO Add request to API
 	const handleVote = (action) => {
@@ -15,12 +22,19 @@ export default function AnswerCard({ answer }) {
 		if (action === 'upvote') {
 			vote.upvote = !vote.upvote;
 			if (vote.downvote === true) vote.downvote = false;
+			dataService.vote(answer._id, userVote, userData.accessToken)
+				.then(x => {
+					setUserVote(vote);
+				});
 		} else if (action === 'downvote') {
 			vote.downvote = !vote.downvote;
 			if (vote.upvote === true) vote.upvote = false;
+			dataService.vote(answer._id, userVote, userData.accessToken)
+				.then(x => {
+					setUserVote(vote);
+				});
 		}
 
-		setUserVote(vote);
 	}
 
 	useEffect(() => {

@@ -8,45 +8,52 @@ async function request(url, options) {
 	}
 
 	if (response.ok === false) {
-		throw {
-			errors: data.errors || ['Request error'],
-		}
+		// TODO Refactor Error handling
+		throw new Error('Request error')
 	}
 
 	const data = await response.json();
-
+	console.log(data);
 	return data;
 }
 
-function createOptions(method = 'get', data) {
+function createOptions(method = 'get', data, accessToken) {
 	const options = {
 		'method': method,
 	};
 
-	// if (user) {
-	// 	options.headers['X-Auth-Token'] = user.accessToken;
-	// }
+	if (accessToken) {
+		if (options.headers === undefined) options.headers = {};
+		console.log(accessToken);
+		options.headers['X-Auth-Token'] = accessToken;
+	}
 
 	if (data !== undefined) {
-		options.headers = {};
+		if (options.headers === undefined) options.headers = {};
+		console.log(data)
 		options.headers['Content-Type'] = 'application/json';
 		options.body = JSON.stringify(data);
 	}
 	return options;
 }
 
-export async function get(url) {
+// TODO Refactor all...
+export async function get(url, undefined, accessToken) {
 	return request(API_URL + url, createOptions());
 }
 
-export async function post(url, data) {
-	return request(API_URL + url, createOptions('post', data));
+export async function post(url, data, accessToken) {
+	return request(API_URL + url, createOptions('post', data, accessToken));
 }
 
-export async function put(url, data) {
-	return request(API_URL + url, createOptions('put', data));
+export async function put(url, data, accessToken) {
+	return request(API_URL + url, createOptions('put', data, accessToken));
 }
 
-export async function del(url, data) {
-	return request(API_URL + url, createOptions('delete', data));
+export async function patch(url, data, accessToken) {
+	return request(API_URL + url, createOptions('patch', data, accessToken));
+}
+
+export async function del(url, data, accessToken) {
+	return request(API_URL + url, createOptions('delete', data, accessToken));
 }
