@@ -16,6 +16,7 @@ import Signup from './components/auth/Signup';
 import PageNotFound from './components/PageNotFound';
 import useLocalStorage from './components/hooks/useLocalStorage';
 import { logout } from './services/auth.service';
+import Feed from './components/feed/Feed';
 
 function App() {
 	const [userData, setUserData] = useLocalStorage('userData');
@@ -44,8 +45,16 @@ function App() {
 				<div className='bg-base-200 min-h-screen'>
 					<main className="flex justify-center w-full " >
 						<Routes>
-							<Route path='/' element={<Home />} />
-							<Route path='/:pageParam' element={<Home />} />
+							<Route path='/' element={<Home />} >
+								<Route
+									path="/"
+									element={<Feed />}
+								/>
+								<Route
+									path=":pageParam"
+									element={<Feed />}
+								/>
+							</Route>
 
 							<Route path='/questions' element={<Questions />} />
 							<Route path='/questions/:id' element={<QuestionDetails />} />

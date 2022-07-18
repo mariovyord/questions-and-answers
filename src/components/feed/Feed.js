@@ -5,7 +5,7 @@ import AnswerCard from '../cards/AnswerCard/AnswerCard';
 import useFetch from '../hooks/useFetch';
 import { PAGE_SIZE } from '../../constants';
 
-export default function Feed({ urlOptions }) {
+export default function Feed({ urlOptions = '' }) {
 	let { pageParam } = useParams();
 	const [query, setQuery] = useSearchParams();
 	const navigate = useNavigate();
