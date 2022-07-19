@@ -1,17 +1,18 @@
-import { useState, useEffect, useContext, useCallback } from 'react';
-import { AuthContext } from '../../contexts/AuthContext';
+import { useState, useEffect, useCallback } from 'react';
 import { API_URL } from '../../constants';
+import useAuthContext from './useAuthContext';
 
 // TODO Add more error handling
-export default function useFetch(url, method, body) {
-	const { userData } = useContext(AuthContext);
+// TODO useFetch should be only for GET
+export default function useFetch(url, body) {
+	const userData = useAuthContext();
 	const [data, setData] = useState([]);
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState(null);
 
-	const createOptions = useCallback((method = 'get', body) => {
+	const createOptions = useCallback((body) => {
 		const options = {
-			'method': method,
+			method: 'get',
 		};
 
 		if (userData) {
@@ -33,7 +34,7 @@ export default function useFetch(url, method, body) {
 		setLoading(true)
 		setError(null);
 
-		fetch(API_URL + url, createOptions(method, body))
+		fetch(API_URL + url, createOptions(body))
 			.then(response => response.json())
 			.then(result => {
 				setLoading(false);
@@ -43,7 +44,7 @@ export default function useFetch(url, method, body) {
 				setLoading(false);
 				setError(err.message);
 			})
-	}, [url, method, body, createOptions])
+	}, [url, body, createOptions])
 
 	return { data, loading, error }
 }
