@@ -28,18 +28,23 @@ export default function Profile() {
 				loading
 					? <h1>Loading</h1>
 					: <div className='col-span-5 md:col-span-2 w-full'>
-						<div className='avatar'>
-							<div className='w-full rounded-lg'>
-								<img src={data.imageUrl} alt="Portrait" />
+						<div className='bg-base-100 p-4 mb-2 rounded-lg shadow flex gap-2'>
+							<div class="avatar">
+								<div class="w-32 rounded">
+									<img src={data.imageUrl} alt="Portrait" />
+								</div>
+							</div>
+							<div className=''>
+								<h1 className='font-bold text-2xl'>{data.firstName} {data.lastName}</h1>
+								<h2 className='italic opacity-80 text-sm'>@{data.username}</h2>
+								<h2 className=''>{data.description}</h2>
 							</div>
 						</div>
-						<div className=''>
-							<h1 className='font-bold text-3xl'>{data.firstName} {data.lastName}</h1>
-							<h2>@{data.username}</h2>
-							<h2>{data.description}</h2>
+						<div>
+							<button className='btn btn-primary btn-outline w-full mb-2'>Edit Profile</button>
 						</div>
 						<div>
-							<button className='btn btn-primary btn-outline w-full'>Show questions</button>
+							<button className='btn btn-secondary btn-outline w-full'>Show questions</button>
 						</div>
 					</div>
 			}
