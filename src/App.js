@@ -16,7 +16,6 @@ import PageNotFound from './components/PageNotFound';
 import Feed from './components/feed/Feed';
 
 function App() {
-
 	return (
 		<AuthProvider>
 			<Router>
@@ -27,16 +26,8 @@ function App() {
 					<main className="flex justify-center w-full " >
 						<Routes>
 							<Route path='/' element={<Home />} >
-								<Route
-									path="/"
-									element={<Feed />}
-								/>
-								<Route
-									path=":pageParam"
-									element={<Feed />}
-								/>
+								<Route path="/" element={<Feed />} />
 							</Route>
-
 							<Route path='/questions' element={<Questions />} />
 							<Route path='/questions/:id' element={<QuestionDetails />} />
 							<Route path='/profile' element={<Profile />} />

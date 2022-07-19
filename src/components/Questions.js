@@ -7,7 +7,7 @@ import useFetch from './hooks/useFetch';
 import FeedOptionsContainer from './utils/FeedOptionsContainer';
 
 export default function Questions({ questions }) {
-	const pageSize = 20;
+	const pageSize = 5;
 
 	const [isDesktop, setDesktop] = useState(window.innerWidth > 768);
 	const [query, setQuery] = useSearchParams();
@@ -15,8 +15,7 @@ export default function Questions({ questions }) {
 	const { data, loading, error } = useFetch(`/collections/questions?sortBy=createdAt%20desc&page=${query.get('page') || 1}&pageSize=${pageSize}${query.get('where') ? `&where=${query.get('where')}` : ''}`);
 	const { data: ciclesData, loading: loadingCircles, error: errorCircles } = useFetch(`/collections/circles`);
 	const { data: docsCount } = useFetch(`/collections/questions?${query.get('where') ? `where=${query.get('where')}&` : ''}count=true`);
-	console.log('data', data)
-	console.log('docsCount', docsCount)
+
 	useEffect(() => {
 		window.addEventListener("resize", updateMedia);
 		return () => window.removeEventListener("resize", updateMedia);
@@ -73,7 +72,7 @@ export default function Questions({ questions }) {
 						}} />
 					</div >
 					: <>
-						<div className='col-span-3 gap-2'>
+						<div className='col-span-5 md:col-span-3 gap-2'>
 							<div className='grid gap-2'>
 								<FeedOptionsContainer
 									handlePage={handlePage}
@@ -96,8 +95,30 @@ export default function Questions({ questions }) {
 										}
 									</select>
 								</FeedOptionsContainer>
-								{/* TODO Change it to quiestions prop */}
+
 								{data.map(x => <QuestionCard data={x} />)}
+
+								<FeedOptionsContainer
+									handlePage={handlePage}
+									page={query.get('page')}
+									pageSize={pageSize}
+									docsCount={docsCount}
+								>
+									<select
+										className="select w-full max-w-xs btn-outline"
+										onChange={handleSort}
+										value={query.get('where')?.split('=')[1] || 'all'}
+									>
+										<option value="all">All</option>
+										{
+											loadingCircles
+												? null
+												: <>
+													{ciclesData.map(x => <option key={x._id} value={x._id}>{x.title}</option>)}
+												</>
+										}
+									</select>
+								</FeedOptionsContainer>
 							</div>
 						</div>
 					</>

@@ -49,7 +49,7 @@ export default function Profile() {
 					</div>
 			}
 
-			{/* Main Feed */}
+			{/* Feed */}
 			<Feed urlOptions={filterQuery} />
 		</div>
 	)
