@@ -7,7 +7,7 @@ import useFetch from './hooks/useFetch';
 import FeedOptionsContainer from './utils/FeedOptionsContainer';
 
 export default function Questions({ questions }) {
-	const pageSize = 3;
+	const pageSize = 20;
 
 	const [isDesktop, setDesktop] = useState(window.innerWidth > 768);
 	const [query, setQuery] = useSearchParams();

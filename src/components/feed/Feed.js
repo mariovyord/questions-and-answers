@@ -22,11 +22,7 @@ export default function Feed({ urlOptions = '' }) {
 	const handleSort = (e) => {
 		const sort = e.target.value;
 		const page = query.get('page');
-		if (sort === 'createdAt%20desc') {
-			handleQuery(page, 'createdAt%20desc');
-		} else {
-			handleQuery(page);
-		}
+		if (sort) handleQuery(page, sort)
 	}
 
 	const handlePage = (changeNum) => {
