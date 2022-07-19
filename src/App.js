@@ -1,7 +1,6 @@
-import { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
-import { AuthContext } from './contexts/AuthContext';
+import { AuthProvider } from './contexts/AuthContext';
 
 import Footer from './components/Footer';
 import Home from './components/Home';
@@ -14,30 +13,12 @@ import Circles from './components/Circles';
 import Auth from './components/auth/Auth';
 import Signup from './components/auth/Signup';
 import PageNotFound from './components/PageNotFound';
-import useLocalStorage from './components/hooks/useLocalStorage';
-import { logout } from './services/auth.service';
 import Feed from './components/feed/Feed';
 
 function App() {
-	const [userData, setUserData] = useLocalStorage('userData');
-
-	// TODO Move auth logic out of App
-	const handleLogin = (authData) => {
-		setUserData(authData);
-	}
-	const handleLogout = () => {
-		// TODO Add modal
-		const confirmation = window.confirm('Are you sure?');
-		if (confirmation) {
-			const refreshToken = userData.refreshToken;
-
-			logout(refreshToken)
-			setUserData(undefined);
-		}
-	}
 
 	return (
-		<AuthContext.Provider value={{ userData, handleLogin, handleLogout }}>
+		<AuthProvider>
 			<Router>
 				<header>
 					<Navbar />
@@ -71,7 +52,7 @@ function App() {
 					</footer>
 				</div>
 			</Router>
-		</AuthContext.Provider>
+		</AuthProvider>
 	);
 }
 
