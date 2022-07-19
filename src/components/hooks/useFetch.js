@@ -3,7 +3,6 @@ import { API_URL } from '../../constants';
 import useAuthContext from './useAuthContext';
 
 // TODO Add more error handling
-// TODO useFetch should be only for GET
 export default function useFetch(url, body) {
 	const userData = useAuthContext();
 	const [data, setData] = useState([]);
@@ -37,12 +36,13 @@ export default function useFetch(url, body) {
 		fetch(API_URL + url, createOptions(body))
 			.then(response => response.json())
 			.then(result => {
-				setLoading(false);
 				setData(result.result);
 			})
 			.catch(err => {
-				setLoading(false);
 				setError(err.message);
+			})
+			.finally(() => {
+				setLoading(false);
 			})
 	}, [url, body, createOptions])
 
