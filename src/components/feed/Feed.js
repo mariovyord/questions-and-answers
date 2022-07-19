@@ -1,9 +1,9 @@
 import React from 'react';
 import { useSearchParams } from 'react-router-dom';
-import FeedOptions from './FeedOptions';
 import AnswerCard from './AnswerCard/AnswerCard';
 import useFetch from '../hooks/useFetch';
 import { PAGE_SIZE } from '../../constants';
+import FeedOptionsContainer from '../utils/FeedOptionsContainer';
 
 export default function Feed({ urlOptions = '' }) {
 	const [query, setQuery] = useSearchParams();
@@ -41,13 +41,28 @@ export default function Feed({ urlOptions = '' }) {
 		<>
 			{loading
 				// TODO Add Loading spinner and stuff
-				? <div className='col-span-5 md:col-span-3 grid gap-2 h-screen bg-base-100 rounded-lg w-full'>
-					< FeedOptions handleSort={handleSort} />
+				? <div className='col-span-5 md:col-span-3 grid gap-2 h-screen rounded-lg w-full'>
+					<FeedOptionsContainer handlePage={handlePage} page={query.get('page')} docsCount={docsCount} sort={query.get('sortBy')} >
+						<select className="select w-full max-w-xs btn-outline" onChange={handleSort}>
+							<option value={'score'}>Sort by score</option>
+							<option value={'most-recent'}>Sort by most recent</option>
+						</select>
+					</FeedOptionsContainer>
 				</div >
 				: <div className='col-span-5 md:col-span-3 grid gap-2'>
-					<FeedOptions handleSort={handleSort} handlePage={handlePage} page={query.get('page')} docsCount={docsCount} sort={query.get('sortBy')} />
+					<FeedOptionsContainer handlePage={handlePage} page={query.get('page')} docsCount={docsCount} sort={query.get('sortBy')} >
+						<select className="select w-full max-w-xs btn-outline" onChange={handleSort}>
+							<option value={'score'}>Sort by score</option>
+							<option value={'most-recent'}>Sort by most recent</option>
+						</select>
+					</FeedOptionsContainer>
 					{data.map(x => <AnswerCard key={x._id} answer={x} />)}
-					<FeedOptions handleSort={handleSort} handlePage={handlePage} page={query.get('page')} docsCount={docsCount} />
+					<FeedOptionsContainer handlePage={handlePage} page={query.get('page')} docsCount={docsCount} sort={query.get('sortBy')} >
+						<select className="select w-full max-w-xs btn-outline" onChange={handleSort}>
+							<option value={'score'}>Sort by score</option>
+							<option value={'most-recent'}>Sort by most recent</option>
+						</select>
+					</FeedOptionsContainer>
 				</div>
 			}
 		</>)

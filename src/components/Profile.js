@@ -27,9 +27,9 @@ export default function Profile() {
 			{
 				loading
 					? <h1>Loading</h1>
-					: <div className='col-span-2 w-full'>
+					: <div className='col-span-5 md:col-span-2 w-full'>
 						<div className='avatar'>
-							<div className='w-full max-'>
+							<div className='w-full rounded-lg'>
 								<img src={data.imageUrl} alt="Portrait" />
 							</div>
 						</div>
