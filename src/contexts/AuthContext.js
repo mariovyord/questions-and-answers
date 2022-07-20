@@ -7,6 +7,8 @@ export const AuthContext = createContext();
 export function AuthProvider({ children }) {
 	const [userData, setUserData] = useLocalStorage('userData');
 
+	// TODO Check token validity and get new tokens if expired
+
 	const handleLogin = (authData) => {
 		setUserData(authData);
 	}

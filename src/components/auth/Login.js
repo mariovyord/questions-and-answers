@@ -47,9 +47,9 @@ export default function Login() {
 				// TODO Add error handling
 				// TODO Move refresh token elsewhere
 				handleLogin({
-					_id: data._id,
-					accessToken: data.tokens.accessToken,
-					refreshToken: data.tokens.refreshToken,
+					_id: data.result._id,
+					accessToken: data.result.accessToken,
+					refreshToken: data.result.refreshToken,
 				});
 				navigate('/')
 			}).catch((err) => {

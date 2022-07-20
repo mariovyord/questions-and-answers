@@ -25,6 +25,7 @@ export default function Feed({ urlOptions = '' }) {
 		if (sort) handleQuery(page, sort)
 	}
 
+	// TODO Remove query string from jsx!!!
 	const handlePage = (changeNum) => {
 		let page = query.get('page');
 		if (page) page = parseInt(page) + changeNum;
