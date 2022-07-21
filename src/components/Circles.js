@@ -1,8 +1,8 @@
 import React from 'react';
 import CircleCard from './cards/CircleCard';
 import useFetch from './hooks/useFetch';
-import NoContent from './utils/NoContent';
-import Spinner from './utils/Spinner';
+import NoContent from './common/NoContent';
+import Spinner from './common/Spinner';
 
 export default function Circles() {
 	const { data, loading, error } = useFetch(`/collections/circles`);

@@ -1,15 +1,29 @@
 import React, { useEffect, useState, useContext } from 'react';
+import { Link } from 'react-router-dom';
 import { AuthContext } from '../contexts/AuthContext';
+import { getQuestionsByOwnerId } from '../services/data.service';
+import QuestionCard from './cards/QuestionCard';
 import Feed from './feed/Feed';
 import useFetch from './hooks/useFetch';
 
 export default function Profile() {
 	const [isDesktop, setDesktop] = useState(window.innerWidth > 768);
+	const [showQuestions, setShowQuestions] = useState(false);
+	const [questions, setQuestions] = useState([]);
 
 	const { userData } = useContext(AuthContext);
 	const filterQuery = `&where=owner=${userData._id}`;
 
 	const { data, loading, error } = useFetch(`/users/${userData._id}`);
+
+	const handleShowQuestions = () => {
+		getQuestionsByOwnerId(userData._id)
+			.then(x => {
+				setQuestions(x.result);
+				setShowQuestions(!showQuestions)
+			});
+	}
+
 	// TODO Abstract it away
 	useEffect(() => {
 		window.addEventListener("resize", updateMedia);
@@ -43,9 +57,16 @@ export default function Profile() {
 						<div>
 							<button className='btn btn-primary btn-outline w-full mb-2'>Edit Profile</button>
 						</div>
-						<div>
-							<button className='btn btn-secondary btn-outline w-full'>Show questions</button>
+						<div className='pb-2'>
+							<button onClick={handleShowQuestions} className='btn btn-secondary btn-outline w-full'>{showQuestions ? 'Hide questions' : 'Show questions'}</button>
 						</div>
+						{showQuestions && <div className='grid gap-2'>
+							{questions.length > 0
+								? questions.map(x => <QuestionCard data={x} />)
+								: <h2>No questions</h2>
+							}
+						</div>
+						}
 					</div>
 			}
 

@@ -2,9 +2,9 @@ import React from 'react';
 import { useSearchParams } from 'react-router-dom';
 import AnswerCard from './AnswerCard/AnswerCard';
 import useFetch from '../hooks/useFetch';
-import FeedOptionsContainer from '../utils/FeedOptionsContainer';
-import Spinner from '../utils/Spinner';
-import NoContent from '../utils/NoContent';
+import FeedOptionsContainer from '../common/FeedOptionsContainer';
+import Spinner from '../common/Spinner';
+import NoContent from '../common/NoContent';
 
 export default function Feed({ urlOptions = '' }) {
 	const pageSize = 2;

@@ -4,4 +4,6 @@ export const vote = (answerId, userVote) => post(`/collections/answers/${answerI
 
 export const getData = (url) => get(url);
 
-export const postQuestion = (data) => post('/collections/questions', data)
+export const postQuestion = (data) => post('/collections/questions', data);
+
+export const getQuestionsByOwnerId = (ownerId) => get(`/collections/questions?where=owner=${ownerId}`)
