@@ -5,7 +5,7 @@ import useFetch from './hooks/useFetch';
 export default function Circles() {
 	const { data, loading, error } = useFetch(`/collections/circles`);
 	const { data: docsCount } = useFetch(`/collections/circles?count=true`);
-	console.log(data)
+
 	return (
 		<div >
 			<h2 className='font-bold text-center text-3xl my-5'>Main circles</h2>

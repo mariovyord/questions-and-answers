@@ -1,18 +1,16 @@
 import { API_URL } from "../constants";
+import { getUserData } from "../utils/userData";
 
 async function request(url, options) {
 	const response = await fetch(url, options);
-
-	if (response.status === 204) {
-		return response;
-	}
+	const data = await response.json();
 
 	if (response.ok === false) {
-		// TODO Refactor Error handling
-		throw new Error('Request error')
+		const errMessage = {
+			errors: data.errors || data.message || 'Error fetching data from server',
+		}
+		throw (errMessage);
 	}
-
-	const data = await response.json();
 
 	return data;
 }
@@ -22,12 +20,7 @@ function createOptions(method = 'get', data) {
 		'method': method,
 	};
 
-	// TODO Full refactor
-	const localUser = localStorage.getItem('userData');
-	let userData;
-	if (localUser !== 'undefined') {
-		userData = JSON.parse(localUser);
-	}
+	const userData = getUserData();
 
 	if (userData) {
 		if (options.headers === undefined) options.headers = {};
@@ -35,7 +28,7 @@ function createOptions(method = 'get', data) {
 		options.headers['X-Auth-Token'] = userData.accessToken;
 	}
 
-	if (data !== undefined) {
+	if (data) {
 		if (options.headers === undefined) options.headers = {};
 
 		options.headers['Content-Type'] = 'application/json';
@@ -44,7 +37,6 @@ function createOptions(method = 'get', data) {
 	return options;
 }
 
-// TODO Refactor all...
 export async function get(url) {
 	return request(API_URL + url, createOptions());
 }

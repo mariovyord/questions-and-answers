@@ -9,8 +9,12 @@ export function AuthProvider({ children }) {
 
 	// TODO Check token validity and get new tokens if expired
 
-	const handleLogin = (authData) => {
-		setUserData(authData);
+	const handleLogin = (data) => {
+		setUserData({
+			_id: data.result._id,
+			accessToken: data.result.accessToken,
+			refreshToken: data.result.refreshToken,
+		});
 	}
 	const handleLogout = () => {
 		// TODO Add modal
@@ -19,7 +23,7 @@ export function AuthProvider({ children }) {
 			const refreshToken = userData.refreshToken;
 
 			logout(refreshToken)
-			setUserData(undefined);
+			setUserData(null);
 		}
 	}
 	return (

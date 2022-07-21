@@ -3,29 +3,27 @@ import { useState } from "react";
 export default function useLocalStorage(key, initialValue) {
 	const [state, setState] = useState(() => {
 		try {
-			let item = localStorage.getItem(key);
-
-			return item
-				? JSON.parse(item)
-				: initialValue;
-
+			const userData = localStorage.getItem(key)
+			if (userData) {
+				return JSON.parse(localStorage.getItem(key));
+			}
+			return null;
 		} catch (err) {
-			console.log(err.message);
-			return initialValue;
+			return null;
 		}
 	});
 
 	const setItem = (value) => {
 		try {
-			// TODO Needs more testing
-			if (typeof value === 'function') {
-				setState((x) => value(x));
+			if (value === null) {
+				localStorage.removeItem('userData');
+				setState(null);
 			} else {
 				localStorage.setItem(key, JSON.stringify(value));
 				setState(value);
 			}
 		} catch (err) {
-			console.log(err.message);
+			return null;
 		}
 	}
 
