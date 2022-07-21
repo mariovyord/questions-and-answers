@@ -37,19 +37,20 @@ export default function Home() {
 			<Outlet />
 
 			{/* Sidebar Right */}
-			{isDesktop
-				? <div className={'col-span-1'}>
-					<div>
-						<h3 className='text-center font-bold'>Select theme</h3>
-						<div className='flex justify-around py-2'>
-							<button className='btn btn-outline' data-set-theme="dark" data-act-class="btn-success">Dark</button>
-							<button className='btn btn-outline' data-set-theme="cmyk" data-act-class="btn-success">Light</button>
+			{
+				isDesktop
+					? <div className={'col-span-1'}>
+						<div>
+							<h3 className='text-center font-bold'>Select theme</h3>
+							<div className='flex justify-around py-2'>
+								<button className='btn btn-outline' data-set-theme="dark" data-act-class="btn-success">Dark</button>
+								<button className='btn btn-outline' data-set-theme="cmyk" data-act-class="btn-success">Light</button>
+							</div>
 						</div>
+						<Stats />
 					</div>
-					<Stats />
-				</div>
-				: null
+					: null
 			}
-		</div>
+		</div >
 	)
 }

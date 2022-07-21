@@ -1,10 +1,10 @@
 import React from 'react';
 import CircleCard from './cards/CircleCard';
 import useFetch from './hooks/useFetch';
+import Spinner from './utils/Spinner';
 
 export default function Circles() {
 	const { data, loading, error } = useFetch(`/collections/circles`);
-	const { data: docsCount } = useFetch(`/collections/circles?count=true`);
 
 	return (
 		<div >
@@ -13,7 +13,7 @@ export default function Circles() {
 				{/* Main Feed */}
 				{
 					loading
-						? <h1>Lodaingasdas</h1>
+						? <Spinner />
 						: <>
 							{/* TODO Change it to quiestions prop */}
 							{data.map(x => <CircleCard data={x}></CircleCard>)}

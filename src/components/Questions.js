@@ -5,6 +5,7 @@ import CirlclesList from './feautures/CirclesList';
 import QuestionCard from './cards/QuestionCard';
 import useFetch from './hooks/useFetch';
 import FeedOptionsContainer from './utils/FeedOptionsContainer';
+import Spinner from './utils/Spinner';
 
 export default function Questions({ questions }) {
 	const pageSize = 5;
@@ -60,41 +61,34 @@ export default function Questions({ questions }) {
 			}
 
 			{/* Main Feed */}
-			{
-				loading
-					// TODO Add Loading spinner and stuff
-					? <div className='col-span-5 md:col-span-3 grid gap-2 h-screen rounded-lg w-full'>
-						<QuestionCard data={{
-							body: 'Loading...',
-							_id: 'Loading...',
-							circle: 'Loading...',
-							meta: { circle: 'Loading...' },
-						}} />
-					</div >
-					: <>
-						<div className='col-span-5 md:col-span-3 gap-2'>
-							<div className='grid gap-2'>
-								<FeedOptionsContainer
-									handlePage={handlePage}
-									page={query.get('page')}
-									pageSize={pageSize}
-									docsCount={docsCount}
-								>
-									<select
-										className="select w-full max-w-xs btn-outline"
-										onChange={handleSort}
-										value={query.get('where')?.split('=')[1] || 'all'}
-									>
-										<option value="all">All</option>
-										{
-											loadingCircles
-												? null
-												: <>
-													{ciclesData.map(x => <option key={x._id} value={x._id}>{x.title}</option>)}
-												</>
-										}
-									</select>
-								</FeedOptionsContainer>
+			<div className='col-span-5 md:col-span-3 gap-2'>
+				<div className='grid gap-2'>
+					<FeedOptionsContainer
+						handlePage={handlePage}
+						page={query.get('page')}
+						pageSize={pageSize}
+						docsCount={docsCount}
+					>
+						<select
+							className="select w-full max-w-xs btn-outline"
+							onChange={handleSort}
+							value={query.get('where')?.split('=')[1] || 'all'}
+						>
+							<option value="all">All</option>
+							{
+								loadingCircles
+									? null
+									: <>
+										{ciclesData.map(x => <option key={x._id} value={x._id}>{x.title}</option>)}
+									</>
+							}
+						</select>
+					</FeedOptionsContainer>
+					{
+						loading
+							// TODO Add Loading spinner and stuff
+							? <Spinner />
+							: <>
 
 								{data.map(x => <QuestionCard data={x} />)}
 
@@ -119,10 +113,10 @@ export default function Questions({ questions }) {
 										}
 									</select>
 								</FeedOptionsContainer>
-							</div>
-						</div>
-					</>
-			}
+							</>
+					}
+				</div>
+			</div>
 
 			{/* Sidebar Right */}
 			{

@@ -1,6 +1,7 @@
 import { createContext, useCallback, useEffect, useState } from "react";
 import { logout, newTokens } from '../services/auth.service';
 import useLocalStorage from '../components/hooks/useLocalStorage';
+import Spinner from "../components/utils/Spinner";
 
 export const AuthContext = createContext();
 
@@ -59,7 +60,7 @@ export function AuthProvider({ children }) {
 
 	return (
 		<AuthContext.Provider value={{ userData, handleLogin, handleLogout }}>
-			{loading ? null : children}
+			{loading ? <Spinner /> : children}
 		</AuthContext.Provider>
 	)
 }
