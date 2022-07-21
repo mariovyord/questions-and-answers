@@ -1,8 +1,19 @@
 import { API_URL } from "../constants";
-import { getUserData } from "../utils/userData";
+import { clearUserData, getUserData } from "../utils/userData";
 
 async function request(url, options) {
 	const response = await fetch(url, options);
+
+	if (response.status === 401) {
+		clearUserData();
+		throw new Error('Unauthorized');
+	}
+
+	if (response.status === 403) {
+		clearUserData();
+		throw new Error('Session expired');
+	}
+
 	const data = await response.json();
 
 	if (response.ok === false) {
@@ -24,13 +35,11 @@ function createOptions(method = 'get', data) {
 
 	if (userData) {
 		if (options.headers === undefined) options.headers = {};
-
 		options.headers['X-Auth-Token'] = userData.accessToken;
 	}
 
 	if (data) {
 		if (options.headers === undefined) options.headers = {};
-
 		options.headers['Content-Type'] = 'application/json';
 		options.body = JSON.stringify(data);
 	}

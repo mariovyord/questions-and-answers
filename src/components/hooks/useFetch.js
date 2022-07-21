@@ -1,31 +1,16 @@
-import { useState, useEffect, useCallback } from 'react';
-import { API_URL } from '../../constants';
-import useUserDataContext from './useUserDataContext';
+import { useState, useEffect } from 'react';
+import { getData } from '../../services/data.service';
 
 export default function useFetch(url) {
-	const userData = useUserDataContext();
-
 	const [data, setData] = useState([]);
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState(null);
-
-	const createOptions = useCallback(() => {
-		const options = { method: 'get', };
-
-		if (userData !== null) {
-			if (options.headers === undefined) options.headers = {};
-			options.headers['X-Auth-Token'] = userData.accessToken;
-		}
-
-		return options;
-	}, [userData]);
 
 	useEffect(() => {
 		setLoading(true)
 		setError(null);
 
-		fetch(API_URL + url, createOptions())
-			.then(response => response.json())
+		getData(url)
 			.then(result => {
 				setData(result.result);
 			})
@@ -35,7 +20,8 @@ export default function useFetch(url) {
 			.finally(() => {
 				setLoading(false);
 			})
-	}, [url, createOptions])
+
+	}, [url])
 
 	return { data, loading, error }
 }

@@ -45,12 +45,7 @@ export default function Login() {
 		login(username, password)
 			.then(data => {
 				// TODO Add error handling
-				// TODO Move refresh token elsewhere
-				handleLogin({
-					_id: data.result._id,
-					accessToken: data.result.accessToken,
-					refreshToken: data.result.refreshToken,
-				});
+				handleLogin(data);
 				navigate('/')
 			}).catch((err) => {
 				console.log(err.errors);

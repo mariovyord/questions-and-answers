@@ -2,7 +2,6 @@ import React, { useState, useContext } from 'react';
 import { signup } from '../../services/auth.service';
 import { AuthContext } from '../../contexts/AuthContext';
 import { useNavigate } from 'react-router-dom';
-import useFetch from '../hooks/useFetch';
 
 // TODO Full refactor and Add abstraction
 export default function Signup() {
@@ -58,11 +57,7 @@ export default function Signup() {
 		signup(user)
 			.then(data => {
 				// TODO Move refresh token elsewhere
-				handleLogin({
-					_id: data.result._id,
-					accessToken: data.result.accessToken,
-					refreshToken: data.result.refreshToken,
-				});
+				handleLogin(data);
 				navigate('/')
 			}).catch((err) => {
 				console.log(err.errors);
