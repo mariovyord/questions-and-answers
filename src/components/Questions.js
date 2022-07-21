@@ -6,6 +6,7 @@ import QuestionCard from './cards/QuestionCard';
 import useFetch from './hooks/useFetch';
 import FeedOptionsContainer from './utils/FeedOptionsContainer';
 import Spinner from './utils/Spinner';
+import NoContent from './utils/NoContent';
 
 export default function Questions({ questions }) {
 	const pageSize = 5;
@@ -48,6 +49,32 @@ export default function Questions({ questions }) {
 		handleQuery(page, where);
 	}
 
+	const content = <>
+		{data.map(x => <QuestionCard data={x} />)}
+
+		<FeedOptionsContainer
+			handlePage={handlePage}
+			page={query.get('page')}
+			pageSize={pageSize}
+			docsCount={docsCount}
+		>
+			<select
+				className="select w-full max-w-xs btn-outline"
+				onChange={handleSort}
+				value={query.get('where')?.split('=')[1] || 'all'}
+			>
+				<option value="all">All</option>
+				{
+					loadingCircles
+						? null
+						: <>
+							{ciclesData.map(x => <option key={x._id} value={x._id}>{x.title}</option>)}
+						</>
+				}
+			</select>
+		</FeedOptionsContainer>
+	</>
+
 
 	return (
 		<div className='grid grid-cols-5 gap-2 max-w-5xl p-2 w-full'>
@@ -86,34 +113,8 @@ export default function Questions({ questions }) {
 					</FeedOptionsContainer>
 					{
 						loading
-							// TODO Add Loading spinner and stuff
 							? <Spinner />
-							: <>
-
-								{data.map(x => <QuestionCard data={x} />)}
-
-								<FeedOptionsContainer
-									handlePage={handlePage}
-									page={query.get('page')}
-									pageSize={pageSize}
-									docsCount={docsCount}
-								>
-									<select
-										className="select w-full max-w-xs btn-outline"
-										onChange={handleSort}
-										value={query.get('where')?.split('=')[1] || 'all'}
-									>
-										<option value="all">All</option>
-										{
-											loadingCircles
-												? null
-												: <>
-													{ciclesData.map(x => <option key={x._id} value={x._id}>{x.title}</option>)}
-												</>
-										}
-									</select>
-								</FeedOptionsContainer>
-							</>
+							: <> {data.length > 0 ? content : <NoContent content='questions' />} </>
 					}
 				</div>
 			</div>

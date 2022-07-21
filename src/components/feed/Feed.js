@@ -4,6 +4,7 @@ import AnswerCard from './AnswerCard/AnswerCard';
 import useFetch from '../hooks/useFetch';
 import FeedOptionsContainer from '../utils/FeedOptionsContainer';
 import Spinner from '../utils/Spinner';
+import NoContent from '../utils/NoContent';
 
 export default function Feed({ urlOptions = '' }) {
 	const pageSize = 2;
@@ -14,7 +15,7 @@ export default function Feed({ urlOptions = '' }) {
 		? 'sortBy=' + query.get('sortBy')
 		: 'sortBy=score%20desc'}&page=${query.get('page') || 1}&pageSize=${pageSize}&populate=owner${urlOptions}`)
 	const { data: docsCount } = useFetch(`/collections/answers?count=true${urlOptions}`);
-
+	console.log(data)
 	const handleQuery = (page, sortBy) => setQuery({
 		page: page || 1,
 		sortBy: sortBy || 'score%20desc',
@@ -34,6 +35,27 @@ export default function Feed({ urlOptions = '' }) {
 		const sort = query.get('sortBy');
 		handleQuery(page, sort);
 	}
+
+	const content = <>
+		{data.map(x => <AnswerCard key={x._id} answer={x} />)}
+
+		< FeedOptionsContainer
+			handlePage={handlePage}
+			page={query.get('page')}
+			pageSize={pageSize}
+			docsCount={docsCount}
+			sort={query.get('sortBy')}
+		>
+			<select
+				className="select w-full max-w-xs btn-outline"
+				value={query.get('sortBy') || 'score%20desc'}
+				onChange={handleSort}
+			>
+				<option value={'score%20desc'}>Sort by score</option>
+				<option value={'createdAt%20desc'}>Sort by most recent</option>
+			</select>
+		</FeedOptionsContainer>
+	</>
 
 	return (
 		<>
@@ -57,24 +79,7 @@ export default function Feed({ urlOptions = '' }) {
 				{loading
 					? <Spinner />
 					: <>
-						{data.map(x => <AnswerCard key={x._id} answer={x} />)}
-
-						< FeedOptionsContainer
-							handlePage={handlePage}
-							page={query.get('page')}
-							pageSize={pageSize}
-							docsCount={docsCount}
-							sort={query.get('sortBy')}
-						>
-							<select
-								className="select w-full max-w-xs btn-outline"
-								value={query.get('sortBy') || 'score%20desc'}
-								onChange={handleSort}
-							>
-								<option value={'score%20desc'}>Sort by score</option>
-								<option value={'createdAt%20desc'}>Sort by most recent</option>
-							</select>
-						</FeedOptionsContainer>
+						{data.length > 0 ? content : <NoContent content='answers' />}
 					</>
 				}
 			</div>
