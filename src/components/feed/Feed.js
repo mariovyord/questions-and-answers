@@ -15,7 +15,7 @@ export default function Feed({ urlOptions = '' }) {
 		? 'sortBy=' + query.get('sortBy')
 		: 'sortBy=score%20desc'}&page=${query.get('page') || 1}&pageSize=${pageSize}&populate=owner${urlOptions}`)
 	const { data: docsCount } = useFetch(`/collections/answers?count=true${urlOptions}`);
-	console.log(data)
+
 	const handleQuery = (page, sortBy) => setQuery({
 		page: page || 1,
 		sortBy: sortBy || 'score%20desc',

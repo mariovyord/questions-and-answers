@@ -1,7 +1,7 @@
 import { createContext, useCallback, useEffect, useState } from "react";
 import { logout, newTokens } from '../services/auth.service';
 import useLocalStorage from '../components/hooks/useLocalStorage';
-import Spinner from "../components/utils/Spinner";
+import Spinner from "../components/common/Spinner";
 
 export const AuthContext = createContext();
 
@@ -44,18 +44,21 @@ export function AuthProvider({ children }) {
 	}, [userData, setUserData])
 
 	useEffect(() => {
-		if (loading) updateTokens(userData.refreshToken)
+		if (userData) {
+			if (loading) updateTokens(userData.refreshToken)
 
-		let fourMinutes = 1000 * 60 * 4
+			let fourMinutes = 1000 * 60 * 4
 
-		let interval = setInterval(() => {
-			if (userData) {
-				updateTokens(userData.refreshToken)
-			}
-		}, fourMinutes);
+			let interval = setInterval(() => {
+				if (userData) {
+					updateTokens(userData.refreshToken)
+				}
+			}, fourMinutes);
 
-		return () => clearInterval(interval)
-
+			return () => clearInterval(interval)
+		} else {
+			setLoading(false);
+		}
 	}, [userData, loading, updateTokens])
 
 	return (

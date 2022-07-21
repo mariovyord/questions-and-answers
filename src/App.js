@@ -38,10 +38,10 @@ function App() {
 							<Route path="*" element={<PageNotFound />} />
 						</Routes>
 					</main>
-					<footer>
-						<Footer />
-					</footer>
 				</div>
+				<footer className='b-0 w-full'>
+					<Footer />
+				</footer>
 			</Router>
 		</AuthProvider>
 	);

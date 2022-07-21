@@ -1,16 +1,8 @@
 import NavList from './NavList';
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
 import AddQuestionModal from './AddQuestionModal';
 
 export default function Navbar() {
-
-	const [openModal, SetOpenModal] = useState(false);
-
-	const handleModal = () => {
-		SetOpenModal(!openModal);
-	}
-
 	return (
 		<div className='bg-base-100 flex justify-center'>
 			<div className="navbar max-w-5xl">
@@ -31,8 +23,7 @@ export default function Navbar() {
 					</ul>
 				</div>
 				<div className="navbar-end">
-					<button onClick={() => handleModal()} className="btn btn-secondary modal-button">Ask question</button>
-					{openModal && <AddQuestionModal handleModal={handleModal} />}
+					<AddQuestionModal />
 				</div>
 			</div>
 		</div >

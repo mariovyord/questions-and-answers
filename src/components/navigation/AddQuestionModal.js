@@ -1,34 +1,91 @@
-import React, { useEffect } from 'react';
-import { AiOutlineCloseCircle } from 'react-icons/ai';
-import { enablePageScroll, disablePageScroll } from 'scroll-lock';
+import { useCallback, useEffect, useState } from 'react';
+import Modal from '../common/Modal';
+import circles from '../../data/circles.json';
+import { toTitleCase } from '../../utils/stringUtils';
+import useUserDataContext from '../hooks/useUserDataContext';
+import { postQuestion } from '../../services/data.service';
+import FormInput from '../forms/input/FormInput';
 
-export default function AddQuestionModal({ handleModal }) {
+const AddQuestionModal = () => {
+	const [openModal, SetOpenModal] = useState(false);
+	const [errors, setErrors] = useState({});
+	const userData = useUserDataContext();
 
-	useEffect(() => {
-		disablePageScroll();
-		return () => enablePageScroll();
+	const handleModal = () => {
+		SetOpenModal(!openModal);
+	}
+
+	const handleSubmit = (e) => {
+		e.preventDefault();
+
+		const formData = new FormData(e.target);
+		const question = formData.get('body');
+		const circle = formData.get('circle');
+		const owner = userData._id;
+		const meta = {
+			circle: 'history'
+		}
+
+		const data = {
+			body: question,
+			circle,
+			owner,
+			meta,
+		}
+
+		console.log(data)
+		postQuestion(data)
+			.then(x => {
+				// Show success 
+			})
+			.then(x => {
+				SetOpenModal(!openModal)
+			})
+			.catch(err => {
+				console.log(err);
+			})
+
+	}
+
+	const clearErrors = useCallback(() => {
+		setTimeout(() => {
+			setErrors({});
+		}, 3000)
 	}, [])
 
-	// useEffect(() => {
-	// 	document.body.style.overflow = "hidden";
-	// 	return () => document.body.style.overflow = "auto";
-	// }, []);
+	const verifyQuestion = (e) => {
+		const body = e.target.value;
+		if (body.length < 6) {
+			setErrors({
+				...errors,
+				body: 'Minimum length is 6 characters'
+			})
+			clearErrors()
+		} else if (body.length > 50) {
+			setErrors({
+				...errors,
+				body: 'Maximum length is 50 characters'
+			})
+			clearErrors()
+		}
+	}
 
 	return (
-		<div onClick={() => handleModal()} className='overflow-hidden absolute w-full h-full bg-slate-400 bg-opacity-70 z-50 top-0 left-0 flex flex-col items-center justify-center p-3 '>
-			<form onClick={(e) => e.stopPropagation()} className='card bg-base-100 p-3 w-full max-w-md' >
-				<div className='flex justify-end'>
-					<button onClick={() => handleModal()}><AiOutlineCloseCircle size='25px' /></button>
-				</div>
-				<div className='px-8 pb-8'>
-					<label htmlFor="question" className='label font-bold text-2xl'>Add question</label>
-					<input type="text" name='question' className='input input-bordered my-4 w-full' />
-					<div className='flex justify-end gap-4 w-full'>
-						<button onClick={() => handleModal()} className='btn btn-outline'>Cancel</button>
-						<button className='btn btn-primary'>Submit</button>
+		<>
+			<button onClick={() => handleModal()} className="btn btn-secondary modal-button">Ask question</button>
+			{
+				openModal && <Modal handleModal={handleModal} handleSubmit={handleSubmit} contents={{ title: 'Add question', button: 'Submit' }} >
+					<div className='my-4 '>
+						<FormInput name="body" verify={verifyQuestion} errors={errors} />
 					</div>
-				</div>
-			</form>
-		</div >
+					<select class="select select-bordered w-full" name="circle">
+						<option disabled selected>Select circle</option>
+						{circles.map(x => <option key={x._id} value={x._id}>{toTitleCase(x.title)}</option>)}
+					</select>
+				</Modal>
+			}
+		</>
 	)
 }
+
+export default AddQuestionModal
