@@ -3,8 +3,8 @@ import { createContext, useCallback, useEffect, useState } from "react";
 export const NotificationContext = createContext();
 
 export function NotificationProvider({ children }) {
-	const [notification, setNotification] = useState('Hello World');
 	const [type, setType] = useState('alert');
+	const [notification, setNotification] = useState('');
 
 	const handleNotification = (type, value) => {
 		setType(type);
@@ -19,7 +19,7 @@ export function NotificationProvider({ children }) {
 	const autoHide = useCallback(() => {
 		setTimeout(() => {
 			handleHide();
-		}, 3000)
+		}, 5000)
 	}, [])
 
 	useEffect(() => {
