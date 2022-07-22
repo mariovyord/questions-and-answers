@@ -5,12 +5,15 @@ import { toTitleCase } from '../../utils/stringUtils';
 import useUserDataContext from '../hooks/useUserDataContext';
 import { postQuestion } from '../../services/data.service';
 import FormInput from '../forms/FormInput';
+import useNotificationContext from '../hooks/useNotificationContext';
 
 const AddQuestionModal = () => {
 	const [openModal, SetOpenModal] = useState(false);
 	const [errors, setErrors] = useState({});
 	const [circle, setCircle] = useState({ value: 'select' });
 	const userData = useUserDataContext();
+
+	const handleNotification = useNotificationContext()
 
 	useEffect(() => {
 		setErrors({})
@@ -50,14 +53,14 @@ const AddQuestionModal = () => {
 
 		postQuestion(data)
 			.then(x => {
-				// Show success notification
+				handleNotification('success', 'Success! Thank you for contributing!')
 			})
 			.then(x => {
 				SetOpenModal(!openModal)
 			})
 			.catch(err => {
-				// Show notification
-				console.log(err);
+				// Change it to something more relevant
+				handleNotification('error', 'Error connecting to server!')
 			})
 
 	}

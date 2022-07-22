@@ -14,35 +14,38 @@ import Auth from './components/auth/Auth';
 import Signup from './components/auth/Signup';
 import PageNotFound from './components/PageNotFound';
 import Feed from './components/feed/Feed';
+import { NotificationProvider } from './contexts/NotificationContext';
 
 function App() {
 	return (
 		<AuthProvider>
-			<Router>
-				<header>
-					<Navbar />
-				</header>
-				<div className='bg-base-200 min-h-screen'>
-					<main className="flex justify-center w-full " >
-						<Routes>
-							<Route path='/' element={<Home />} >
-								<Route path="/" element={<Feed />} />
-							</Route>
-							<Route path='/questions' element={<Questions />} />
-							<Route path='/questions/:id' element={<QuestionDetails />} />
-							<Route path='/profile' element={<Profile />} />
-							<Route path='/circles' element={<Circles />} />
-							<Route path='/auth/signup' element={<Signup />} />
-							<Route path='/auth' element={<Auth />} />
-							<Route path='/about' element={<About />} />
-							<Route path="*" element={<PageNotFound />} />
-						</Routes>
-					</main>
-				</div>
-				<footer className='b-0 w-full'>
-					<Footer />
-				</footer>
-			</Router>
+			<NotificationProvider>
+				<Router>
+					<header>
+						<Navbar />
+					</header>
+					<div className='bg-base-200 min-h-screen'>
+						<main className="flex justify-center w-full " >
+							<Routes>
+								<Route path='/' element={<Home />} >
+									<Route path="/" element={<Feed />} />
+								</Route>
+								<Route path='/questions' element={<Questions />} />
+								<Route path='/questions/:id' element={<QuestionDetails />} />
+								<Route path='/profile' element={<Profile />} />
+								<Route path='/circles' element={<Circles />} />
+								<Route path='/auth/signup' element={<Signup />} />
+								<Route path='/auth' element={<Auth />} />
+								<Route path='/about' element={<About />} />
+								<Route path="*" element={<PageNotFound />} />
+							</Routes>
+						</main>
+					</div>
+					<footer className='b-0 w-full'>
+						<Footer />
+					</footer>
+				</Router>
+			</NotificationProvider>
 		</AuthProvider>
 	);
 }
