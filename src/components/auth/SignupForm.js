@@ -1,12 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Formik } from 'formik';
 import FormInput from '../forms/FormInput';
 import { signup } from '../../services/auth.service';
 import useNotificationContext from '../hooks/useNotificationContext';
+import { AuthContext } from '../../contexts/AuthContext';
 
 const SignupForm = () => {
 	const handleNotification = useNotificationContext();
+	const { handleLogin } = useContext(AuthContext);
 	const navigate = useNavigate();
 
 	const validate = values => {
@@ -38,8 +40,10 @@ const SignupForm = () => {
 		} else if (/\W/.test(values.lastName)) {
 			errors.lastName = 'Must be a single alphanumeric word'
 		}
-		// Description
-		// Not Required
+		// Description (not required)
+		if (values.description.length > 60) {
+			errors.password = 'Must be 60 characters or less';
+		}
 
 		// Password
 		if (!values.password) {
@@ -73,13 +77,14 @@ const SignupForm = () => {
 				handleNotification('info', 'Form send!')
 				signup(values)
 					.then(x => {
-						handleNotification('alert-success', 'Sign up successful!')
+						handleLogin(x.result);
+						handleNotification('alert-success', 'Sign up successful!');
 					})
 					.then(x => {
 						navigate('/');
 					})
 					.catch(err => {
-						handleNotification('alert-success', err?.errors[0]?.message || 'Error connecting to server!')
+						handleNotification('alert-success', err?.errors[0]?.message || 'Error connecting to server!');
 					});
 			}}
 		>
@@ -153,4 +158,4 @@ const SignupForm = () => {
 	);
 }
 
-export default SignupForm
+export default SignupForm;
