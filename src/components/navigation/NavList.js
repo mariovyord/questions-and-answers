@@ -1,15 +1,11 @@
-import React, { useContext } from 'react';
-import { NavLink, useParams } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { BsHouseDoor, BsPerson } from 'react-icons/bs';
-import { AiOutlineInfoCircle, AiOutlineQuestionCircle, AiOutlineCheckCircle, AiOutlineLogin, AiOutlineLogout } from 'react-icons/ai';
-import { AuthContext } from '../../contexts/AuthContext';
+import { AiOutlineInfoCircle, AiOutlineQuestionCircle, AiOutlineCheckCircle, AiOutlineLogout } from 'react-icons/ai';
 
-export default function NavList({ isMobile }) {
+export default function NavList({ isMobile, userData, handleLogout }) {
 
 	const tooltipClasses = isMobile ? 'z-10' : 'tooltip tooltip-bottom z-10';
 	const activeClassName = 'bg-primary';
-
-	const { userData, handleLogout } = useContext(AuthContext);
 
 	const userNav = (
 		<>
@@ -30,15 +26,6 @@ export default function NavList({ isMobile }) {
 			</li>
 		</>
 	);
-
-	const guestNav = (
-		<li>
-			<NavLink to="/auth" className={tooltipClasses} data-tip='Login'>
-				<AiOutlineLogin size={'24px'} />
-				{isMobile ? 'Login' : ''}
-			</NavLink>
-		</li>
-	)
 
 	return (
 		<>
@@ -64,7 +51,7 @@ export default function NavList({ isMobile }) {
 				</NavLink>
 			</li>
 
-			{userData ? userNav : guestNav}
+			{userData ? userNav : null}
 
 			<li>
 				<NavLink to="/about" className={tooltipClasses} data-tip='About'>

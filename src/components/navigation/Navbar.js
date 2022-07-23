@@ -1,8 +1,12 @@
+import React, { useContext } from 'react';
 import NavList from './NavList';
 import { Link } from 'react-router-dom';
 import AddQuestionModal from './AddQuestionModal';
+import { AuthContext } from '../../contexts/AuthContext';
 
 export default function Navbar() {
+	const { userData, handleLogout } = useContext(AuthContext);
+
 	return (
 		<div className='bg-base-100 flex justify-center'>
 			<div className="navbar max-w-5xl">
@@ -19,11 +23,19 @@ export default function Navbar() {
 				</div>
 				<div className="navbar-center hidden lg:flex">
 					<ul className="menu menu-horizontal p-0">
-						<NavList />
+						<NavList userData={userData} handleLogout={handleLogout} />
 					</ul>
 				</div>
+
 				<div className="navbar-end">
-					<AddQuestionModal />
+					{userData
+						? < AddQuestionModal />
+						: <button className="btn btn-secondary modal-button">
+							<Link to="/auth" >
+								Login
+							</Link>
+						</button>
+					}
 				</div>
 			</div>
 		</div >
