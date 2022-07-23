@@ -4,9 +4,9 @@ import circles from '../../data/circles.json';
 import { toTitleCase } from '../../utils/stringUtils';
 import useUserDataContext from '../hooks/useUserDataContext';
 import { postQuestion } from '../../services/data.service';
-import FormInput from '../forms/FormInput';
+import FormInput from '../forms/OldInput';
 import useNotificationContext from '../hooks/useNotificationContext';
-import FormSelect from '../forms/FormSelect';
+import FormSelect from '../forms/OldSelect';
 
 const AddQuestionModal = () => {
 	const [openModal, SetOpenModal] = useState(false);

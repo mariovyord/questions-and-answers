@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-const FormSelect = ({ name, verify, errors, value, onChange, children }) => {
+const OldSelect = ({ name, verify, errors, value, onChange, children }) => {
 	const [showError, setShowError] = useState('');
 
 	useEffect(() => {
@@ -41,4 +41,4 @@ const FormSelect = ({ name, verify, errors, value, onChange, children }) => {
 	)
 }
 
-export default FormSelect;
+export default OldSelect;

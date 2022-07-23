@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react';
 import { signup } from '../../services/auth.service';
 import { AuthContext } from '../../contexts/AuthContext';
 import { useNavigate } from 'react-router-dom';
+import SignupForm from './SignupForm';
 
 // TODO Full refactor and Add abstraction
 export default function Signup() {
@@ -71,7 +72,9 @@ export default function Signup() {
 		<div className='flex justify-center w-full p-3 bg-base-100'>
 			<div className='w-96 py-8'>
 				<h1 className='font-bold text-5xl text-center mb-8'>Sign up</h1>
-				<form className='form-control max-w-sm' onSubmit={handleSubmit}>
+				<SignupForm />
+
+				{/* <form className='form-control max-w-sm' onSubmit={handleSubmit}>
 					<label htmlFor="username" className='label'>Username</label>
 					<input name="username" id="username" type="text" className='input input-bordered' placeholder='Make it short and memorable.' />
 
@@ -91,7 +94,7 @@ export default function Signup() {
 					<input name="rePassword" id="rePassword" type="password" className='input input-bordered' placeholder='... and repeat if here.' />
 
 					<input type="submit" className='btn btn-accent mt-6' placeholder='username' value={'Sign up'} />
-				</form>
+				</form> */}
 			</div>
 		</div>
 	)
