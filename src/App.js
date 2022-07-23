@@ -11,7 +11,7 @@ import QuestionDetails from './components/QuestionDetails';
 import Profile from './components/Profile';
 import Circles from './components/Circles';
 import Auth from './components/auth/Auth';
-import Signup from './components/auth/Signup';
+import Signup from './components/auth/signup/Signup';
 import PageNotFound from './components/PageNotFound';
 import Feed from './components/feed/Feed';
 import { NotificationProvider } from './contexts/NotificationContext';

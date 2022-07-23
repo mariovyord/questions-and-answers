@@ -1,6 +1,6 @@
 import { post, del } from './requests.service';
 
-export const login = (username, password) => post('/auth/login', { username, password });
+export const login = (userData) => post('/auth/login', userData);
 
 export const signup = (userData) => post('/auth/signup', userData);
 

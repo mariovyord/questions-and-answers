@@ -11,9 +11,9 @@ export function AuthProvider({ children }) {
 
 	const handleLogin = (data) => {
 		setUserData({
-			_id: data.result._id,
-			accessToken: data.result.accessToken,
-			refreshToken: data.result.refreshToken,
+			_id: data._id,
+			accessToken: data.accessToken,
+			refreshToken: data.refreshToken,
 		});
 	}
 	const handleLogout = () => {

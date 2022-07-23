@@ -12,7 +12,7 @@ const FormInput = ({ label, ...props }) => {
 				{...props}
 			/>
 			{meta.touched && meta.error ? (
-				<div className="alert alert-warning h-5 rounded-lg text-sm absolute max-w-sm">{meta.error}</div>
+				<div className="bg-base-200 py-1 px-2 rounded-lg text-sm absolute max-w-sm">{meta.error}</div>
 			) : null}
 		</>
 	);

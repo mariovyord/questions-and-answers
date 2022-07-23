@@ -4,21 +4,23 @@ import { clearUserData, getUserData } from "../utils/userData";
 async function request(url, options) {
 	const response = await fetch(url, options);
 
-	if (response.status === 401) {
-		clearUserData();
-		throw new Error('Unauthorized');
-	}
 
-	if (response.status === 403) {
-		clearUserData();
-		throw new Error('Session expired');
-	}
 
 	const data = await response.json();
 
+	if (response.status === 403) {
+		clearUserData();
+		throw data.errors || ['Forbidden'];
+	}
+
+	if (response.status === 401) {
+		clearUserData();
+		throw data.errors || ['Unauthorized'];
+	}
+
 	if (response.ok === false) {
 		const errMessage = {
-			errors: data.errors || data.message || 'Error fetching data from server',
+			errors: data.errors || [data.message] || ['Error fetching data from server'],
 		}
 		throw (errMessage);
 	}

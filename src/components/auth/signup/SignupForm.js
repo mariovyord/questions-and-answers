@@ -1,10 +1,10 @@
 import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Formik } from 'formik';
-import FormInput from '../forms/FormInput';
-import { signup } from '../../services/auth.service';
-import useNotificationContext from '../hooks/useNotificationContext';
-import { AuthContext } from '../../contexts/AuthContext';
+import FormInput from '../../forms/FormInput';
+import { signup } from '../../../services/auth.service';
+import useNotificationContext from '../../hooks/useNotificationContext';
+import { AuthContext } from '../../../contexts/AuthContext';
 
 const SignupForm = () => {
 	const handleNotification = useNotificationContext();
@@ -73,19 +73,22 @@ const SignupForm = () => {
 				rePassword: '',
 			}}
 			validate={validate}
-			onSubmit={values => {
+			onSubmit={(values, { setSubmitting }) => {
 				handleNotification('info', 'Form send!')
 				signup(values)
 					.then(x => {
 						handleLogin(x.result);
-						handleNotification('alert-success', 'Sign up successful!');
+						handleNotification('success', 'Sign up successful!');
 					})
 					.then(x => {
 						navigate('/');
 					})
 					.catch(err => {
-						handleNotification('alert-success', err?.errors[0]?.message || 'Error connecting to server!');
-					});
+						handleNotification('success', err[0].message || 'Error connecting to server!');
+					})
+					.finally(() => {
+						setSubmitting(false);
+					});;
 			}}
 		>
 			{formik => (
@@ -145,12 +148,13 @@ const SignupForm = () => {
 						/>
 					</div>
 					<div>
-						<input
+						<button
 							disabled={formik.isSubmitting}
 							type="submit"
 							className='btn btn-accent mt-6 w-full'
-							placeholder='username'
-							value={'Sign up'} />
+						>
+							Sign up
+						</button>
 					</div>
 				</form>
 			)}
