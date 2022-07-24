@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import MDEditor from '@uiw/react-md-editor';
 import rehypeSanitize from "rehype-sanitize";
-import useUserData from '../hooks/useUserData';
-import useNotificationContext from '../hooks/useNotificationContext';
+import useUserData from '../../hooks/useUserData';
+import useNotificationContext from '../../hooks/useNotificationContext';
 
-import { postAnswer } from '../../services/data.service';
+import { postAnswer } from '../../../services/data.service';
 
 const AddAnswerForm = ({ question, addAnswers, showTextarea }) => {
 	const [answerErrors, setAnswerErrors] = useState('')

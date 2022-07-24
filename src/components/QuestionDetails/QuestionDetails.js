@@ -6,8 +6,9 @@ import useFetch from '../hooks/useFetch';
 import { toTitleCase } from '../../utils/stringUtils';
 
 import Feed from '../feed/Feed';
-import AddAnswerForm from './AddAnswerForm';
+import AddAnswerForm from './AddAnswerForm/AddAnswerForm';
 import AnswerCard from '../feed/AnswerCard/AnswerCard';
+import RecentQuestionsList from '../feautures/RecentQuestionsList';
 
 
 export default function QuestionDetails() {
@@ -76,13 +77,7 @@ export default function QuestionDetails() {
 
 			</div>
 			<div className='col-span-2 p-3 flex flex-col gap-2'>
-				<h2 className='font-bold text-xl'>Recent questions</h2>
-				<p>What are some examples of recursion in the real world?</p>
-				<p>What are some examples of trolley problem in real world?</p>
-				<p>What are some real-world problems that could be solved with programming/coding?</p>
-				<p>What are the examples of recursion algorithms?</p>
-				<p>Where can I find some real-world problems to solve by programming?</p>
-				<p>How do I identify recursion in a programming problem?</p>
+				<RecentQuestionsList />
 			</div>
 		</div >
 	)
