@@ -54,9 +54,8 @@ export default function Questions({ questions }) {
 
 		<FeedOptionsContainer
 			handlePage={handlePage}
+			isDisabled={(query.get('page') || 1) >= Math.ceil(docsCount / pageSize)}
 			page={query.get('page')}
-			pageSize={pageSize}
-			docsCount={docsCount}
 		>
 			<select
 				className="select w-full max-w-xs btn-outline"
@@ -92,9 +91,8 @@ export default function Questions({ questions }) {
 				<div className='grid gap-2'>
 					<FeedOptionsContainer
 						handlePage={handlePage}
+						isDisabled={(query.get('page') || 1) >= Math.ceil(docsCount / pageSize)}
 						page={query.get('page')}
-						pageSize={pageSize}
-						docsCount={docsCount}
 					>
 						<select
 							className="select w-full max-w-xs btn-outline"
