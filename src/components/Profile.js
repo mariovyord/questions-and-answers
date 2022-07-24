@@ -14,7 +14,7 @@ export default function Profile() {
 	const { userData } = useContext(AuthContext);
 	const filterQuery = `&where=owner=${userData._id}`;
 
-	const { data, loading, error } = useFetch(`/users/${userData._id}`);
+	const [data, loading, error] = useFetch(`/users/${userData._id}`);
 
 	const handleShowQuestions = () => {
 		getQuestionsByOwnerId(userData._id)

@@ -5,7 +5,7 @@ import NoContent from './common/NoContent';
 import Spinner from './common/Spinner';
 
 export default function Circles() {
-	const { data, loading, error } = useFetch(`/collections/circles`);
+	const [data, loading, error] = useFetch(`/collections/circles`);
 
 	const content = data.map(x => <CircleCard data={x}></CircleCard>)
 

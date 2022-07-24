@@ -65,20 +65,22 @@ export default function AnswerCard({ answer: data }) {
 		<div className={isCardOpen ? 'w-full bg-base-100 shadow p-4 rounded-lg transition-all' : 'opacity-0 h-0 transition-all'}>
 
 			{/* User info */}
-			<div className='flex'>
-				<div className="avatar">
-					<div className="w-10 rounded-full">
-						{/* Link to user profile */}
-						<Link to={'/users/' + answer.owner._id} className='place-self-center link-hover'>
-							<img src={answer.owner.imageUrl} alt='Profile' />
-						</Link>
+			{answer.owner._id && <>
+				<div className='flex'>
+					<div className="avatar">
+						<div className="w-10 rounded-full">
+							{/* Link to user profile */}
+							<Link to={'/users/' + answer.owner._id} className='place-self-center link-hover'>
+								<img src={answer.owner.imageUrl} alt='Profile' />
+							</Link>
+						</div>
 					</div>
+					<span className='font-bold flex ml-3'>
+						{/* Link to user profile */}
+						<Link to={'/users/' + answer.owner._id} className='place-self-center link-hover'>{answer.owner.firstName} {answer.owner.lastName}</Link>
+					</span>
 				</div>
-				<span className='font-bold flex ml-3'>
-					{/* Link to user profile */}
-					<Link to={'/users/' + answer.owner._id} className='place-self-center link-hover'>{answer.owner.firstName} {answer.owner.lastName}</Link>
-				</span>
-			</div>
+			</>}
 
 			{/* Question */}
 			<div className='py-2'>

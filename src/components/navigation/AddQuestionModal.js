@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from 'react';
 import Modal from '../common/Modal';
 import circles from '../../data/circles.json';
 import { toTitleCase } from '../../utils/stringUtils';
-import useUserDataContext from '../hooks/useUserDataContext';
+import useUserData from '../hooks/useUserData';
 import { postQuestion } from '../../services/data.service';
 import FormInput from '../forms/OldInput';
 import useNotificationContext from '../hooks/useNotificationContext';
@@ -14,7 +14,7 @@ const AddQuestionModal = () => {
 	const [body, setBody] = useState('');
 	const [circle, setCircle] = useState({ value: 'select' });
 
-	const userData = useUserDataContext();
+	const userData = useUserData();
 
 	const handleNotification = useNotificationContext()
 
@@ -85,7 +85,7 @@ const AddQuestionModal = () => {
 			})
 			.catch(err => {
 				// Change it to something more relevant
-				handleNotification('error', err?.errors[0]?.message || 'Error connecting to server!')
+				handleNotification('error', err[0]?.message || 'Error connecting to server!')
 			})
 	}
 

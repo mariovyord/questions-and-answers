@@ -14,9 +14,9 @@ export default function Questions({ questions }) {
 	const [isDesktop, setDesktop] = useState(window.innerWidth > 768);
 	const [query, setQuery] = useSearchParams();
 
-	const { data, loading, error } = useFetch(`/collections/questions?sortBy=createdAt%20desc&page=${query.get('page') || 1}&pageSize=${pageSize}${query.get('where') ? `&where=${query.get('where')}` : ''}`);
-	const { data: ciclesData, loading: loadingCircles, error: errorCircles } = useFetch(`/collections/circles`);
-	const { data: docsCount } = useFetch(`/collections/questions?${query.get('where') ? `where=${query.get('where')}&` : ''}count=true`);
+	const [data, loading, error] = useFetch(`/collections/questions?sortBy=createdAt%20desc&page=${query.get('page') || 1}&pageSize=${pageSize}${query.get('where') ? `&where=${query.get('where')}` : ''}`);
+	const [ciclesData, loadingCircles, errorCircles] = useFetch(`/collections/circles`);
+	const [docsCount] = useFetch(`/collections/questions?${query.get('where') ? `where=${query.get('where')}&` : ''}count=true`);
 
 	useEffect(() => {
 		window.addEventListener("resize", updateMedia);
