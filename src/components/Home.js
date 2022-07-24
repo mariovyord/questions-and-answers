@@ -3,6 +3,7 @@ import Stats from './feautures/Stats';
 import CirlclesList from './feautures/CirclesList';
 import { themeChange } from 'theme-change';
 import { Outlet } from 'react-router-dom';
+import RecentQuestionsList from './feautures/RecentQuestionsList';
 
 
 export default function Home() {
@@ -47,7 +48,8 @@ export default function Home() {
 								<button className='btn btn-outline' data-set-theme="cmyk" data-act-class="btn-success">Light</button>
 							</div>
 						</div>
-						<Stats />
+						<RecentQuestionsList />
+						{/* <Stats /> */}
 					</div>
 					: null
 			}

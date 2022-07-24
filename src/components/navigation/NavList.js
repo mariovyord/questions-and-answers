@@ -10,7 +10,7 @@ export default function NavList({ isMobile, userData, handleLogout }) {
 	const userNav = (
 		<>
 			<li>
-				<NavLink to={`/profile/${userData._id}`} className={tooltipClasses} data-tip='Profile'>
+				<NavLink to={`/profile/${userData?._id}`} className={tooltipClasses} data-tip='Profile'>
 					<BsPerson size={'24px'} />
 					{isMobile ? 'Profile' : ''}
 				</NavLink>

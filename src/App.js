@@ -16,6 +16,7 @@ import PageNotFound from './components/PageNotFound';
 import Feed from './components/feed/Feed';
 import { NotificationProvider } from './contexts/NotificationContext';
 import CircleDetails from './components/CircleDetails/CircleDetails';
+import AnswerDetails from './components/AnswerDetails.js/AnswerDetails';
 
 function App() {
 	return (
@@ -34,6 +35,7 @@ function App() {
 								<Route path='/questions' element={<Questions />} />
 								<Route path='/questions/:id' element={<QuestionDetails />} />
 								<Route path='/profile/:_id' element={<Profile />} />
+								<Route path='/answers/:_id' element={<AnswerDetails />} />
 								<Route path='/circles' element={<Circles />} />
 								<Route path='/circles/:_id' element={<CircleDetails />} />
 								<Route path='/auth/signup' element={<Signup />} />
