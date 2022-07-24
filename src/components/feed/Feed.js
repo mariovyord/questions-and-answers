@@ -7,7 +7,7 @@ import Spinner from '../common/Spinner';
 import NoContent from '../common/NoContent';
 
 export default function Feed({ urlOptions = '' }) {
-	const pageSize = 2;
+	const pageSize = 10;
 	const [query, setQuery] = useSearchParams();
 
 	// TODO Add error handling!
@@ -41,9 +41,8 @@ export default function Feed({ urlOptions = '' }) {
 
 		< FeedOptionsContainer
 			handlePage={handlePage}
+			isDisabled={(query.get('page') || 1) >= Math.ceil(docsCount / pageSize)}
 			page={query.get('page')}
-			pageSize={pageSize}
-			docsCount={docsCount}
 			sort={query.get('sortBy')}
 		>
 			<select
@@ -61,10 +60,8 @@ export default function Feed({ urlOptions = '' }) {
 		<>
 			<div className='col-span-5 md:col-span-3 grid gap-2'>
 				<FeedOptionsContainer
-					handlePage={handlePage}
+					isDisabled={(query.get('page') || 1) >= Math.ceil(docsCount / pageSize)}
 					page={query.get('page')}
-					pageSize={pageSize}
-					docsCount={docsCount}
 					sort={query.get('sortBy')}
 				>
 					<select

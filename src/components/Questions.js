@@ -9,7 +9,7 @@ import Spinner from './common/Spinner';
 import NoContent from './common/NoContent';
 
 export default function Questions({ questions }) {
-	const pageSize = 5;
+	const pageSize = 20;
 
 	const [isDesktop, setDesktop] = useState(window.innerWidth > 768);
 	const [query, setQuery] = useSearchParams();
