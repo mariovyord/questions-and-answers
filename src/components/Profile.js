@@ -1,6 +1,5 @@
-import React, { useEffect, useState, useContext } from 'react';
-import { Link } from 'react-router-dom';
-import { AuthContext } from '../contexts/AuthContext';
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import { getQuestionsByOwnerId } from '../services/data.service';
 import QuestionCard from './cards/QuestionCard';
 import Feed from './feed/Feed';
@@ -11,13 +10,13 @@ export default function Profile() {
 	const [showQuestions, setShowQuestions] = useState(false);
 	const [questions, setQuestions] = useState([]);
 
-	const { userData } = useContext(AuthContext);
-	const filterQuery = `&where=owner=${userData._id}`;
+	const { _id } = useParams();
+	const filterQuery = `&where=owner=${_id}`;
 
-	const [data, loading, error] = useFetch(`/users/${userData._id}`);
+	const [data, loading, error] = useFetch(`/users/${_id}`);
 
 	const handleShowQuestions = () => {
-		getQuestionsByOwnerId(userData._id)
+		getQuestionsByOwnerId(_id)
 			.then(x => {
 				setQuestions(x.result);
 				setShowQuestions(!showQuestions)
@@ -43,8 +42,8 @@ export default function Profile() {
 					? <h1>Loading</h1>
 					: <div className='col-span-5 md:col-span-2 w-full'>
 						<div className='bg-base-100 p-4 mb-2 rounded-lg shadow flex gap-2'>
-							<div class="avatar">
-								<div class="w-32 rounded">
+							<div className="avatar">
+								<div className="w-32 rounded">
 									<img src={data.imageUrl} alt="Portrait" />
 								</div>
 							</div>

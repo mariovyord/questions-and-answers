@@ -20,7 +20,7 @@ const OldSelect = ({ name, verify, errors, value, onChange, children }) => {
 	return (
 		<>
 			<select
-				class="select select-bordered w-full"
+				className="select select-bordered w-full"
 				name={name}
 				onChange={onChange}
 				value={value}

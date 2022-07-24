@@ -70,14 +70,14 @@ export default function AnswerCard({ answer: data }) {
 					<div className="avatar">
 						<div className="w-10 rounded-full">
 							{/* Link to user profile */}
-							<Link to={'/users/' + answer.owner._id} className='place-self-center link-hover'>
+							<Link to={'/profile/' + answer.owner._id} className='place-self-center link-hover'>
 								<img src={answer.owner.imageUrl} alt='Profile' />
 							</Link>
 						</div>
 					</div>
 					<span className='font-bold flex ml-3'>
 						{/* Link to user profile */}
-						<Link to={'/users/' + answer.owner._id} className='place-self-center link-hover'>{answer.owner.firstName} {answer.owner.lastName}</Link>
+						<Link to={'/profile/' + answer.owner._id} className='place-self-center link-hover'>{answer.owner.firstName} {answer.owner.lastName}</Link>
 					</span>
 				</div>
 			</>}

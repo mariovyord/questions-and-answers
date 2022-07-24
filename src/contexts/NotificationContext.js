@@ -46,7 +46,7 @@ export function NotificationProvider({ children }) {
 
 	const notificationBody = <>
 		<div onClick={handleHide} className="flex justify-center w-full pt-16 fixed z-50">
-			<div class={`alert ${styles[type]} shadow-lg  max-w-md`}>
+			<div className={`alert ${styles[type]} shadow-lg  max-w-md`}>
 				<div>
 					{icons[type]}
 					<span>{notification}</span>

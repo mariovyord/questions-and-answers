@@ -32,7 +32,7 @@ function App() {
 								</Route>
 								<Route path='/questions' element={<Questions />} />
 								<Route path='/questions/:id' element={<QuestionDetails />} />
-								<Route path='/profile' element={<Profile />} />
+								<Route path='/profile/:_id' element={<Profile />} />
 								<Route path='/circles' element={<Circles />} />
 								<Route path='/auth/signup' element={<Signup />} />
 								<Route path='/auth' element={<Auth />} />
