@@ -76,7 +76,7 @@ export default function QuestionDetails() {
 				<Feed urlOptions={`where=question=${questionId}`} />
 
 			</div>
-			<div className='col-span-2 p-3 flex flex-col gap-2'>
+			<div className='col-span-5 md:col-span-2 p-3 flex flex-col gap-2'>
 				<RecentQuestionsList />
 			</div>
 		</div >
