@@ -1,6 +1,6 @@
 import React from 'react';
 import { Formik } from 'formik';
-import FormTextarea from '../../forms/FormTextarea';
+import FormTextarea from '../../form/FormTextarea';
 
 const AddComment = () => {
 	return (

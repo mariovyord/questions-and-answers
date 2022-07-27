@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Formik } from 'formik';
-import FormInput from '../../forms/FormInput';
+import FormInput from '../../form/FormInput';
 import { login, signup } from '../../../services/auth.service';
 import useNotificationContext from '../../hooks/useNotificationContext';
 import { AuthContext } from '../../../contexts/AuthContext';

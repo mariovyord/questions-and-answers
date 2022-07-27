@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import NavList from './NavList';
 import { Link } from 'react-router-dom';
-import AddQuestionModal from './AddQuestionModal';
+import AddQuestionModal from './addQuestionModal/AddQuestionModal';
 import { AuthContext } from '../../contexts/AuthContext';
 
 export default function Navbar() {
