@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { deleteAnswerById } from '../../services/data.service';
+import { deleteAnswerById, getAnswer } from '../../services/data.service';
 import Spinner from '../common/Spinner';
 import CirlclesList from '../feautures/CirclesList';
 import RecentQuestionsList from '../feautures/RecentQuestionsList';
@@ -8,15 +8,13 @@ import AnswerCard from '../feed/AnswerCard/AnswerCard';
 import useFetch from '../hooks/useFetch';
 import useNotificationContext from '../hooks/useNotificationContext';
 import useUserData from '../hooks/useUserData';
-import AddAnswerForm from '../QuestionDetails/AddAnswerForm/AddAnswerForm';
-import AddAnswerForm2 from './AddAnswerForm2';
 import AddComment from './comments/AddComment';
 import CommentsFeed from './comments/CommentsFeed';
+import EditAnswerForm from './EditAnswerForm';
 
 const AnswerDetails = () => {
 	const [newComments, setNewComments] = useState([]);
 	const [isOpen, setIsOpen] = useState(false);
-
 	const handleNotification = useNotificationContext();
 	const navigate = useNavigate();
 
@@ -24,11 +22,33 @@ const AnswerDetails = () => {
 	const userData = useUserData()
 
 	const { _id } = useParams();
-	// TODO Bug Doesnt receive owner
-	const [data, loading, errors] = useFetch(`/collections/answers/${_id}?populate=owner`);
+
+	const [data, setData] = useState([]);
+	const [loading, setLoading] = useState(true);
+	const [error, setError] = useState(null);
+
+	useEffect(() => {
+		setLoading(true)
+		setError(null);
+
+		getAnswer(_id)
+			.then(result => {
+				setData(result.result);
+			})
+			.catch(err => {
+				setError('Error fetching data from server');
+			})
+			.finally(() => {
+				setLoading(false);
+			})
+	}, [_id])
 
 	const showTextarea = (e) => {
 		setIsOpen(!isOpen);
+	}
+
+	const handleSetNewBody = (body) => {
+		setData({ ...data, body: body });
 	}
 
 	const addComment = (comment) => {
@@ -39,7 +59,7 @@ const AnswerDetails = () => {
 		// TODO Add modal
 		const confirmation = window.confirm('Are you sure?');
 		if (confirmation) {
-			handleNotification('info', 'Deleting asnwer!');
+			handleNotification('info', 'Deleting answer!');
 			deleteAnswerById(_id)
 				.then(x => {
 					handleNotification('success', 'Answer deleted!');
@@ -71,7 +91,9 @@ const AnswerDetails = () => {
 				<div className="collapse-content">
 
 					{!loading && <>
-						<AddAnswerForm2
+						<EditAnswerForm
+							answerId={_id}
+							handleSetNewBody={handleSetNewBody}
 							question={{
 								body: data.meta.question,
 								owner: data._id,

@@ -3,10 +3,9 @@ import MDEditor from '@uiw/react-md-editor';
 import rehypeSanitize from "rehype-sanitize";
 import useUserData from '../hooks/useUserData';
 import useNotificationContext from '../hooks/useNotificationContext';
+import { editAnswer } from '../../services/data.service';
 
-import { postAnswer } from '../../services/data.service';
-
-const AddAnswerForm2 = ({ question, addAnswers, showTextarea, values }) => {
+const EditAnswerForm = ({ answerId, question, showTextarea, values, handleSetNewBody }) => {
 	const [answerErrors, setAnswerErrors] = useState('')
 	const [isSubmitting, setSubmitting] = useState(false);
 	const [textValue, setTextValue] = useState("");
@@ -37,7 +36,6 @@ const AddAnswerForm2 = ({ question, addAnswers, showTextarea, values }) => {
 		return true;
 	}
 
-	// Submit function should come from outside - one for edit and one for submit
 	const handleSubmit = (textValue) => {
 		const isValid = isValidAnswer(textValue.trim());
 		if (isValid === false) return undefined;
@@ -45,25 +43,18 @@ const AddAnswerForm2 = ({ question, addAnswers, showTextarea, values }) => {
 
 		const newAnswer = {
 			body: textValue.trim(),
-			owner: userData._id,
-			question: question._id,
-			circle: question.circle,
-			meta: {
-				question: question.body,
-				circle: question.meta.circle,
-			}
 		}
 
 		setSubmitting(true);
-		handleNotification('info', 'Answer send!');
-		postAnswer(newAnswer)
+		handleNotification('info', 'Answer update send!');
+		editAnswer(answerId, newAnswer)
 			.then(x => {
-				addAnswers(x.result);
-				handleNotification('success', 'Answer successful!');
-				handleOnClear();
+				handleNotification('success', 'Answer update successful!');
+				handleSetNewBody(x.result.body)
 				showTextarea();
 			})
 			.catch(err => {
+				console.log(err)
 				handleNotification('error', err[0].message || 'Error connecting to server!');
 			})
 			.finally(() => {
@@ -100,4 +91,4 @@ const AddAnswerForm2 = ({ question, addAnswers, showTextarea, values }) => {
 	)
 }
 
-export default AddAnswerForm2
+export default EditAnswerForm;
