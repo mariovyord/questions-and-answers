@@ -79,7 +79,7 @@ const AddQuestionForm = ({ handleModal }) => {
 							id="question"
 							name="question"
 							type="text"
-							placeholder="Ask a question..."
+							placeholder="Here goes your question..."
 						/>
 					</div>
 					<div>

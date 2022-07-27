@@ -2,12 +2,12 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { BsHandThumbsUpFill, BsHandThumbsUp, BsHandThumbsDown, BsHandThumbsDownFill } from 'react-icons/bs';
 
-export default function AnswerCardMenu({ isLoggedIn, userVote, handleVote, score, answerId }) {
+export default function AnswerCardMenu({ isHiddenBtn, isLoggedIn, userVote, handleVote, score, answerId }) {
 
 	const asnwerUrl = '/answers/' + answerId;
 
 	return (
-		<div className='flex justify-between gap-2 border-t-2 pt-3 mt-3'>
+		<div className='flex justify-between gap-2 border-t-2 pt-3 mt-3 h-16'>
 			<div className='flex justify-center gap-2'>
 
 				{isLoggedIn
@@ -24,11 +24,12 @@ export default function AnswerCardMenu({ isLoggedIn, userVote, handleVote, score
 
 				<div className='pt-[13%] text-lg'>{score}</div>
 			</div>
-			<div className='w-1/2'>
+			{!isHiddenBtn && <div className='w-1/2'>
 				<Link to={asnwerUrl} className='btn btn-primary w-full'>
 					Details
 				</Link>
 			</div>
+			}
 		</div >
 	)
 }

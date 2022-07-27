@@ -5,7 +5,7 @@ import FormTextarea from '../../form/FormTextarea';
 const AddComment = () => {
 	return (
 		<>
-			<h2 className='font-bold text-2xl'>Add comment</h2>
+			<h2 className='font-bold text-2xl  mb-2'>Add comment</h2>
 			<Formik
 				initialValues={{
 					text: '',

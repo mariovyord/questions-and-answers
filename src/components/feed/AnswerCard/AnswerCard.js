@@ -5,8 +5,9 @@ import MDEditor from '@uiw/react-md-editor';
 import rehypeSanitize from "rehype-sanitize";
 import AnswerCardMenu from './AnswerCardMenu';
 import * as dataService from '../../../services/data.service';
+import { toTitleCase } from '../../../utils/stringUtils';
 
-export default function AnswerCard({ answer: data }) {
+export default function AnswerCard({ isHiddenBtn, answer: data }) {
 	const { userData } = useContext(AuthContext);
 	const [isCardOpen, setIsCardOpen] = useState(false);
 	const [answer, setAnswer] = useState(data);
@@ -90,7 +91,7 @@ export default function AnswerCard({ answer: data }) {
 				</div>
 				<div>
 					{/* Link to circle details */}
-					<span className='text-xs text-gray-500'>Circle: <Link to={"/circles/" + answer.circle} className='link-hover'>{answer.meta.circle}</Link></span>
+					<span className='text-xs text-gray-500'>Circle: <Link to={"/circles/" + answer.circle} className='link-hover'>{toTitleCase(answer.meta.circle)}</Link></span>
 				</div>
 			</div>
 
@@ -110,7 +111,7 @@ export default function AnswerCard({ answer: data }) {
 			</div>
 
 			{/* Menu buttons */}
-			<AnswerCardMenu isLoggedIn={userData ? true : false} userVote={userVote} handleVote={handleVote} score={answer.score} answerId={answer._id} />
+			<AnswerCardMenu isHiddenBtn={isHiddenBtn} isLoggedIn={userData ? true : false} userVote={userVote} handleVote={handleVote} score={answer.score} answerId={answer._id} />
 		</div>
 	)
 }
