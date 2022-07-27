@@ -84,7 +84,7 @@ const SignupForm = () => {
 						navigate('/');
 					})
 					.catch(err => {
-						handleNotification('success', err[0].message || 'Error connecting to server!');
+						handleNotification('success', err[0].message || 'Something went wrong');
 					})
 					.finally(() => {
 						setSubmitting(false);

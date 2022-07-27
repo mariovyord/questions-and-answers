@@ -55,7 +55,7 @@ const AddAnswerForm = ({ question, addAnswers, showTextarea }) => {
 				showTextarea();
 			})
 			.catch(err => {
-				handleNotification('error', err[0].message || 'Error connecting to server!');
+				handleNotification('error', err[0].message || 'Something went wrong');
 			})
 			.finally(() => {
 				setSubmitting(false);

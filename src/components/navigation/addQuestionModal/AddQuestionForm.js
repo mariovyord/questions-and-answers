@@ -64,7 +64,7 @@ const AddQuestionForm = ({ handleModal }) => {
 						handleModal();
 					})
 					.catch(err => {
-						handleNotification('error', err[0]?.message || 'Error connecting to server!')
+						handleNotification('error', err[0]?.message || 'Something went wrong')
 					})
 					.finally(() => {
 						setSubmitting(false);

@@ -40,13 +40,10 @@ const AddComment = ({ answerId, addComment }) => {
 					postComment(newComment)
 						.then(x => {
 							handleNotification('success', 'Comment successful!');
-							// TODO Doesnt return names and img of user
-							console.log(x)
 							addComment(x.result);
 						})
 						.catch(err => {
-							console.log(err)
-							handleNotification('error', err[0].message || 'Error connecting to server!');
+							handleNotification('error', err[0].message || 'Something went wrong');
 						})
 						.finally(() => {
 							resetForm();
