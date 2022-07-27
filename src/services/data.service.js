@@ -10,5 +10,7 @@ export const postQuestion = (data) => post('/collections/questions', data);
 
 export const postAnswer = (data) => post('/collections/answers', data);
 
+export const postComment = (data) => post('/collections/comments', data);
+
 export const getQuestionsByOwnerId = (ownerId) => get(`/collections/questions?where=owner=${ownerId}`);
 

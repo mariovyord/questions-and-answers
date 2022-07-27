@@ -1,4 +1,3 @@
-import { divider } from '@uiw/react-md-editor';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import Spinner from '../common/Spinner';
@@ -8,16 +7,21 @@ import AnswerCard from '../feed/AnswerCard/AnswerCard';
 import useFetch from '../hooks/useFetch';
 import useUserData from '../hooks/useUserData';
 import AddComment from './comments/AddComment';
-import CommentCard from './comments/CommentCard';
+import CommentsFeed from './comments/CommentsFeed';
 
 const AnswerDetails = () => {
+	const [newComments, setNewComments] = useState([]);
+
 	const [isDesktop, setDesktop] = useState(window.innerWidth > 768);
 	const userData = useUserData()
 
 	const { _id } = useParams();
 	// TODO Bug Doesnt receive owner
 	const [data, loading, errors] = useFetch(`/collections/answers/${_id}?populate=owner`);
-	const [comments, loadingComments, errorsComments] = useFetch(`/collections/comments?where=answer=${_id}&populate=owner`)
+
+	const addComment = (comment) => {
+		setNewComments(x => [...newComments, comment])
+	}
 
 	useEffect(() => {
 		window.addEventListener("resize", updateMedia);
@@ -35,28 +39,15 @@ const AnswerDetails = () => {
 		</div>
 	</>
 
-	const commentsFeed = <>
-		<h2 className='font-bold text-2xl mb-2'>Comments</h2>
-		<div>
-			{loadingComments && 'Loading'}
-			{!loadingComments && comments.length === 0 && 'No comments'}
-			{!loadingComments && comments.length > 0 && <>
-				{comments.map(x => <div>{<CommentCard comment={x} />}</div>)}
-			</>}
-
-
-		</div>
-	</>
-
 	const mainTemplate = <>
 		<div>
 			<AnswerCard isHiddenBtn={true} answer={data} />
 			{userData._id == data?.owner?._id && ownerControls}
 			<div className='p-4'>
-				<AddComment />
+				<AddComment answerId={_id} addComment={addComment} />
 			</div>
 			<div className='p-4'>
-				{commentsFeed}
+				{<CommentsFeed answerId={_id} newComments={newComments} />}
 			</div>
 		</div>
 	</>
