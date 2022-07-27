@@ -4,7 +4,6 @@ import FormTextarea from '../../form/FormTextarea';
 import useNotificationContext from '../../hooks/useNotificationContext';
 import { postComment } from '../../../services/data.service';
 import useUserData from '../../hooks/useUserData';
-import CommentCard from './CommentCard';
 
 const AddComment = ({ answerId, addComment }) => {
 
@@ -42,9 +41,11 @@ const AddComment = ({ answerId, addComment }) => {
 						.then(x => {
 							handleNotification('success', 'Comment successful!');
 							// TODO Doesnt return names and img of user
+							console.log(x)
 							addComment(x.result);
 						})
 						.catch(err => {
+							console.log(err)
 							handleNotification('error', err[0].message || 'Error connecting to server!');
 						})
 						.finally(() => {

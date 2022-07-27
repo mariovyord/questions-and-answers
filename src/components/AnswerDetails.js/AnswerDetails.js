@@ -5,15 +5,13 @@ import Spinner from '../common/Spinner';
 import CirlclesList from '../feautures/CirclesList';
 import RecentQuestionsList from '../feautures/RecentQuestionsList';
 import AnswerCard from '../feed/AnswerCard/AnswerCard';
-import useFetch from '../hooks/useFetch';
 import useNotificationContext from '../hooks/useNotificationContext';
 import useUserData from '../hooks/useUserData';
-import AddComment from './comments/AddComment';
-import CommentsFeed from './comments/CommentsFeed';
-import EditAnswerForm from './EditAnswerForm';
+
+import CommentsSection from './comments/CommentsSection';
+import EditAnswerForm from './EditAnswerForm/EditAnswerForm';
 
 const AnswerDetails = () => {
-	const [newComments, setNewComments] = useState([]);
 	const [isOpen, setIsOpen] = useState(false);
 	const handleNotification = useNotificationContext();
 	const navigate = useNavigate();
@@ -43,16 +41,12 @@ const AnswerDetails = () => {
 			})
 	}, [_id])
 
-	const showTextarea = (e) => {
+	const showTextarea = () => {
 		setIsOpen(!isOpen);
 	}
 
 	const handleSetNewBody = (body) => {
 		setData({ ...data, body: body });
-	}
-
-	const addComment = (comment) => {
-		setNewComments(x => [...newComments, comment])
 	}
 
 	const deleteAnswer = () => {
@@ -121,12 +115,7 @@ const AnswerDetails = () => {
 		<div>
 			<AnswerCard isHiddenBtn={true} answer={data} />
 			{userData._id == data?.owner?._id && ownerControls}
-			<div className='p-4'>
-				<AddComment answerId={_id} addComment={addComment} />
-			</div>
-			<div className='p-4'>
-				{<CommentsFeed answerId={_id} newComments={newComments} />}
-			</div>
+			<CommentsSection answerId={_id} />
 		</div>
 	</>
 

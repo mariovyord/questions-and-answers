@@ -1,7 +1,74 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import useUserData from '../../hooks/useUserData';
+import { Formik } from 'formik';
+import FormTextarea from '../../form/FormTextarea';
+import { BsTrash } from 'react-icons/bs';
+import { FiEdit, FiSave } from 'react-icons/fi';
+import * as dataService from '../../../services/data.service';
+import useNotificationContext from '../../hooks/useNotificationContext';
 
-const CommentCard = ({ comment }) => {
+
+
+const CommentCard = ({ comment, handleChange }) => {
+	const userData = useUserData();
+	const [lockComment, setLockComment] = useState(true);
+
+	const handleNotification = useNotificationContext();
+
+	const handleUnlockEdit = () => {
+		setLockComment(x => !x);
+	}
+
+	const handleDelete = (_id) => {
+		const confirmation = window.confirm('Are you sure?')
+		if (confirmation) {
+			dataService.deleteComment(_id)
+				.then(x => {
+					handleChange((x) => {
+						return x._id !== _id;
+					})
+					handleNotification('success', 'Comment deleted')
+				})
+				.catch(err => {
+					handleNotification(err[0].message || 'Something went wrong')
+				})
+		}
+	}
+
+	const handleSubmit = (values, { setSubmitting }) => {
+		dataService.editComment(comment._id, { body: values.comment })
+			.then(res => {
+				handleChange((x) => {
+					if (x._id == res.result._id) {
+						x.body = res.result.body
+						return x;
+					}
+					return x;
+				})
+				handleNotification('success', 'Comment updated')
+				handleUnlockEdit();
+			})
+			.catch(err => {
+				handleNotification(err[0].message || 'Something went wrong')
+			})
+			.finally(() => {
+				setSubmitting(false);
+			})
+	}
+
+	const validate = values => {
+		const errors = {};
+		if (!values.comment) {
+			errors.comment = 'Required';
+		} else if (values.comment.length < 6) {
+			errors.comment = 'Must be 6 characters or more'
+		} else if (values.comment.length > 200) {
+			errors.comment = 'Must be 200 characters or less'
+		}
+		return errors;
+	};
+
 	return (
 		<div className='w-full bg-base-100 shadow p-4 rounded-lg'>
 			{/* User */}
@@ -20,11 +87,46 @@ const CommentCard = ({ comment }) => {
 				</span>
 			</div>
 			{/* Comment itself */}
-			<div>
-				<textarea disabled className='w-full'>{comment.body}</textarea>
-			</div>
+			<Formik
+				initialValues={{
+					comment: comment.body,
+				}}
+				validate={validate}
+				onSubmit={handleSubmit}
+			>
+				{formik => (
+					<>
+						<form onSubmit={formik.handleSubmit} className='form-control'>
+							<div>
+								{lockComment
+									? <div className='w-full p-4'>
+										<p>{comment.body}</p>
+									</div>
+									: <FormTextarea
+										disabled={lockComment}
+										label="Comment"
+										id="comment"
+										name="comment"
+										type="text"
+										placeholder="Your comment goes here..."
+									/>}
+							</div>
+							<div>
+								{userData._id === comment.owner._id && <>
+									<div>
+										{/* TODO Add tooltips */}
+										<button onClick={() => handleDelete(comment._id)} type="button" disabled={formik.isSubmitting} className='btn btn-ghost text-error'><BsTrash size={'20px'} /></button>
+										<button type="button" disabled={formik.isSubmitting} className='btn btn-ghost' onClick={handleUnlockEdit}><FiEdit size={'20px'} /></button>
+										{!lockComment && <button type="submit" disabled={formik.isSubmitting} className='btn btn-ghost' ><FiSave size={'20px'} /></button>}
+									</div> </>
+								}
+							</div>
+						</form>
+					</>
+				)}
+			</Formik >
 		</div>
 	)
 }
 
-export default CommentCard
+export default CommentCard;

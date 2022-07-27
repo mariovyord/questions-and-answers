@@ -6,7 +6,7 @@ const FormTextarea = ({ label, ...props }) => {
 	return (
 		<>
 			<textarea
-				className={`textarea textarea-bordered w-full p-4 ${meta.touched && meta.error ? "border-error" : null}`}
+				className={`textarea textarea-bordered resize-none w-full p-4 ${meta.touched && meta.error ? "border-error" : null}`}
 				{...field}
 				{...props}
 			>
