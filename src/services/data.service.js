@@ -1,4 +1,4 @@
-import { get, post } from "./requests.service";
+import { get, post, del } from "./requests.service";
 
 export const vote = (answerId, userVote) => post(`/collections/answers/${answerId}/vote`, userVote);
 
@@ -9,6 +9,8 @@ export const getQuestion = (_id) => get(`/collections/questions/${_id}`);
 export const postQuestion = (data) => post('/collections/questions', data);
 
 export const postAnswer = (data) => post('/collections/answers', data);
+
+export const deleteAnswerById = (_id) => del(`/collections/answers/${_id}`);
 
 export const postComment = (data) => post('/collections/comments', data);
 

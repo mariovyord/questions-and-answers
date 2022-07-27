@@ -1,16 +1,20 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
+import { deleteAnswerById } from '../../services/data.service';
 import Spinner from '../common/Spinner';
 import CirlclesList from '../feautures/CirclesList';
 import RecentQuestionsList from '../feautures/RecentQuestionsList';
 import AnswerCard from '../feed/AnswerCard/AnswerCard';
 import useFetch from '../hooks/useFetch';
+import useNotificationContext from '../hooks/useNotificationContext';
 import useUserData from '../hooks/useUserData';
 import AddComment from './comments/AddComment';
 import CommentsFeed from './comments/CommentsFeed';
 
 const AnswerDetails = () => {
 	const [newComments, setNewComments] = useState([]);
+	const handleNotification = useNotificationContext();
+	const navigate = useNavigate();
 
 	const [isDesktop, setDesktop] = useState(window.innerWidth > 768);
 	const userData = useUserData()
@@ -21,6 +25,22 @@ const AnswerDetails = () => {
 
 	const addComment = (comment) => {
 		setNewComments(x => [...newComments, comment])
+	}
+
+	const deleteAnswer = () => {
+		// TODO Add modal
+		const confirmation = window.confirm('Are you sure?');
+		if (confirmation) {
+			handleNotification('info', 'Deleting asnwer!');
+			deleteAnswerById(_id)
+				.then(x => {
+					handleNotification('success', 'Answer deleted!');
+					navigate('/');
+				})
+				.catch(err => {
+					handleNotification('error', err[0].message || 'Something went wrong!');
+				})
+		}
 	}
 
 	useEffect(() => {
@@ -34,7 +54,7 @@ const AnswerDetails = () => {
 
 	const ownerControls = <>
 		<div className='flex flex-col gap-2 w-full p-2'>
-			<button className='btn btn-error w-full'>Delete</button>
+			<button onClick={deleteAnswer} className='btn btn-error w-full'>Delete</button>
 			<button className='btn btn-secondary w-full'>Edit</button>
 		</div>
 	</>
