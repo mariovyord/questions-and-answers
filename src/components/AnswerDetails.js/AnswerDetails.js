@@ -8,11 +8,15 @@ import AnswerCard from '../feed/AnswerCard/AnswerCard';
 import useFetch from '../hooks/useFetch';
 import useNotificationContext from '../hooks/useNotificationContext';
 import useUserData from '../hooks/useUserData';
+import AddAnswerForm from '../QuestionDetails/AddAnswerForm/AddAnswerForm';
+import AddAnswerForm2 from './AddAnswerForm2';
 import AddComment from './comments/AddComment';
 import CommentsFeed from './comments/CommentsFeed';
 
 const AnswerDetails = () => {
 	const [newComments, setNewComments] = useState([]);
+	const [isOpen, setIsOpen] = useState(false);
+
 	const handleNotification = useNotificationContext();
 	const navigate = useNavigate();
 
@@ -22,6 +26,10 @@ const AnswerDetails = () => {
 	const { _id } = useParams();
 	// TODO Bug Doesnt receive owner
 	const [data, loading, errors] = useFetch(`/collections/answers/${_id}?populate=owner`);
+
+	const showTextarea = (e) => {
+		setIsOpen(!isOpen);
+	}
 
 	const addComment = (comment) => {
 		setNewComments(x => [...newComments, comment])
@@ -55,7 +63,35 @@ const AnswerDetails = () => {
 	const ownerControls = <>
 		<div className='flex flex-col gap-2 w-full p-2'>
 			<button onClick={deleteAnswer} className='btn btn-error w-full'>Delete</button>
-			<button className='btn btn-secondary w-full'>Edit</button>
+			<div className="collapse">
+				<input onClick={() => showTextarea()} type="checkbox" className='p-0 m-0' />
+				<div className="collapse-title text-base font-medium btn btn-secondary w-full min-h-0 p-0">
+					{isOpen ? 'Close' : 'Edit Answer'}
+				</div>
+				<div className="collapse-content">
+
+					{!loading && <>
+						<AddAnswerForm2
+							question={{
+								body: data.meta.question,
+								owner: data._id,
+								circle: data.circle,
+								meta: {
+									circle: data.meta.circle
+								}
+							}}
+							showTextarea={showTextarea}
+							values={data.body} />
+					</>}
+
+					<div className="alert shadow-lg">
+						<div>
+							<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="stroke-current flex-shrink-0 w-6 h-6"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+							<span>You can use <a href="https://www.markdownguide.org/" className='link'>markdown</a>  in writing your answer!</span>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 	</>
 
