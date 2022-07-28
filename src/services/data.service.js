@@ -23,3 +23,6 @@ export const editComment = (_id, data) => put(`/collections/comments/${_id}`, da
 export const deleteComment = (_id) => del(`/collections/comments/${_id}`);
 export const getQuestionsByOwnerId = (ownerId) => get(`/collections/questions?where=owner=${ownerId}`);
 
+// User
+export const getUserDataById = (_id) => get(`/users/${_id}`);
+export const editUser = (_id, data) => put(`/users/${_id}`, data);

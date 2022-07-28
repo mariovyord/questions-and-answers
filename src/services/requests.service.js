@@ -4,8 +4,6 @@ import { clearUserData, getUserData } from "../utils/userData";
 async function request(url, options) {
 	const response = await fetch(url, options);
 
-
-
 	const data = await response.json();
 
 	if (response.status === 403) {

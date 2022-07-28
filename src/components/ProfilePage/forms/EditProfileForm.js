@@ -2,14 +2,11 @@ import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Formik } from 'formik';
 import FormInput from '../../form/FormInput';
-import { signup } from '../../../services/auth.service';
 import useNotificationContext from '../../hooks/useNotificationContext';
-import { AuthContext } from '../../../contexts/AuthContext';
+import { editUser } from '../../../services/data.service';
 
-const SignupForm = () => {
+const EditProfileForm = ({ profile }) => {
 	const handleNotification = useNotificationContext();
-	const { handleLogin } = useContext(AuthContext);
-	const navigate = useNavigate();
 
 	const validate = values => {
 		const errors = {};
@@ -45,50 +42,31 @@ const SignupForm = () => {
 			errors.password = 'Must be 60 characters or less';
 		}
 
-		// Password
-		if (!values.password) {
-			errors.password = 'Required';
-		} else if (values.password.length > 60) {
-			errors.password = 'Must be 60 characters or less';
-		} else if (values.password.length < 6) {
-			errors.password = 'Must be 6 characters or more'
-		} else if (/\W/.test(values.password)) {
-			errors.password = 'Must be a single alphanumeric word'
-		}
-		// Repeat password
-		if (values.rePassword !== values.password) {
-			errors.rePassword = 'Repeat password';
-		}
 		return errors;
 	};
 
 	return (
 		<Formik
 			initialValues={{
-				username: '',
-				firstName: '',
-				lastName: '',
-				description: '',
-				password: '',
-				rePassword: '',
+				username: profile.username,
+				firstName: profile.firstName,
+				lastName: profile.lastName,
+				description: profile.description,
 			}}
 			validate={validate}
 			onSubmit={(values, { setSubmitting }) => {
+				console.log(profile);
 				handleNotification('info', 'Form send!')
-				signup(values)
-					.then(x => {
-						handleLogin(x.result);
-						handleNotification('success', 'Sign up successful!');
-					})
-					.then(x => {
-						navigate('/');
-					})
+				editUser(profile._id, values).then(x => {
+					handleNotification('success', 'Profile updated!');
+				})
 					.catch(err => {
+						console.log(err)
 						handleNotification('error', err[0].message || 'Something went wrong');
 					})
 					.finally(() => {
 						setSubmitting(false);
-					});;
+					});
 			}}
 		>
 			{formik => (
@@ -130,30 +108,12 @@ const SignupForm = () => {
 						/>
 					</div>
 					<div>
-						<FormInput
-							label="Password"
-							id="password"
-							name="password"
-							type="password"
-							placeholder="Pick a secure password..."
-						/>
-					</div>
-					<div>
-						<FormInput
-							label="Repeat password"
-							id="rePassword"
-							name="rePassword"
-							type="password"
-							placeholder="... and repeat if here."
-						/>
-					</div>
-					<div>
 						<button
 							disabled={formik.isSubmitting}
 							type="submit"
 							className='btn btn-accent mt-6 w-full'
 						>
-							Sign up
+							Save info
 						</button>
 					</div>
 				</form>
@@ -162,4 +122,4 @@ const SignupForm = () => {
 	);
 }
 
-export default SignupForm;
+export default EditProfileForm

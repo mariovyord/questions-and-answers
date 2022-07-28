@@ -8,7 +8,7 @@ import Navbar from './components/navigation/Navbar';
 import About from './components/About';
 import Questions from './components/Questions';
 import QuestionDetails from './components/QuestionDetails/QuestionDetails';
-import Profile from './components/Profile';
+import Profile from './components/ProfilePage/ProfilePage';
 import Circles from './components/Circles';
 import Auth from './components/auth/Auth';
 import Signup from './components/auth/signup/Signup';
