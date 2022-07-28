@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { toTitleCase } from '../../utils/stringUtils';
 
 export default function QuestionCard({ data }) {
 	const questionUrl = '/questions/' + data._id;
@@ -14,7 +15,7 @@ export default function QuestionCard({ data }) {
 			<span>Circle: </span>
 
 			<Link to={circleUrl} className='bg-base-100 link-hover'>
-				{data.meta.circle}
+				{toTitleCase(data.meta.circle)}
 			</Link>
 
 		</div>

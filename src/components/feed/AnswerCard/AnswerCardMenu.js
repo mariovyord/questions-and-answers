@@ -12,10 +12,10 @@ export default function AnswerCardMenu({ isHiddenBtn, isLoggedIn, userVote, hand
 
 				{isLoggedIn
 					? <>
-						<button onClick={() => handleVote('upvote')}>
+						<button onClick={() => handleVote('upvote')} className="tooltip tooltip-bottom tooltip-info" data-tip="Upvote">
 							{userVote.upvote ? <BsHandThumbsUpFill size={'25px'} /> : <BsHandThumbsUp size={'25px'} />}
 						</button>
-						<button onClick={() => handleVote('downvote')}>
+						<button onClick={() => handleVote('downvote')} className="tooltip tooltip-bottom tooltip-info" data-tip="Downvote">
 							{userVote.downvote ? <BsHandThumbsDownFill size={'25px'} /> : <BsHandThumbsDown size={'25px'} />}
 						</button>
 					</>

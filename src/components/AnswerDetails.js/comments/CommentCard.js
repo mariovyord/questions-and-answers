@@ -115,9 +115,32 @@ const CommentCard = ({ comment, handleChange }) => {
 								{userData._id === comment.owner._id && <>
 									<div>
 										{/* TODO Add tooltips */}
-										<button onClick={() => handleDelete(comment._id)} type="button" disabled={formik.isSubmitting} className='btn btn-ghost text-error'><BsTrash size={'20px'} /></button>
-										<button type="button" disabled={formik.isSubmitting} className='btn btn-ghost' onClick={handleUnlockEdit}><FiEdit size={'20px'} /></button>
-										{!lockComment && <button type="submit" disabled={formik.isSubmitting} className='btn btn-ghost' ><FiSave size={'20px'} /></button>}
+										<button
+											onClick={() => handleDelete(comment._id)}
+											type="button"
+											disabled={formik.isSubmitting}
+											className='btn btn-ghost text-error tooltip tooltip-bottom tooltip-error'
+											data-tip="Delete"
+										>
+											<BsTrash size={'20px'} />
+										</button>
+										<button
+											type="button"
+											disabled={formik.isSubmitting}
+											className='btn btn-ghost tooltip tooltip-bottom tooltip-info'
+											onClick={handleUnlockEdit}
+											data-tip="Edit"
+										>
+											<FiEdit size={'20px'} />
+										</button>
+										{!lockComment && <button
+											type="submit"
+											disabled={formik.isSubmitting}
+											className='btn btn-ghost tooltip tooltip-bottom tooltip-info'
+											data-tip="Save"
+										>
+											<FiSave size={'20px'} />
+										</button>}
 									</div> </>
 								}
 							</div>

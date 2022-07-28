@@ -9,7 +9,7 @@ import useNotificationContext from '../hooks/useNotificationContext';
 import useUserData from '../hooks/useUserData';
 
 import CommentsSection from './comments/CommentsSection';
-import EditAnswerForm from './EditAnswerForm/EditAnswerForm';
+import EditAnswerForm from './edit/EditAnswerForm';
 
 const AnswerDetails = () => {
 	const [isOpen, setIsOpen] = useState(false);
