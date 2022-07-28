@@ -26,6 +26,10 @@ const AnswerDetails = () => {
 	const [error, setError] = useState(null);
 
 	useEffect(() => {
+		document.title = "Answer Details"
+	}, []);
+
+	useEffect(() => {
 		setLoading(true)
 		setError(null);
 

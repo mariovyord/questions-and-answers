@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 
 import useFetch from '../hooks/useFetch';
@@ -11,13 +11,17 @@ import AnswerCard from '../feed/AnswerCard/AnswerCard';
 import RecentQuestionsList from '../feautures/RecentQuestionsList';
 
 
-export default function QuestionDetails() {
+export default function QuestionDetailsPage() {
 	const [isOpen, setIsOpen] = useState(false);
 	const [newAnswers, setNewAnswers] = useState([]);
 
 	const { id: questionId } = useParams();
 
 	const [question, loading, error] = useFetch(`/collections/questions/${questionId}`);
+
+	useEffect(() => {
+		document.title = "Question Details"
+	}, []);
 
 	const showTextarea = (e) => {
 		setIsOpen(!isOpen);

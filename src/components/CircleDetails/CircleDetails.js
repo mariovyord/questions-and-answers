@@ -1,4 +1,4 @@
-import React from 'react';
+import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { toTitleCase } from '../../utils/stringUtils';
 import RecentQuestionsList from '../feautures/RecentQuestionsList';
@@ -8,6 +8,10 @@ import useFetch from '../hooks/useFetch';
 const CircleDetails = () => {
 	const { _id } = useParams();
 	const [data, loading, errors] = useFetch(`/collections/circles/${_id}`);
+
+	useEffect(() => {
+		document.title = "Circle Details"
+	}, []);
 
 	return (
 		<div className='grid grid-cols-5 gap-2 max-w-5xl p-2'>

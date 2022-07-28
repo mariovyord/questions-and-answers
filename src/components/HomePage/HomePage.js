@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import Stats from './feautures/Stats';
-import CirlclesList from './feautures/CirclesList';
+import CirlclesList from '../feautures/CirclesList';
 import { themeChange } from 'theme-change';
 import { Outlet } from 'react-router-dom';
-import RecentQuestionsList from './feautures/RecentQuestionsList';
+import RecentQuestionsList from '../feautures/RecentQuestionsList';
 
 
-export default function Home() {
+export default function HomePage() {
 	const [isDesktop, setDesktop] = useState(window.innerWidth > 768);
+
+	useEffect(() => {
+		document.title = "Home"
+	}, []);
 
 	useEffect(() => {
 		window.addEventListener("resize", updateMedia);

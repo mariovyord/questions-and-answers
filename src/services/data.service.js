@@ -5,6 +5,8 @@ export const getData = (url) => get(url);
 // Questions
 export const getQuestion = (_id) => get(`/collections/questions/${_id}`);
 export const postQuestion = (data) => post('/collections/questions', data);
+export const getQuestionsByOwnerId = (ownerId) => get(`/collections/questions?where=owner=${ownerId}`);
+export const hideQuestionById = (_id, bool) => put(`/collections/questions/${_id}`, { isHidden: true });
 
 // Answers
 export const getAnswer = (_id) => get(`/collections/answers/${_id}?populate=owner`);
@@ -21,7 +23,6 @@ export const getComments = (answerId) => get(`/collections/comments?where=answer
 export const postComment = (data) => post('/collections/comments', data);
 export const editComment = (_id, data) => put(`/collections/comments/${_id}`, data);
 export const deleteComment = (_id) => del(`/collections/comments/${_id}`);
-export const getQuestionsByOwnerId = (ownerId) => get(`/collections/questions?where=owner=${ownerId}`);
 
 // User
 export const getUserDataById = (_id) => get(`/users/${_id}`);

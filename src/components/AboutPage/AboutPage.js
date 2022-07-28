@@ -1,6 +1,10 @@
-import React from 'react'
+import { useEffect } from 'react'
 
-export default function About() {
+export default function AboutPage() {
+	useEffect(() => {
+		document.title = "About"
+	}, []);
+
 	return (
 		<div className='max-w-5xl py-3'>
 			<div className="carousel carousel-center rounded-box">

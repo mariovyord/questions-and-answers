@@ -1,11 +1,15 @@
-import React from 'react';
-import CircleCard from './cards/CircleCard';
-import useFetch from './hooks/useFetch';
-import NoContent from './common/NoContent';
-import Spinner from './common/Spinner';
+import React, { useEffect } from 'react';
+import CircleCard from '../cards/CircleCard';
+import useFetch from '../hooks/useFetch';
+import NoContent from '../common/NoContent';
+import Spinner from '../common/Spinner';
 
-export default function Circles() {
+export default function CirclesPage() {
 	const [data, loading, error] = useFetch(`/collections/circles`);
+
+	useEffect(() => {
+		document.title = "Circles"
+	}, []);
 
 	const content = data.map(x => <CircleCard key={x._id} data={x}></CircleCard>)
 

@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import Stats from './feautures/Stats';
-import CirlclesList from './feautures/CirclesList';
-import QuestionCard from './cards/QuestionCard';
-import useFetch from './hooks/useFetch';
-import FeedOptionsContainer from './common/FeedOptionsContainer';
-import Spinner from './common/Spinner';
-import NoContent from './common/NoContent';
+import Stats from '../feautures/Stats';
+import CirlclesList from '../feautures/CirclesList';
+import QuestionCard from '../cards/QuestionCard';
+import useFetch from '../hooks/useFetch';
+import FeedOptionsContainer from '../common/FeedOptionsContainer';
+import Spinner from '../common/Spinner';
+import NoContent from '../common/NoContent';
 
-export default function Questions({ questions }) {
+export default function QuestionsPage({ questions }) {
 	const pageSize = 20;
 
 	const [isDesktop, setDesktop] = useState(window.innerWidth > 768);
@@ -17,6 +17,10 @@ export default function Questions({ questions }) {
 	const [data, loading, error] = useFetch(`/collections/questions?sortBy=createdAt%20desc&page=${query.get('page') || 1}&pageSize=${pageSize}${query.get('where') ? `&where=${query.get('where')}` : ''}`);
 	const [ciclesData, loadingCircles, errorCircles] = useFetch(`/collections/circles`);
 	const [docsCount] = useFetch(`/collections/questions?${query.get('where') ? `where=${query.get('where')}&` : ''}count=true`);
+
+	useEffect(() => {
+		document.title = "Questions"
+	}, []);
 
 	useEffect(() => {
 		window.addEventListener("resize", updateMedia);

@@ -9,11 +9,14 @@ import Feed from '../feed/Feed';
 import useNotificationContext from '../hooks/useNotificationContext';
 import EditProfileForm from './forms/EditProfileForm';
 import UploadImageForm from './forms/UploadImageForm';
+import UserCard from './userCards/UserCard';
+import ShadowUserCard from './userCards/ShadowUserCard';
 
 export default function Profile() {
 	const [showQuestions, setShowQuestions] = useState(false);
 	const [showEditProfile, setShowEditProfile] = useState(false);
 	const [questions, setQuestions] = useState([]);
+	const [loadingQuestions, setLoadingQuestions] = useState(false)
 	const [isOwner, setIsOwner] = useState(false);
 
 	// From data service
@@ -29,6 +32,10 @@ export default function Profile() {
 
 	const handleNotification = useNotificationContext();
 	const navigate = useNavigate();
+
+	useEffect(() => {
+		document.title = "Profile"
+	}, []);
 
 	useEffect(() => {
 		setLoading(true);
@@ -48,13 +55,16 @@ export default function Profile() {
 				setLoading(false);
 			})
 
-	}, [profileId, handleNotification, navigate])
+	}, [])
 
 	const handleShowQuestions = () => {
+		setLoadingQuestions(true);
 		getQuestionsByOwnerId(profileId)
 			.then(x => {
-				setQuestions(x.result);
+				// TODO Dont get hidden questions from server - but for now server doesnt handle multiple of the same query
+				setQuestions(x.result.filter(x => x.isHidden !== true));
 				setShowQuestions(!showQuestions)
+				setLoadingQuestions(false);
 			});
 	}
 
@@ -64,50 +74,47 @@ export default function Profile() {
 			{/* Sidebar Left */}
 			{
 				loading
-					? <h1>Loading</h1>
+					? <ShadowUserCard />
 					: <div className='col-span-5 md:col-span-2 w-full'>
-						<div className='bg-base-100 p-4 mb-2 rounded-lg shadow flex gap-2'>
-							<div className="avatar">
-								<div className="w-32 rounded">
-									<img src={profile.imageUrl} alt="Portrait" />
-								</div>
-							</div>
-							<div className=''>
-								<h1 className='font-bold text-2xl'>{profile.firstName} {profile.lastName}</h1>
-								<h2 className='italic opacity-80 text-sm'>@{profile.username}</h2>
-								<h2 className=''>{profile.description}</h2>
-							</div>
-						</div>
+						<UserCard profile={profile} />
 						<div>
-							{isOwner && <button
-								onClick={() => setShowEditProfile((x) => !x)}
-								className='btn btn-primary btn-outline w-full mb-2'
-							>
-								{showEditProfile ? 'Close' : 'Edit Profile'}
-							</button>}
-							{showEditProfile && <div className='flex flex-col gap-2 mb-4'>
-								<div className='border border-primary rounded-lg p-4 bg-base-100 shadow'>
-									<h3 className='font-bold text-2xl'>Profile picture</h3>
-									<div className='py-4'>
-										<UploadImageForm userId={userData._id} />
+							<div>
+								{isOwner && <button
+									onClick={() => setShowEditProfile((x) => !x)}
+									className='btn btn-primary btn-outline w-full mb-2'
+								>
+									{showEditProfile ? 'Close' : 'Edit Profile'}
+								</button>}
+								{showEditProfile && <div className='flex flex-col gap-2 mb-4'>
+									<div className='border border-primary rounded-lg p-4 bg-base-100 shadow'>
+										<h3 className='font-bold text-2xl'>Profile picture</h3>
+										<div className='py-4'>
+											<UploadImageForm userId={userData._id} />
+										</div>
 									</div>
-								</div>
-								<div className='border border-primary rounded-lg p-4 bg-base-100 shadow'>
-									<h3 className='font-bold text-2xl'>Edit info</h3>
-									<EditProfileForm profile={profile} />
-								</div>
-							</div>}
-						</div>
-						<div className='pb-2'>
-							<button onClick={handleShowQuestions} className='btn btn-secondary btn-outline w-full'>{showQuestions ? 'Hide questions' : 'Show questions'}</button>
-						</div>
-						{showQuestions && <div className='grid gap-2'>
-							{questions.length > 0
-								? questions.map(x => <QuestionCard data={x} />)
-								: <h2>No questions</h2>
+									<div className='border border-primary rounded-lg p-4 bg-base-100 shadow'>
+										<h3 className='font-bold text-2xl'>Edit info</h3>
+										<EditProfileForm profile={profile} />
+									</div>
+								</div>}
+							</div>
+							<div className='pb-2'>
+								<button
+									onClick={handleShowQuestions}
+									className='btn btn-secondary btn-outline w-full'
+									disabled={loadingQuestions}
+								>
+									{showQuestions ? 'Hide questions' : 'Show questions'}
+								</button>
+							</div>
+							{showQuestions && <div className='grid gap-2'>
+								{questions.length > 0
+									? questions.map(x => <QuestionCard key={x._id} data={x} />)
+									: <h2>No questions</h2>
+								}
+							</div>
 							}
 						</div>
-						}
 					</div>
 			}
 
