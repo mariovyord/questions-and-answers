@@ -88,7 +88,9 @@ export default function Profile() {
 							{showEditProfile && <div className='flex flex-col gap-2 mb-4'>
 								<div className='border border-primary rounded-lg p-4 bg-base-100 shadow'>
 									<h3 className='font-bold text-2xl'>Profile picture</h3>
-									<UploadImageForm />
+									<div className='py-4'>
+										<UploadImageForm userId={userData._id} />
+									</div>
 								</div>
 								<div className='border border-primary rounded-lg p-4 bg-base-100 shadow'>
 									<h3 className='font-bold text-2xl'>Edit info</h3>

@@ -26,3 +26,4 @@ export const getQuestionsByOwnerId = (ownerId) => get(`/collections/questions?wh
 // User
 export const getUserDataById = (_id) => get(`/users/${_id}`);
 export const editUser = (_id, data) => put(`/users/${_id}`, data);
+export const uploadPicture = (_id, base64img) => put(`/users/${_id}`, { imageUrl: base64img });

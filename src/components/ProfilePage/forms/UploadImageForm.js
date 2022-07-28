@@ -1,12 +1,73 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { Formik } from 'formik';
+import useNotificationContext from '../../hooks/useNotificationContext';
+import { AuthContext } from '../../../contexts/AuthContext';
+import { uploadPicture } from '../../../services/data.service';
 
-const UploadImageForm = () => {
+const UploadImageForm = ({ userId, handleNewPicture }) => {
+	const handleNotification = useNotificationContext();
+	const { handleLogin } = useContext(AuthContext);
+	const navigate = useNavigate();
+
+	const validate = values => {
+		const errors = {};
+
+		return errors;
+	};
+
+	const handleSubmit = (values) => {
+		// Convert to base64 and upload
+		const file = values.file;
+
+		if (file.size > 300000) return handleNotification('warning', 'Maximum image size is 300 kb!');
+
+		const reader = new FileReader();
+		reader.onloadend = () => {
+			handleNotification('info', 'Loading...')
+			uploadPicture(userId, reader.result)
+				.then(x => {
+					handleNotification('success', 'Image uploaded!')
+				})
+				.catch(err => {
+					handleNotification('error', 'Upload failed!')
+				})
+		}
+		reader.readAsDataURL(file);
+	}
+
 	return (
-		<form className='py-2'>
-			<input type="file" />
-			<button type='submit' className='btn btn-accent'>Upload</button>
-		</form>
-	)
+		<Formik
+			initialValues={{
+				file: '',
+			}}
+			validate={validate}
+			onSubmit={handleSubmit}
+		>
+			{formik => (
+				<form onSubmit={formik.handleSubmit} className='form-control'>
+					<div>
+						<input
+							id="file"
+							name="file"
+							type="file"
+							onChange={(event) => {
+								formik.setFieldValue("file", event.currentTarget.files[0]);
+							}} />
+					</div>
+					<div>
+						<button
+							disabled={formik.isSubmitting}
+							type="submit"
+							className='btn btn-accent mt-6 w-full'
+						>
+							Upload
+						</button>
+					</div>
+				</form>
+			)}
+		</Formik >
+	);
 }
 
 export default UploadImageForm;
