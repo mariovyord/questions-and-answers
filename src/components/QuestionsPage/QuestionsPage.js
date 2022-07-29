@@ -54,7 +54,7 @@ export default function QuestionsPage({ questions }) {
 	}
 
 	const content = <>
-		{data.map(x => <QuestionCard data={x} />)}
+		{data.map(x => <QuestionCard key={x._id} data={x} />)}
 
 		<FeedOptionsContainer
 			handlePage={handlePage}

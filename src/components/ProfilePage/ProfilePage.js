@@ -70,7 +70,7 @@ const Profile = () => {
 	}
 
 	return (
-		<div className='grid grid-cols-5 gap-2 max-w-5xl p-2 w-full min-h-screen'>
+		<div className='grid grid-cols-5 gap-2 max-w-5xl p-2 w-full'>
 
 			{/* Sidebar Left */}
 			{
