@@ -19,14 +19,10 @@ export function AuthProvider({ children }) {
 		});
 	}
 	const handleLogout = () => {
-		// TODO Add modal
-		const confirmation = window.confirm('Are you sure?');
-		if (confirmation) {
-			const refreshToken = userData.refreshToken;
-			logout(refreshToken)
-			setUserData(null);
-			navigate('/');
-		}
+		const refreshToken = userData.refreshToken;
+		logout(refreshToken)
+		setUserData(null);
+		navigate('/');
 	}
 
 	const updateTokens = useCallback(async (refreshToken) => {

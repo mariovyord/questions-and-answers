@@ -1,6 +1,7 @@
 import { NavLink } from 'react-router-dom';
 import { BsHouseDoor, BsPerson } from 'react-icons/bs';
-import { AiOutlineInfoCircle, AiOutlineQuestionCircle, AiOutlineCheckCircle, AiOutlineLogout } from 'react-icons/ai';
+import { AiOutlineInfoCircle, AiOutlineQuestionCircle, AiOutlineCheckCircle } from 'react-icons/ai';
+import LogoutBtn from './LogoutBtn/LogoutBtn';
 
 export default function NavList({ isMobile, userData, handleLogout }) {
 
@@ -14,15 +15,6 @@ export default function NavList({ isMobile, userData, handleLogout }) {
 					<BsPerson size={'24px'} />
 					{isMobile ? 'Profile' : ''}
 				</NavLink>
-			</li>
-			<li>
-				<button
-					onClick={() => handleLogout()}
-					className={tooltipClasses + ' text-error'}
-					data-tip='Logout'>
-					<AiOutlineLogout size={'24px'} />
-					{isMobile ? 'Logout' : ''}
-				</button>
 			</li>
 		</>
 	);
@@ -59,6 +51,8 @@ export default function NavList({ isMobile, userData, handleLogout }) {
 					{isMobile ? 'About' : ''}
 				</NavLink>
 			</li>
+
+			{userData ? <LogoutBtn /> : null}
 		</>
 	)
 }
