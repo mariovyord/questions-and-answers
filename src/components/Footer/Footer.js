@@ -11,7 +11,7 @@ export default function Footer() {
 			</div>
 			<div>
 				<div className="grid grid-flow-col gap-4">
-					<a href="https://github.com/mariovyord/questions-and-answers">
+					<a target="_blank" rel="noreferrer" href="https://github.com/mariovyord/questions-and-answers">
 						<BsGithub size={'30px'} />
 					</a>
 				</div>

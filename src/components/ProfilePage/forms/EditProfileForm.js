@@ -55,13 +55,11 @@ const EditProfileForm = ({ profile }) => {
 			}}
 			validate={validate}
 			onSubmit={(values, { setSubmitting }) => {
-				console.log(profile);
 				handleNotification('info', 'Form send!')
 				editUser(profile._id, values).then(x => {
 					handleNotification('success', 'Profile updated!');
 				})
 					.catch(err => {
-						console.log(err)
 						handleNotification('error', err[0].message || 'Something went wrong');
 					})
 					.finally(() => {

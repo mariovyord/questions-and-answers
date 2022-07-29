@@ -58,7 +58,7 @@ export default function Feed({ urlOptions = '' }) {
 
 	return (
 		<>
-			<div className='col-span-5 md:col-span-3 grid gap-2 w-full'>
+			<div className='col-span-5 md:col-span-3 grid gap-2 w-full h-fit'>
 				<FeedOptionsContainer
 					isDisabled={(query.get('page') || 1) >= Math.ceil(docsCount / pageSize)}
 					page={query.get('page')}
