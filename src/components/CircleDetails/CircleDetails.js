@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { toTitleCase } from '../../utils/stringUtils';
 import RecentQuestionsList from '../feautures/RecentQuestionsList';
 import Feed from '../feed/Feed';
-import useFetch from '../hooks/useFetch';
+import useFetch from '../../hooks/useFetch';
 
 const CircleDetails = () => {
 	const { _id } = useParams();

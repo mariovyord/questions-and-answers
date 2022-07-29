@@ -3,7 +3,7 @@ import { useSearchParams } from 'react-router-dom';
 import Stats from '../feautures/Stats';
 import CirlclesList from '../feautures/CirclesList';
 import QuestionCard from '../cards/QuestionCard';
-import useFetch from '../hooks/useFetch';
+import useFetch from '../../hooks/useFetch';
 import FeedOptionsContainer from '../common/FeedOptionsContainer';
 import Spinner from '../common/Spinner';
 import NoContent from '../common/NoContent';

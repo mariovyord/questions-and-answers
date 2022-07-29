@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSearchParams } from 'react-router-dom';
 import AnswerCard from './AnswerCard/AnswerCard';
-import useFetch from '../hooks/useFetch';
+import useFetch from '../../hooks/useFetch';
 import FeedOptionsContainer from '../common/FeedOptionsContainer';
 import Spinner from '../common/Spinner';
 import NoContent from '../common/NoContent';
@@ -10,7 +10,6 @@ export default function Feed({ urlOptions = '' }) {
 	const pageSize = 10;
 	const [query, setQuery] = useSearchParams();
 
-	// TODO Add error handling!
 	const [data, loading] = useFetch(`/collections/answers?${query.get('sortBy')
 		? 'sortBy=' + query.get('sortBy')
 		: 'sortBy=score%20desc'}&page=${query.get('page') || 1}&pageSize=${pageSize}&populate=owner&${urlOptions}`)

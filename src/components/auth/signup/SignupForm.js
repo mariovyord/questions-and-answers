@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Formik } from 'formik';
 import FormInput from '../../form/FormInput';
 import { signup } from '../../../services/auth.service';
-import useNotificationContext from '../../hooks/useNotificationContext';
+import useNotificationContext from '../../../hooks/useNotificationContext';
 import { AuthContext } from '../../../contexts/AuthContext';
 
 const SignupForm = () => {

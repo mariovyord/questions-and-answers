@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { Formik } from 'formik';
 import FormTextarea from '../../form/FormTextarea';
-import useNotificationContext from '../../hooks/useNotificationContext';
+import useNotificationContext from '../../../hooks/useNotificationContext';
 import { postComment } from '../../../services/data.service';
-import useUserData from '../../hooks/useUserData';
+import useUserData from '../../../hooks/useUserData';
 
 const AddComment = ({ answerId, addComment }) => {
 

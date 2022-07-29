@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import CircleCard from '../cards/CircleCard';
-import useFetch from '../hooks/useFetch';
+import useFetch from '../../hooks/useFetch';
 import NoContent from '../common/NoContent';
 import Spinner from '../common/Spinner';
 

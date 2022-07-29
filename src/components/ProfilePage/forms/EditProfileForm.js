@@ -1,8 +1,7 @@
-import React, { useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React from 'react';
 import { Formik } from 'formik';
 import FormInput from '../../form/FormInput';
-import useNotificationContext from '../../hooks/useNotificationContext';
+import useNotificationContext from '../../../hooks/useNotificationContext';
 import { editUser } from '../../../services/data.service';
 
 const EditProfileForm = ({ profile }) => {

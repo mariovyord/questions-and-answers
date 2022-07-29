@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Formik } from 'formik';
-import useNotificationContext from '../../hooks/useNotificationContext';
+import useNotificationContext from '../../../hooks/useNotificationContext';
 import { AuthContext } from '../../../contexts/AuthContext';
 import { uploadPicture } from '../../../services/data.service';
 

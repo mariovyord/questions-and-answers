@@ -1,6 +1,6 @@
 import { createContext, useCallback, useEffect, useState } from "react";
 import { logout, newTokens } from '../services/auth.service';
-import useLocalStorage from '../components/hooks/useLocalStorage';
+import useLocalStorage from '../hooks/useLocalStorage';
 import Spinner from "../components/common/Spinner";
 import { useNavigate } from "react-router-dom";
 

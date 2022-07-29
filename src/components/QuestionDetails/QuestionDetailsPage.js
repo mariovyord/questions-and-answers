@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 
-import useFetch from '../hooks/useFetch';
+import useFetch from '../../hooks/useFetch';
+import useUserData from '../../hooks/useUserData';
 
 import { toTitleCase } from '../../utils/stringUtils';
 
@@ -9,7 +10,6 @@ import Feed from '../feed/Feed';
 import AddAnswerForm from './AddAnswerForm/AddAnswerForm';
 import AnswerCard from '../feed/AnswerCard/AnswerCard';
 import RecentQuestionsList from '../feautures/RecentQuestionsList';
-import useUserData from '../hooks/useUserData';
 
 
 export default function QuestionDetailsPage() {

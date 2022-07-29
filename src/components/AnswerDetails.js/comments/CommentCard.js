@@ -1,18 +1,20 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import useUserData from '../../hooks/useUserData';
+import useUserData from '../../../hooks/useUserData';
 import { Formik } from 'formik';
 import FormTextarea from '../../form/FormTextarea';
 import { BsTrash } from 'react-icons/bs';
 import { FiEdit, FiSave } from 'react-icons/fi';
 import * as dataService from '../../../services/data.service';
-import useNotificationContext from '../../hooks/useNotificationContext';
+import useNotificationContext from '../../../hooks/useNotificationContext';
+import Modal from '../../common/Modal';
 
 
 
 const CommentCard = ({ comment, handleChange }) => {
 	const userData = useUserData();
 	const [lockComment, setLockComment] = useState(true);
+	const [openModal, SetOpenModal] = useState(false);
 
 	const handleNotification = useNotificationContext();
 
@@ -20,20 +22,21 @@ const CommentCard = ({ comment, handleChange }) => {
 		setLockComment(x => !x);
 	}
 
+	const handleModal = () => {
+		SetOpenModal(!openModal);
+	}
+
 	const handleDelete = (_id) => {
-		const confirmation = window.confirm('Are you sure?')
-		if (confirmation) {
-			dataService.deleteComment(_id)
-				.then(x => {
-					handleChange((x) => {
-						return x._id !== _id;
-					})
-					handleNotification('success', 'Comment deleted')
+		dataService.deleteComment(_id)
+			.then(x => {
+				handleChange((x) => {
+					return x._id !== _id;
 				})
-				.catch(err => {
-					handleNotification(err[0].message || 'Something went wrong')
-				})
-		}
+				handleNotification('success', 'Comment deleted')
+			})
+			.catch(err => {
+				handleNotification(err[0].message || 'Something went wrong')
+			})
 	}
 
 	const handleSubmit = (values, { setSubmitting }) => {
@@ -69,7 +72,7 @@ const CommentCard = ({ comment, handleChange }) => {
 		return errors;
 	};
 
-	return (
+	return (<>
 		<div className='w-full bg-base-100 shadow p-4 rounded-lg'>
 			{/* User */}
 			<div className='flex'>
@@ -114,9 +117,8 @@ const CommentCard = ({ comment, handleChange }) => {
 							<div>
 								{userData && userData._id === comment.owner._id && <>
 									<div>
-										{/* TODO Add tooltips */}
 										<button
-											onClick={() => handleDelete(comment._id)}
+											onClick={() => handleModal()}
 											type="button"
 											disabled={formik.isSubmitting}
 											className='btn btn-ghost text-error tooltip tooltip-bottom tooltip-error'
@@ -124,6 +126,13 @@ const CommentCard = ({ comment, handleChange }) => {
 										>
 											<BsTrash size={'20px'} />
 										</button>
+										{
+											openModal && <Modal handleModal={handleModal} >
+												<p className='font-bold text-xl mb-7'>Are you sure you want to delete answer?</p>
+												<button onClick={() => handleDelete(comment._id)} type='button' className='btn btn-secondary w-1/3'>Yes</button>
+												<button onClick={handleModal} type='button' className='btn btn-primary w-2/3'>No</button>
+											</Modal>
+										}
 										<button
 											type="button"
 											disabled={formik.isSubmitting}
@@ -145,10 +154,12 @@ const CommentCard = ({ comment, handleChange }) => {
 								}
 							</div>
 						</form>
+
 					</>
 				)}
 			</Formik >
 		</div>
+	</>
 	)
 }
 

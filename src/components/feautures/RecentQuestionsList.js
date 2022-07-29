@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Spinner from '../common/Spinner';
-import useFetch from '../hooks/useFetch';
+import useFetch from '../../hooks/useFetch';
 
 const RecentQuestionsList = () => {
 	// Add select only titles and ids

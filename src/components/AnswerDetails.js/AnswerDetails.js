@@ -5,8 +5,8 @@ import Spinner from '../common/Spinner';
 import CirlclesList from '../feautures/CirclesList';
 import RecentQuestionsList from '../feautures/RecentQuestionsList';
 import AnswerCard from '../feed/AnswerCard/AnswerCard';
-import useNotificationContext from '../hooks/useNotificationContext';
-import useUserData from '../hooks/useUserData';
+import useNotificationContext from '../../hooks/useNotificationContext';
+import useUserData from '../../hooks/useUserData';
 
 import CommentsSection from './comments/CommentsSection';
 import OwnerControls from './edit/OwnerControls';
@@ -53,19 +53,16 @@ const AnswerDetails = () => {
 		setData({ ...data, body: body });
 	}
 
-	const deleteAnswer = () => {
-		const confirmation = window.confirm('Are you sure?');
-		if (confirmation) {
-			handleNotification('info', 'Deleting answer!');
-			deleteAnswerById(_id)
-				.then(x => {
-					handleNotification('success', 'Answer deleted!');
-					navigate('/');
-				})
-				.catch(err => {
-					handleNotification('error', err[0].message || 'Something went wrong!');
-				})
-		}
+	const handleDelete = () => {
+		handleNotification('info', 'Deleting answer!');
+		deleteAnswerById(_id)
+			.then(x => {
+				handleNotification('success', 'Answer deleted!');
+				navigate('/');
+			})
+			.catch(err => {
+				handleNotification('error', err[0].message || 'Something went wrong!');
+			})
 	}
 
 	useEffect(() => {
@@ -84,7 +81,7 @@ const AnswerDetails = () => {
 				data={data}
 				showTextarea={showTextarea}
 				handleSetNewBody={handleSetNewBody}
-				deleteAnswer={deleteAnswer}
+				handleDelete={handleDelete}
 				isOpen={isOpen}
 				_id={_id}
 				loading={loading}

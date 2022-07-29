@@ -2,11 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 
 import { getQuestionsByOwnerId, getUserDataById } from '../../services/data.service';
-import useUserData from '../hooks/useUserData';
+import useUserData from '../../hooks/useUserData';
 
 import QuestionCard from '../cards/QuestionCard';
 import Feed from '../feed/Feed';
-import useNotificationContext from '../hooks/useNotificationContext';
+import useNotificationContext from '../../hooks/useNotificationContext';
 import EditProfileForm from './forms/EditProfileForm';
 import UploadImageForm from './forms/UploadImageForm';
 import UserCard from './userCards/UserCard';

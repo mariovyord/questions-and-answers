@@ -1,12 +1,35 @@
-import React from 'react';
+import { useState } from 'react';
+import Modal from '../../common/Modal';
 import EditAnswerForm from './EditAnswerForm';
 
+const OwnerControls = ({
+	data,
+	showTextarea,
+	handleSetNewBody,
+	handleDelete,
+	isOpen,
+	_id,
+	loading
+}) => {
 
-const OwnerControls = ({ data, showTextarea, handleSetNewBody, deleteAnswer, isOpen, _id, loading }) => {
+	const [openModal, SetOpenModal] = useState(false);
+
+	const handleModal = () => {
+		SetOpenModal(!openModal);
+	}
+
 	return (
 		<>
 			<div className='flex flex-col gap-2 w-full p-2'>
-				<button onClick={deleteAnswer} className='btn btn-error w-full'>Delete</button>
+				<button onClick={() => handleModal()} className='btn btn-error w-full'>Delete</button>
+				{
+					openModal && <Modal handleModal={handleModal} >
+						<p className='font-bold text-xl mb-7'>Are you sure you want to delete answer?</p>
+						<button onClick={() => handleDelete()} type='button' className='btn btn-secondary w-1/3'>Yes</button>
+						<button onClick={handleModal} type='button' className='btn btn-primary w-2/3'>No</button>
+					</Modal>
+				}
+
 				<div className="collapse">
 					<input onClick={() => showTextarea()} type="checkbox" className='p-0 m-0' />
 					<div className="collapse-title text-base font-medium btn btn-secondary w-full min-h-0 p-0">

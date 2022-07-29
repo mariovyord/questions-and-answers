@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { getData } from '../../services/data.service';
+import { getData } from '../services/data.service';
 import useNotificationContext from './useNotificationContext';
 
 export default function useFetch(url) {

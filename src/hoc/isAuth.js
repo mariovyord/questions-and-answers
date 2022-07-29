@@ -1,5 +1,5 @@
 import { Navigate } from 'react-router-dom';
-import useUserData from '../components/hooks/useUserData';
+import useUserData from '../hooks/useUserData';
 
 export const isAuth = (Component) => {
 	const WrapperComponent = (props) => {

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { getComments, getOneComment } from '../../../services/data.service';
-import useNotificationContext from '../../hooks/useNotificationContext';
+import useNotificationContext from '../../../hooks/useNotificationContext';
 import AddComment from './AddComment';
 import CommentCard from './CommentCard';
 
