@@ -128,7 +128,7 @@ const CommentCard = ({ comment, handleChange }) => {
 										</button>
 										{
 											openModal && <Modal handleModal={handleModal} >
-												<p className='font-bold text-xl mb-7'>Are you sure you want to delete answer?</p>
+												<p className='font-bold text-xl mb-7'>Are you sure you want to delete comment?</p>
 												<button onClick={() => handleDelete(comment._id)} type='button' className='btn btn-secondary w-1/3'>Yes</button>
 												<button onClick={handleModal} type='button' className='btn btn-primary w-2/3'>No</button>
 											</Modal>
