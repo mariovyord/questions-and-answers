@@ -43,7 +43,7 @@ export default function AnswerCard({ isHiddenBtn, answer: data }) {
 			dataService.vote(answer._id, vote)
 				.then(x => {
 					setUserVote(vote);
-					setAnswer((a) => ({ ...a, upvotes: x.result.upvotes, downvotes: x.result.downvotes }))
+					setAnswer((a) => ({ ...a, upvotes: x.result.upvotes, downvotes: x.result.downvotes, score: x.result.score }))
 				});
 		} else if (action === 'downvote') {
 			vote.downvote = !vote.downvote;
@@ -52,7 +52,7 @@ export default function AnswerCard({ isHiddenBtn, answer: data }) {
 			dataService.vote(answer._id, vote)
 				.then(x => {
 					setUserVote(vote);
-					setAnswer((a) => ({ ...a, upvotes: x.result.upvotes, downvotes: x.result.downvotes }))
+					setAnswer((a) => ({ ...a, upvotes: x.result.upvotes, downvotes: x.result.downvotes, score: x.result.score }))
 				});
 		}
 

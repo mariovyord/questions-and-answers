@@ -30,11 +30,10 @@ export default function Navbar() {
 				<div className="navbar-end">
 					{userData
 						? < AddQuestionModal />
-						: <button className="btn btn-secondary modal-button">
-							<Link to="/auth" >
-								Login
-							</Link>
-						</button>
+						: <Link className="btn btn-secondary modal-button" to="/auth" >
+							Login
+						</Link>
+
 					}
 				</div>
 			</div>

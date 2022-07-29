@@ -110,12 +110,14 @@ const Profile = () => {
 									{showQuestions ? 'Hide questions' : 'Show questions'}
 								</button>
 							</div>
-							{showQuestions && <div className='grid gap-2'>
+							{showQuestions && <>
 								{questions.length > 0
-									? questions.map(x => <QuestionCard key={x._id} data={x} />)
+									? <div className='grid gap-2 max-h-[500px] overflow-y-auto overflow-x-hidden'>
+										{questions.map(x => <QuestionCard key={x._id} data={x} />)}
+									</div>
 									: <h2>No questions</h2>
 								}
-							</div>
+							</>
 							}
 						</div>
 					</div>

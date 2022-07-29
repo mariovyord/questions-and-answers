@@ -47,7 +47,7 @@ function App() {
 								</Routes>
 							</main>
 						</div>
-						<footer className='b-0 w-full'>
+						<footer className='w-full'>
 							<Footer />
 						</footer>
 					</NotificationProvider>

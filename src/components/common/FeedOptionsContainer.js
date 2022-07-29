@@ -3,7 +3,7 @@ export default function FeedOptionsContainer({ handlePage, page, isDisabled, chi
 	if (page === undefined) page = 1;
 
 	return (
-		<div className="btn-group grid grid-cols-3 gap-2" >
+		<div className="btn-group grid grid-cols-3 gap-2 h-fit" >
 			<button className="btn btn-outline" disabled={(page || 1) <= 1} onClick={() => handlePage(-1)}>Prev page</button>
 			{children}
 			<button className="btn btn-outline" disabled={isDisabled} onClick={() => handlePage(1)}>Next Page</button>
