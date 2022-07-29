@@ -1,13 +1,13 @@
-import { useAuth } from '../contexts/AuthContext';
 import { Navigate } from 'react-router-dom';
+import useUserData from '../components/hooks/useUserData';
 
 export const isAuth = (Component) => {
 	const WrapperComponent = (props) => {
-		const { userData } = useAuth();
+		const userData = useUserData();
 
 		return userData
 			? <Component {...props} />
-			: <Navigate to="/login" />
+			: <Navigate to="/auth" />
 	}
 
 	return WrapperComponent;

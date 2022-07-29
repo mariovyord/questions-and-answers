@@ -9,7 +9,7 @@ import useNotificationContext from '../hooks/useNotificationContext';
 import useUserData from '../hooks/useUserData';
 
 import CommentsSection from './comments/CommentsSection';
-import EditAnswerForm from './edit/EditAnswerForm';
+import OwnerControls from './edit/OwnerControls';
 
 const AnswerDetails = () => {
 	const [isOpen, setIsOpen] = useState(false);
@@ -23,7 +23,8 @@ const AnswerDetails = () => {
 
 	const [data, setData] = useState([]);
 	const [loading, setLoading] = useState(true);
-	const [error, setError] = useState(null);
+
+	const handleNotifications = useNotificationContext();
 
 	useEffect(() => {
 		document.title = "Answer Details"
@@ -31,14 +32,13 @@ const AnswerDetails = () => {
 
 	useEffect(() => {
 		setLoading(true)
-		setError(null);
 
 		getAnswer(_id)
 			.then(result => {
 				setData(result.result);
 			})
 			.catch(err => {
-				setError('Error fetching data from server');
+				handleNotifications('error', 'Error fetching data from server')
 			})
 			.finally(() => {
 				setLoading(false);
@@ -54,7 +54,6 @@ const AnswerDetails = () => {
 	}
 
 	const deleteAnswer = () => {
-		// TODO Add modal
 		const confirmation = window.confirm('Are you sure?');
 		if (confirmation) {
 			handleNotification('info', 'Deleting answer!');
@@ -78,48 +77,19 @@ const AnswerDetails = () => {
 		setDesktop(window.innerWidth > 768);
 	};
 
-	const ownerControls = <>
-		<div className='flex flex-col gap-2 w-full p-2'>
-			<button onClick={deleteAnswer} className='btn btn-error w-full'>Delete</button>
-			<div className="collapse">
-				<input onClick={() => showTextarea()} type="checkbox" className='p-0 m-0' />
-				<div className="collapse-title text-base font-medium btn btn-secondary w-full min-h-0 p-0">
-					{isOpen ? 'Close' : 'Edit Answer'}
-				</div>
-				<div className="collapse-content">
-
-					{!loading && <>
-						<EditAnswerForm
-							answerId={_id}
-							handleSetNewBody={handleSetNewBody}
-							question={{
-								body: data.meta.question,
-								owner: data._id,
-								circle: data.circle,
-								meta: {
-									circle: data.meta.circle
-								}
-							}}
-							showTextarea={showTextarea}
-							values={data.body} />
-					</>}
-
-					<div className="alert shadow-lg">
-						<div>
-							<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="stroke-current flex-shrink-0 w-6 h-6"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-							<span>You can use <a href="https://www.markdownguide.org/" className='link'>markdown</a>  in writing your answer!</span>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</>
-
 	const mainTemplate = <>
 		<div>
 			<AnswerCard isHiddenBtn={true} answer={data} />
-			{userData._id == data?.owner?._id && ownerControls}
-			<CommentsSection answerId={_id} />
+			{userData && userData._id == data?.owner?._id && <OwnerControls
+				data={data}
+				showTextarea={showTextarea}
+				handleSetNewBody={handleSetNewBody}
+				deleteAnswer={deleteAnswer}
+				isOpen={isOpen}
+				_id={_id}
+				loading={loading}
+			/>}
+			<CommentsSection answerId={_id} userData={userData} />
 		</div>
 	</>
 

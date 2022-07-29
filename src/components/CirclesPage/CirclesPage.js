@@ -5,7 +5,7 @@ import NoContent from '../common/NoContent';
 import Spinner from '../common/Spinner';
 
 export default function CirclesPage() {
-	const [data, loading, error] = useFetch(`/collections/circles`);
+	const [data, loading] = useFetch(`/collections/circles`);
 
 	useEffect(() => {
 		document.title = "Circles"

@@ -11,7 +11,7 @@ export default function Feed({ urlOptions = '' }) {
 	const [query, setQuery] = useSearchParams();
 
 	// TODO Add error handling!
-	const [data, loading, error] = useFetch(`/collections/answers?${query.get('sortBy')
+	const [data, loading] = useFetch(`/collections/answers?${query.get('sortBy')
 		? 'sortBy=' + query.get('sortBy')
 		: 'sortBy=score%20desc'}&page=${query.get('page') || 1}&pageSize=${pageSize}&populate=owner&${urlOptions}`)
 	const [docsCount] = useFetch(`/collections/answers?count=true&${urlOptions}`);
@@ -58,7 +58,7 @@ export default function Feed({ urlOptions = '' }) {
 
 	return (
 		<>
-			<div className='col-span-5 md:col-span-3 grid gap-2'>
+			<div className='col-span-5 md:col-span-3 grid gap-2 w-full'>
 				<FeedOptionsContainer
 					isDisabled={(query.get('page') || 1) >= Math.ceil(docsCount / pageSize)}
 					page={query.get('page')}

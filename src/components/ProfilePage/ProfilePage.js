@@ -11,15 +11,16 @@ import EditProfileForm from './forms/EditProfileForm';
 import UploadImageForm from './forms/UploadImageForm';
 import UserCard from './userCards/UserCard';
 import ShadowUserCard from './userCards/ShadowUserCard';
+import isAuth from '../../hoc/isAuth';
 
-export default function Profile() {
+const Profile = () => {
 	const [showQuestions, setShowQuestions] = useState(false);
 	const [showEditProfile, setShowEditProfile] = useState(false);
 	const [questions, setQuestions] = useState([]);
 	const [loadingQuestions, setLoadingQuestions] = useState(false)
 	const [isOwner, setIsOwner] = useState(false);
 
-	// From data service
+	// Profile from data service
 	const [profile, setProfile] = useState([]);
 	const [loading, setLoading] = useState(true);
 
@@ -49,13 +50,13 @@ export default function Profile() {
 			})
 			.catch(err => {
 				handleNotification('Error fetching data from server');
-				navigate('404');
+				navigate('/404');
 			})
 			.finally(() => {
 				setLoading(false);
 			})
 
-	}, [])
+	}, [profileId])
 
 	const handleShowQuestions = () => {
 		setLoadingQuestions(true);
@@ -69,12 +70,14 @@ export default function Profile() {
 	}
 
 	return (
-		<div className='grid grid-cols-5 gap-2 max-w-5xl p-2 w-full'>
+		<div className='grid grid-cols-5 gap-2 max-w-5xl p-2 w-full min-h-screen'>
 
 			{/* Sidebar Left */}
 			{
 				loading
-					? <ShadowUserCard />
+					? <div className='col-span-5 md:col-span-2 w-full'>
+						<ShadowUserCard />
+					</div>
 					: <div className='col-span-5 md:col-span-2 w-full'>
 						<UserCard profile={profile} />
 						<div>
@@ -123,3 +126,5 @@ export default function Profile() {
 		</div>
 	)
 }
+
+export default isAuth(Profile);

@@ -2,12 +2,14 @@ import { createContext, useCallback, useEffect, useState } from "react";
 import { logout, newTokens } from '../services/auth.service';
 import useLocalStorage from '../components/hooks/useLocalStorage';
 import Spinner from "../components/common/Spinner";
+import { useNavigate } from "react-router-dom";
 
 export const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
 	const [userData, setUserData] = useLocalStorage('userData');
 	let [loading, setLoading] = useState(true);
+	const navigate = useNavigate();
 
 	const handleLogin = (data) => {
 		setUserData({
@@ -21,9 +23,9 @@ export function AuthProvider({ children }) {
 		const confirmation = window.confirm('Are you sure?');
 		if (confirmation) {
 			const refreshToken = userData.refreshToken;
-
 			logout(refreshToken)
 			setUserData(null);
+			navigate('/');
 		}
 	}
 

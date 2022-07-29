@@ -4,29 +4,27 @@ import useNotificationContext from '../../hooks/useNotificationContext';
 import AddComment from './AddComment';
 import CommentCard from './CommentCard';
 
-const CommentsSection = ({ answerId }) => {
+const CommentsSection = ({ answerId, userData }) => {
 	const [data, setData] = useState([]);
 	const [loading, setLoading] = useState(true);
-	const [error, setError] = useState(null);
 
 	const handleNotification = useNotificationContext();
 
 	useEffect(() => {
 		setLoading(true)
-		setError(null);
 
 		getComments(answerId)
 			.then(result => {
 				setData(result.result);
 			})
 			.catch(err => {
-				setError('Error fetching data from server');
+				handleNotification('error', 'Error fetching data from server')
 			})
 			.finally(() => {
 				setLoading(false);
 			})
 
-	}, [answerId])
+	}, [answerId, handleNotification])
 
 	const addComment = (comment) => {
 		getOneComment(comment._id)
@@ -44,9 +42,9 @@ const CommentsSection = ({ answerId }) => {
 
 	return (
 		<>
-			<div className='p-4'>
+			{userData && <div className='p-4'>
 				<AddComment answerId={answerId} addComment={addComment} />
-			</div>
+			</div>}
 			<div className='p-4'>
 				<h2 className='font-bold text-2xl mb-2'>Comments</h2>
 				<div className='flex flex-col gap-2'>

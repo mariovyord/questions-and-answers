@@ -4,12 +4,14 @@ import { toTitleCase } from '../../utils/stringUtils';
 import { BiHide } from 'react-icons/bi'
 import { hideQuestionById } from '../../services/data.service';
 import useNotificationContext from '../hooks/useNotificationContext';
+import useUserData from '../hooks/useUserData';
 
 export default function QuestionCard({ data }) {
 	const questionUrl = '/questions/' + data._id;
 	const circleUrl = '/circles/' + data.circle;
 
 	const handleNotification = useNotificationContext();
+	const userData = useUserData();
 
 	const handleHide = () => {
 		const confirmation = window.confirm('Are you sure?')
@@ -24,9 +26,9 @@ export default function QuestionCard({ data }) {
 
 	return (
 		<div className='w-full bg-base-100 shadow p-4 rounded-lg transition-all relative'>
-			<div onClick={handleHide} className='absolute top-2 right-2 cursor-pointer link-hover tooltip tooltip-bottom' data-tip="Hide from profile">
+			{userData && userData._id === data.owner && <div onClick={handleHide} className='absolute top-2 right-2 cursor-pointer link-hover tooltip tooltip-bottom' data-tip="Hide from profile">
 				<BiHide />
-			</div>
+			</div>}
 
 			<Link to={questionUrl} className='font-bold text-lg link-hover block'>
 				{data.body}

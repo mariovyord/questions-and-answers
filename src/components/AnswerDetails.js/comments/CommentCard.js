@@ -112,7 +112,7 @@ const CommentCard = ({ comment, handleChange }) => {
 									/>}
 							</div>
 							<div>
-								{userData._id === comment.owner._id && <>
+								{userData && userData._id === comment.owner._id && <>
 									<div>
 										{/* TODO Add tooltips */}
 										<button

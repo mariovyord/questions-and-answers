@@ -40,10 +40,10 @@ export default function AnswerCard({ isHiddenBtn, answer: data }) {
 			vote.upvote = !vote.upvote;
 			if (vote.downvote === true) vote.downvote = false;
 
-			dataService.vote(answer._id, vote, userData.accessToken)
+			dataService.vote(answer._id, vote)
 				.then(x => {
 					setUserVote(vote);
-					setAnswer(x.result);
+					setAnswer((a) => ({ ...a, upvotes: x.result.upvotes, downvotes: x.result.downvotes }))
 				});
 		} else if (action === 'downvote') {
 			vote.downvote = !vote.downvote;
@@ -52,7 +52,7 @@ export default function AnswerCard({ isHiddenBtn, answer: data }) {
 			dataService.vote(answer._id, vote)
 				.then(x => {
 					setUserVote(vote);
-					setAnswer(x.result)
+					setAnswer((a) => ({ ...a, upvotes: x.result.upvotes, downvotes: x.result.downvotes }))
 				});
 		}
 

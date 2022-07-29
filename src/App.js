@@ -28,7 +28,7 @@ function App() {
 						<header>
 							<Navbar />
 						</header>
-						<div className='bg-base-200 min-h-[calc(100vh-294px)]'>
+						<div className='bg-base-200 min-h-[calc(100vh-294px)] w-full'>
 							<main className="flex justify-center w-full " >
 								<Routes>
 									<Route path='/' element={<HomePage />} >

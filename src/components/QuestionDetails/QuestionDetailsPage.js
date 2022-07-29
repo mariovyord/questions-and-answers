@@ -9,15 +9,17 @@ import Feed from '../feed/Feed';
 import AddAnswerForm from './AddAnswerForm/AddAnswerForm';
 import AnswerCard from '../feed/AnswerCard/AnswerCard';
 import RecentQuestionsList from '../feautures/RecentQuestionsList';
+import useUserData from '../hooks/useUserData';
 
 
 export default function QuestionDetailsPage() {
 	const [isOpen, setIsOpen] = useState(false);
 	const [newAnswers, setNewAnswers] = useState([]);
+	const userData = useUserData();
 
 	const { id: questionId } = useParams();
 
-	const [question, loading, error] = useFetch(`/collections/questions/${questionId}`);
+	const [question, loading] = useFetch(`/collections/questions/${questionId}`);
 
 	useEffect(() => {
 		document.title = "Question Details"
@@ -34,23 +36,27 @@ export default function QuestionDetailsPage() {
 	return (
 		<div className='grid grid-cols-5 gap-2 max-w-5xl p-2'>
 			<div className='col-span-5 md:col-span-3 flex flex-col gap-2 '>
-				{/* Question */}
-				{/* Add loading animation */}
+
 				{loading && <>
-					<div className='p-3 bg-base-100 rounded-lg shadow'>
-						<h1 className='font-bold text-2xl mb-2'>Loading...</h1>
-						<p className='italic text-slate-500'>Circle: <Link className=' link-hover' to={`/circles/`}>...</Link></p>
-					</div>
-					<div>
-						<button className='btn btn-secondary w-full'></button>
+					<div className='p-3 bg-base-100 rounded-lg shadow animate-pulse'>
+						<div className='h-8 bg-slate-200 rounded w-full mb-2'></div>
+						<div className='h-4 bg-slate-200 rounded w-full mb-2'></div>
 					</div>
 				</>}
-				{!loading && <>
+
+				{!loading && question === null && <>
+					<div className='p-3 bg-base-100 rounded-lg shadow'>
+						<h1 className='font-bold text-2xl mb-2 italic'>The question is missing or has been deleted</h1>
+					</div>
+
+				</>}
+
+				{!loading && question !== null && <>
 					<div className='h-fit p-3 bg-base-100 rounded-lg shadow'>
 						<h1 className='font-bold text-2xl mb-2'>{question.body}</h1>
 						<p className='italic text-slate-500'>Circle: <Link className=' link-hover' to={`/circles/${question.circle}`}>{toTitleCase(question.meta.circle)}</Link></p>
 					</div>
-					<div>
+					{userData && <div>
 						<div className="collapse">
 							<input onClick={() => showTextarea()} type="checkbox" className='p-0 m-0' />
 							<div className="collapse-title text-base font-medium btn btn-secondary w-full min-h-0 p-0">
@@ -68,7 +74,7 @@ export default function QuestionDetailsPage() {
 								</div>
 							</div>
 						</div>
-					</div>
+					</div>}
 				</>}
 
 				{/* New Answers from User */}

@@ -7,7 +7,7 @@ import useFetch from '../hooks/useFetch';
 
 const CircleDetails = () => {
 	const { _id } = useParams();
-	const [data, loading, errors] = useFetch(`/collections/circles/${_id}`);
+	const [data, loading] = useFetch(`/collections/circles/${_id}`);
 
 	useEffect(() => {
 		document.title = "Circle Details"

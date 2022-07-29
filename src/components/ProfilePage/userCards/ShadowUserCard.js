@@ -1,6 +1,6 @@
-import React from 'react'
+import React from 'react';
 
-const UserCard = () => {
+const ShadowUserCard = () => {
 	return (
 		<div className='w-full'>
 			<div className='bg-base-100 p-4 mb-2 rounded-lg shadow flex gap-2 w-full animate-pulse'>
@@ -18,4 +18,4 @@ const UserCard = () => {
 	)
 }
 
-export default UserCard
+export default ShadowUserCard;
