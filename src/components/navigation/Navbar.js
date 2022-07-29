@@ -3,6 +3,7 @@ import NavList from './NavList';
 import { Link } from 'react-router-dom';
 import AddQuestionModal from './addQuestionModal/AddQuestionModal';
 import { AuthContext } from '../../contexts/AuthContext';
+import { GiBlackBook } from 'react-icons/gi'
 
 export default function Navbar() {
 	const { userData, handleLogout } = useContext(AuthContext);
@@ -19,7 +20,9 @@ export default function Navbar() {
 							<NavList userData={userData} isMobile={true} />
 						</ul>
 					</div>
-					<Link to="/" className="btn btn-ghost normal-case text-2xl">Questions!</Link>
+					<Link to="/" className="btn btn-ghost font-bold text-3xl px-0 text-primary w-fit ">
+						<GiBlackBook size={'30px'} />&nbsp;QAA
+					</Link>
 				</div>
 				<div className="navbar-center hidden lg:flex">
 					<ul className="menu menu-horizontal p-0">
