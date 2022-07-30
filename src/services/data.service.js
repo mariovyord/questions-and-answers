@@ -2,6 +2,9 @@ import { get, post, del, put } from "./requests.service";
 
 export const getData = (url) => get(url);
 
+// Circles
+export const createCircle = (data) => post('/collections/circles', data);
+
 // Questions
 export const getQuestion = (_id) => get(`/collections/questions/${_id}`);
 export const postQuestion = (data) => post('/collections/questions', data);

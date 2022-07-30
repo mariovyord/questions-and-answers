@@ -4,10 +4,10 @@ import { enablePageScroll, disablePageScroll } from 'scroll-lock';
 import { AiOutlineCloseCircle } from 'react-icons/ai';
 
 const Modal = ({ handleModal, children }) => {
-	useEffect(() => {
-		disablePageScroll();
-		return () => enablePageScroll();
-	}, [])
+	// useEffect(() => {
+	// 	disablePageScroll();
+	// 	return () => enablePageScroll();
+	// }, [])
 
 	return (
 		<div

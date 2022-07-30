@@ -6,7 +6,7 @@ export default function CircleCard({ data }) {
 	const circleUrl = '/circles/' + data._id;;
 
 	return (
-		<div className="card card-compact w-full sm:w-56 bg-base-100 shadow-xl">
+		<div className="card card-compact w-full h-full bg-base-100 shadow-xl rounded-lg">
 			<div className='max-h-24 overflow-hidden' ><img src={data.imageUrl} alt="Shoes" /></div>
 			<div className="card-body">
 				<h2 className="card-title">{toTitleCase(data.title)}</h2>
