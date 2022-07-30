@@ -25,6 +25,9 @@ export default function QuestionCard({ data }) {
 			.then(x => {
 				handleNotification('success', 'Question hidden from profile!')
 			})
+			.then(x => {
+				handleModal();
+			})
 			.catch(err => {
 				handleNotification('error', 'Something went wrong!')
 			})
