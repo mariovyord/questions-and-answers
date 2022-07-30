@@ -1,27 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { spaceToDashAndLowerCase, toTitleCase } from '../../utils/stringUtils';
+import { toTitleCase } from '../../utils/stringUtils';
+import mainCircles from '../../data/circles/circles.json';
 
 export default function CirlclesList() {
-
-	const mainCircles = [
-		'technology',
-		'programming',
-		'science',
-		'history',
-		'books',
-		'movies',
-		'world politics',
-		'economics',
-	];
-
 	return (
 		<div className='p-3'>
-			<h2 className='text-2xl font-bold'>Circles</h2>
+			<h2 className='text-xl font-bold'>Main Circles</h2>
 			<ul>
 				{mainCircles.map(x => {
-					const url = `/circles/${spaceToDashAndLowerCase(x)}`
-					return <li className='py-1 link link-hover' key={x}><Link to={url}>{toTitleCase(x)}</Link></li >
+					const url = `/circles/${x._id}`
+					return <li className='py-1 link link-hover' key={x._id}><Link to={url}>{toTitleCase(x.title)}</Link></li >
 				})}
 			</ul>
 		</div>

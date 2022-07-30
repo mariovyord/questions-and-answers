@@ -69,7 +69,7 @@ const CircleDetails = () => {
 
 			</div>
 			<div className='col-span-5 md:col-span-2 p-3 flex flex-col gap-2'>
-				<RecentQuestionsList />
+				{data && <RecentQuestionsList pageSize={20} circleId={data._id} />}
 			</div>
 			{data && userData._id === data.owner && <>
 				<button

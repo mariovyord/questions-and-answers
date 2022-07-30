@@ -3,6 +3,7 @@ import CirlclesList from '../feautures/CirclesList';
 import { themeChange } from 'theme-change';
 import { Outlet } from 'react-router-dom';
 import RecentQuestionsList from '../feautures/RecentQuestionsList';
+import FeauturedCircle from '../feautures/FeauturedCircle';
 
 
 export default function HomePage() {
@@ -44,15 +45,14 @@ export default function HomePage() {
 			{
 				isDesktop
 					? <div className={'col-span-1'}>
-						<div>
-							<h3 className='text-center font-bold'>Select theme</h3>
-							<div className='flex justify-around py-2'>
+						<div className='p-2'>
+							<h3 className='text-xl font-bold'>Select theme</h3>
+							<div className='flex py-2 gap-2'>
 								<button className='btn btn-outline' data-set-theme="dark" data-act-class="btn-success">Dark</button>
 								<button className='btn btn-outline' data-set-theme="cmyk" data-act-class="btn-success">Light</button>
 							</div>
 						</div>
 						<RecentQuestionsList />
-						{/* <Stats /> */}
 					</div>
 					: null
 			}
