@@ -1,16 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import CircleCard from '../cards/CircleCard';
-import useFetch from '../../hooks/useFetch';
-import NoContent from '../common/NoContent';
 import Spinner from '../common/Spinner';
 import { BsPlus } from 'react-icons/bs';
 import Modal from '../common/Modal';
 import CreateCircleForm from './CreateCircleForm/CreateCircleForm';
 import * as dataService from '../../services/data.service';
 import useNotificationContext from '../../hooks/useNotificationContext';
+import mainCircles from '../../data/circles/circles.json';
 
 const CirclesPage = () => {
-	const [mainCircles, loading] = useFetch(`/collections/circles?where=type=core`);
 	const [userCircles, setUserCircles] = useState(null);
 	const [loadingUserCircles, setLoadingUserCircles] = useState(false);
 
@@ -45,17 +43,14 @@ const CirclesPage = () => {
 			<h2 className='font-bold text-center text-3xl my-5'>Main circles</h2>
 
 			<div className='grid gap-2 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 max-w-5xl p-2'>
+
 				{/* Main Feed */}
-				{
-					loading
-						? <Spinner />
-						: <> {mainCircles.length > 0
-							? mainCircles.map(x => <div key={x._id} className='col-span-1 h-72'><CircleCard data={x}></CircleCard></div>)
-							: <NoContent content='circles' />} </>
-				}
+				{mainCircles.map(x => <div key={x._id} className='col-span-1 h-72'><CircleCard data={x}></CircleCard></div>)}
+
 			</div>
 
 			<h2 className='font-bold text-center text-3xl my-5'>User circles</h2>
+
 			{!userCircles && <div className='flex flex-col justify-center items-center'>
 				<button onClick={handleLoadUserCircles} className='btn btn-primary max-w-xs'>Load user circles</button>
 			</div>}

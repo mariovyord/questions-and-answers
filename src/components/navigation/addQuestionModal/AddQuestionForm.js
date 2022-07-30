@@ -1,13 +1,15 @@
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import useNotificationContext from '../../../hooks/useNotificationContext';
 import useUserData from '../../../hooks/useUserData';
+
+import * as dataService from '../../../services/data.service';
 
 import { Field, Formik } from 'formik';
 import FormInput from '../../form/FormInput';
 import FormSelect from '../../form/FormSelect';
+
 import { toTitleCase } from '../../../utils/stringUtils';
-import circles from '../../../data/circles.json';
-import * as dataService from '../../../services/data.service';
+import circles from '../../../data/circles/circles.json';
 
 
 const AddQuestionForm = ({ handleModal }) => {

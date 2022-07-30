@@ -1,0 +1,98 @@
+[
+	{
+		"isEditDisabled": false,
+		"_id": "62cd3571e2b51c2dae1516b5",
+		"title": "history",
+		"owner": "62cd298e2b4fbaf3158603a7",
+		"imageUrl": "https://i.imgur.com/K3eLf3h.png",
+		"description": "To Discover, Analyze & Preserve",
+		"createdAt": "2022-07-12T08:48:49.980Z",
+		"updatedAt": "2022-07-12T08:48:49.980Z",
+		"__v": 0,
+		"type": "core"
+	},
+	{
+		"isEditDisabled": false,
+		"_id": "62cd35cee2b51c2dae1516b7",
+		"title": "programming",
+		"owner": "62cd298e2b4fbaf3158603a7",
+		"imageUrl": "https://i.imgur.com/qfRiX6q.png",
+		"description": "The process of creating a set of instructions that tell a computer how to perform a task.",
+		"createdAt": "2022-07-12T08:50:22.562Z",
+		"updatedAt": "2022-07-12T08:50:22.562Z",
+		"__v": 0,
+		"type": "core"
+	},
+	{
+		"isEditDisabled": false,
+		"_id": "62cd3601e2b51c2dae1516b9",
+		"title": "technology",
+		"owner": "62cd298e2b4fbaf3158603a7",
+		"imageUrl": "https://i.imgur.com/mM9HTGI.jpg",
+		"description": "The application of scientific knowledge to the practical aims of human life.",
+		"createdAt": "2022-07-12T08:51:13.190Z",
+		"updatedAt": "2022-07-12T08:51:13.190Z",
+		"__v": 0,
+		"type": "core"
+	},
+	{
+		"isEditDisabled": false,
+		"_id": "62cd365ce2b51c2dae1516bb",
+		"title": "science",
+		"owner": "62cd298e2b4fbaf3158603a7",
+		"imageUrl": "https://i.imgur.com/GYzlBb8.jpg",
+		"description": "General truths obtained and tested through scientific method.",
+		"createdAt": "2022-07-12T08:52:44.347Z",
+		"updatedAt": "2022-07-12T08:52:44.347Z",
+		"__v": 0,
+		"type": "core"
+	},
+	{
+		"isEditDisabled": false,
+		"_id": "62cd36a9e2b51c2dae1516bd",
+		"title": "movies",
+		"owner": "62cd298e2b4fbaf3158603a7",
+		"imageUrl": "https://i.imgur.com/QVT04Ps.jpg",
+		"description": "Visual art!",
+		"createdAt": "2022-07-12T08:54:01.715Z",
+		"updatedAt": "2022-07-12T08:54:01.715Z",
+		"__v": 0,
+		"type": "core"
+	},
+	{
+		"isEditDisabled": false,
+		"_id": "62cd36f6e2b51c2dae1516bf",
+		"title": "books",
+		"owner": "62cd298e2b4fbaf3158603a7",
+		"imageUrl": "https://i.imgur.com/R4oDz4S.jpg",
+		"description": "Books are awesome!",
+		"createdAt": "2022-07-12T08:55:18.643Z",
+		"updatedAt": "2022-07-12T08:55:18.643Z",
+		"__v": 0,
+		"type": "core"
+	},
+	{
+		"isEditDisabled": false,
+		"_id": "62cd3730e2b51c2dae1516c1",
+		"title": "world politics",
+		"owner": "62cd298e2b4fbaf3158603a7",
+		"imageUrl": "https://i.imgur.com/nQJn10Y.jpg",
+		"description": "The state of the world.",
+		"createdAt": "2022-07-12T08:56:16.490Z",
+		"updatedAt": "2022-07-12T08:56:16.490Z",
+		"__v": 0,
+		"type": "core"
+	},
+	{
+		"isEditDisabled": false,
+		"_id": "62cd375fe2b51c2dae1516c3",
+		"title": "economics",
+		"owner": "62cd298e2b4fbaf3158603a7",
+		"imageUrl": "https://i.imgur.com/b1Htwo7.jpg",
+		"description": "The study of scarcity and its implications.",
+		"createdAt": "2022-07-12T08:57:03.806Z",
+		"updatedAt": "2022-07-12T08:57:03.806Z",
+		"__v": 0,
+		"type": "core"
+	}
+]
