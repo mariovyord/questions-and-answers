@@ -9,6 +9,7 @@ import { FiEdit } from 'react-icons/fi';
 import { getCircleById } from '../../services/data.service';
 import useNotificationContext from '../../hooks/useNotificationContext';
 import useUserData from '../../hooks/useUserData';
+import isAuth from '../../hoc/isAuth';
 
 const CircleDetails = () => {
 	const { _id } = useParams();
@@ -88,4 +89,4 @@ const CircleDetails = () => {
 	)
 }
 
-export default CircleDetails
+export default isAuth(CircleDetails)

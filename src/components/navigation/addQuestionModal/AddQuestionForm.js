@@ -1,18 +1,31 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import useNotificationContext from '../../../hooks/useNotificationContext';
 import useUserData from '../../../hooks/useUserData';
 
-import { Formik } from 'formik';
+import { Field, Formik } from 'formik';
 import FormInput from '../../form/FormInput';
 import FormSelect from '../../form/FormSelect';
 import { toTitleCase } from '../../../utils/stringUtils';
 import circles from '../../../data/circles.json';
-import { postQuestion } from '../../../services/data.service';
+import * as dataService from '../../../services/data.service';
 
 
 const AddQuestionForm = ({ handleModal }) => {
 	const handleNotification = useNotificationContext();
 	const userData = useUserData();
+	const [userCircles, setUserCircles] = useState(null);
+
+	const handleNotifications = useNotificationContext();
+
+	const handleLoadUserCircles = () => {
+		dataService.getUserCircles()
+			.then(x => {
+				setUserCircles(x.result)
+			})
+			.catch(err => {
+				handleNotifications('error', 'Error fetching data from server')
+			})
+	}
 
 	const validate = values => {
 		const errors = {};
@@ -41,6 +54,7 @@ const AddQuestionForm = ({ handleModal }) => {
 			initialValues={{
 				question: '',
 				circle: '',
+				toggle: false,
 			}}
 			validate={validate}
 			onSubmit={(values, { setSubmitting }) => {
@@ -56,7 +70,7 @@ const AddQuestionForm = ({ handleModal }) => {
 
 				handleNotification('info', 'Form send!')
 
-				postQuestion(data)
+				dataService.postQuestion(data)
 					.then(x => {
 						handleNotification('success', 'Success! Thank you for contributing!')
 					})
@@ -90,15 +104,40 @@ const AddQuestionForm = ({ handleModal }) => {
 							type="text"
 						>
 							<option value='' disabled >Circles...</option>
-							{circles.map(x => <option
-								key={x._id}
-								value={`${x._id}=${x.title}`}
-							>
-								{toTitleCase(x.title)}
-							</option>)}
+
+							{userCircles && formik.values.toggle === true
+								? userCircles.map(x => <option
+									key={x._id}
+									value={`${x._id}=${x.title}`}
+								>
+									{toTitleCase(x.title)}
+								</option>)
+								: circles.map(x => <option
+									key={x._id}
+									value={`${x._id}=${x.title}`}
+								>
+									{toTitleCase(x.title)}
+								</option>)}
+
+
 						</FormSelect>
 					</div>
-
+					<div className="form-control">
+						<label className="label cursor-pointer">
+							<span className="label-text">Select from user circles?</span>
+							<label>
+								<Field
+									className="checkbox"
+									type="checkbox"
+									name="toggle"
+									onChange={() => {
+										formik.setFieldValue("toggle", !formik.values.toggle)
+										formik.values.toggle === false && handleLoadUserCircles()
+									}}
+								/>
+							</label>
+						</label>
+					</div>
 					<div>
 						<button
 							disabled={formik.isSubmitting}

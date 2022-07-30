@@ -9,7 +9,7 @@ import CreateCircleForm from './CreateCircleForm/CreateCircleForm';
 import * as dataService from '../../services/data.service';
 import useNotificationContext from '../../hooks/useNotificationContext';
 
-export default function CirclesPage() {
+const CirclesPage = () => {
 	const [mainCircles, loading] = useFetch(`/collections/circles?where=type=core`);
 	const [userCircles, setUserCircles] = useState(null);
 	const [loadingUserCircles, setLoadingUserCircles] = useState(false);
@@ -83,3 +83,5 @@ export default function CirclesPage() {
 
 	)
 }
+
+export default CirclesPage;
