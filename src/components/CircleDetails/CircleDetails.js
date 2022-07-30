@@ -3,12 +3,12 @@ import { useParams } from 'react-router-dom';
 import { toTitleCase } from '../../utils/stringUtils';
 import RecentQuestionsList from '../feautures/RecentQuestionsList';
 import Feed from '../feed/Feed';
-import useFetch from '../../hooks/useFetch';
 import Modal from '../common/Modal';
 import CreateCircleForm from '../CirclesPage/CreateCircleForm/CreateCircleForm';
 import { FiEdit } from 'react-icons/fi';
 import { getCircleById } from '../../services/data.service';
 import useNotificationContext from '../../hooks/useNotificationContext';
+import useUserData from '../../hooks/useUserData';
 
 const CircleDetails = () => {
 	const { _id } = useParams();
@@ -17,6 +17,8 @@ const CircleDetails = () => {
 
 	const [openModal, SetOpenModal] = useState(false);
 	const handleNotifications = useNotificationContext();
+
+	const userData = useUserData();
 
 	const handleModal = () => {
 		SetOpenModal(!openModal);
@@ -68,7 +70,7 @@ const CircleDetails = () => {
 			<div className='col-span-5 md:col-span-2 p-3 flex flex-col gap-2'>
 				<RecentQuestionsList />
 			</div>
-			{data && <>
+			{data && userData._id === data.owner && <>
 				<button
 					onClick={() => handleModal()}
 					className='btn btn-secondary fixed bottom-6 right-6 btn-circle text-5xl leading-20 tooltip tooltip-top flex justify-center'

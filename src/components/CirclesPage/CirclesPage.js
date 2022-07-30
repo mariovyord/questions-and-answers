@@ -6,14 +6,34 @@ import Spinner from '../common/Spinner';
 import { BsPlus } from 'react-icons/bs';
 import Modal from '../common/Modal';
 import CreateCircleForm from './CreateCircleForm/CreateCircleForm';
+import * as dataService from '../../services/data.service';
+import useNotificationContext from '../../hooks/useNotificationContext';
 
 export default function CirclesPage() {
-	const [data, loading] = useFetch(`/collections/circles`);
+	const [mainCircles, loading] = useFetch(`/collections/circles?where=type=core`);
+	const [userCircles, setUserCircles] = useState(null);
+	const [loadingUserCircles, setLoadingUserCircles] = useState(false);
+
+	const handleNotifications = useNotificationContext();
 
 	const [openModal, SetOpenModal] = useState(false);
 
 	const handleModal = () => {
 		SetOpenModal(!openModal);
+	}
+
+	const handleLoadUserCircles = () => {
+		setLoadingUserCircles(true);
+		dataService.getUserCircles()
+			.then(x => {
+				setUserCircles(x.result)
+			})
+			.catch(err => {
+				handleNotifications('error', 'Error fetching data from server')
+			})
+			.finally(() => {
+				setLoadingUserCircles(false);
+			})
 	}
 
 	useEffect(() => {
@@ -29,19 +49,23 @@ export default function CirclesPage() {
 				{
 					loading
 						? <Spinner />
-						: <> {data.length > 0
-							? data.map(x => <div key={x._id} className='col-span-1 h-72'><CircleCard data={x}></CircleCard></div>)
+						: <> {mainCircles.length > 0
+							? mainCircles.map(x => <div key={x._id} className='col-span-1 h-72'><CircleCard data={x}></CircleCard></div>)
 							: <NoContent content='circles' />} </>
 				}
 			</div>
 
 			<h2 className='font-bold text-center text-3xl my-5'>User circles</h2>
-			<div className='flex flex-col justify-center items-center'>
-				<button className='btn btn-primary max-w-xs'>Load user circles</button>
-			</div>
+			{!userCircles && <div className='flex flex-col justify-center items-center'>
+				<button onClick={handleLoadUserCircles} className='btn btn-primary max-w-xs'>Load user circles</button>
+			</div>}
 
-			{/* <div className='grid gap-2 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 max-w-5xl p-2'>
-			</div> */}
+			<div className='grid gap-2 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 max-w-5xl p-2'>
+				{loadingUserCircles
+					? <Spinner />
+					: userCircles && userCircles.map(x => <div key={x._id} className='col-span-1 h-72'><CircleCard data={x}></CircleCard></div>)
+				}
+			</div>
 
 			<button
 				onClick={() => handleModal()}
