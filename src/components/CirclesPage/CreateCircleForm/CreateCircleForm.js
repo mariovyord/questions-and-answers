@@ -6,7 +6,7 @@ import FormInput from '../../form/FormInput';
 import * as dataService from '../../../services/data.service';
 import { useNavigate } from 'react-router-dom';
 
-const CreateCircleForm = ({ handleModal, defaultVals }) => {
+const CreateCircleForm = ({ handleModal, defaultVals, handleNewData }) => {
 	const handleNotification = useNotificationContext();
 	const userData = useUserData();
 	const navigate = useNavigate();
@@ -63,8 +63,20 @@ const CreateCircleForm = ({ handleModal, defaultVals }) => {
 
 				handleNotification('info', 'Form send!')
 
+				// PUT request if there are default values; POST if there are not
 				if (defaultVals) {
-					console.log('vals')
+					dataService.editCircle(defaultVals._id, data)
+						.then(x => {
+							handleNotification('success', 'Success! Thank you for contributing!')
+							handleModal();
+							handleNewData(x.result)
+						})
+						.catch(err => {
+							handleNotification('error', err[0]?.message || 'Something went wrong')
+						})
+						.finally(() => {
+							setSubmitting(false);
+						});
 				} else {
 					dataService.createCircle(data)
 						.then(x => {

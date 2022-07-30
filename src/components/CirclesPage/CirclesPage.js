@@ -30,7 +30,7 @@ export default function CirclesPage() {
 					loading
 						? <Spinner />
 						: <> {data.length > 0
-							? data.map(x => <div className='col-span-1 h-72'><CircleCard key={x._id} data={x}></CircleCard></div>)
+							? data.map(x => <div key={x._id} className='col-span-1 h-72'><CircleCard data={x}></CircleCard></div>)
 							: <NoContent content='circles' />} </>
 				}
 			</div>
@@ -45,7 +45,8 @@ export default function CirclesPage() {
 
 			<button
 				onClick={() => handleModal()}
-				className='btn btn-secondary fixed bottom-6 right-6 btn-circle text-5xl leading-20'
+				className='btn btn-secondary fixed bottom-6 right-6 btn-circle text-5xl leading-20 tooltip tooltip-top'
+				data-tip='Create'
 			>
 				<BsPlus />
 			</button>
