@@ -35,6 +35,7 @@ const CircleDetails = () => {
 				setData(x.result);
 			})
 			.catch(err => {
+				// TODO Navigate to /circles
 				handleNotifications('error', 'Error fetching data from server');
 			})
 			.finally(() => {

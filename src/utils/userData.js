@@ -4,6 +4,6 @@ export const getUserData = () => {
 	else return null;
 };
 
-export const setUserData = (userData) => localStorage.setItem('useData', JSON.stringify(userData));
+export const setUserData = (userData) => localStorage.setItem('userData', JSON.stringify(userData));
 
-export const clearUserData = () => localStorage.removeItem('useData');
+export const clearUserData = () => localStorage.removeItem('userData');
