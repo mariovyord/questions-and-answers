@@ -1,8 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import isGuest from '../../hoc/isGuest';
 import LoginForm from './login/LoginForm';
 
-export default function Auth() {
+const Auth = () => {
 	return (
 		<div className='flex flex-col justify-center px-2 w-full max-w-5xl min-h-[calc(100vh-290px)]'>
 			<div className='p-8'>
@@ -34,3 +35,5 @@ export default function Auth() {
 		</div>
 	)
 }
+
+export default isGuest(Auth);

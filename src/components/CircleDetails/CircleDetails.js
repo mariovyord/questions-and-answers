@@ -65,7 +65,7 @@ const CircleDetails = () => {
 				setData(x.result);
 			})
 			.catch(err => {
-				// TODO Navigate to /circles
+				navigate('/circles');
 				handleNotifications('error', 'Error fetching data from server');
 			})
 			.finally(() => {
@@ -80,12 +80,13 @@ const CircleDetails = () => {
 	return (
 		<div className='grid grid-cols-5 gap-2 max-w-5xl p-2'>
 			<div className='col-span-5 md:col-span-3 flex flex-col gap-2 '>
-				{/* TODO Add shadow loading */}
 				{loading
-					? <div>
-						<img src="" alt="circle" />
-						<h1>Loading</h1>
-						<h3>Loading</h3>
+					? <div className='bg-primary p-8 rounded-lg shadow'>
+						<div className='max-h-16 overflow-hidden rounded mb-4'>
+							<div className='h-16 bg-slate-200 w-full mb-2 animate-pulse'></div>
+						</div>
+						<div className='h-16 bg-slate-200 rounded w-full mb-2 animate-pulse'></div>
+						<div className='h-6 bg-slate-200 rounded w-full mb-2 animate-pulse'></div>
 					</div>
 					: <div className='bg-primary p-8 rounded-lg shadow'>
 						<div className='max-h-16 overflow-hidden rounded-lg'>

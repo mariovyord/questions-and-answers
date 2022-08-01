@@ -1,6 +1,7 @@
+import isGuest from '../../../hoc/isGuest';
 import SignupForm from './SignupForm';
 
-export default function Signup() {
+const Signup = () => {
 	return (
 		<div className='flex justify-center w-full p-2'>
 			<div className='w-full sm:max-w-md p-8 bg-base-100 rounded-md shadow'>
@@ -12,3 +13,5 @@ export default function Signup() {
 		</div>
 	)
 }
+
+export default isGuest(Signup);

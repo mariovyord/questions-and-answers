@@ -24,7 +24,8 @@ async function request(url, options) {
 	}
 
 	if (data.result === null) {
-		throw new Error('No such record in database');
+		const msg = ['No such record in database']
+		throw (msg);
 	}
 
 	return data;
