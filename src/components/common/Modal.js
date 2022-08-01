@@ -1,13 +1,14 @@
 import { useEffect } from 'react';
-import { enablePageScroll, disablePageScroll } from 'scroll-lock';
+import { enablePageScroll, disablePageScroll, setFillGapMethod } from 'scroll-lock';
 
 import { AiOutlineCloseCircle } from 'react-icons/ai';
 
 const Modal = ({ handleModal, children }) => {
-	// useEffect(() => {
-	// 	disablePageScroll();
-	// 	return () => enablePageScroll();
-	// }, [])
+	useEffect(() => {
+		setFillGapMethod('margin');
+		disablePageScroll('none');
+		return () => enablePageScroll();
+	}, [])
 
 	return (
 		<div

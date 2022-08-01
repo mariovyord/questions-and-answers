@@ -23,6 +23,10 @@ async function request(url, options) {
 		throw (errMessage);
 	}
 
+	if (data.result === null) {
+		throw new Error('No such record in database');
+	}
+
 	return data;
 }
 
