@@ -1,23 +1,28 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { toTitleCase } from '../../utils/stringUtils';
-import RecentQuestionsList from '../feautures/RecentQuestionsList';
-import Feed from '../feed/Feed';
-import Modal from '../common/Modal';
-import CreateCircleForm from '../CirclesPage/CreateCircleForm/CreateCircleForm';
-import { FiEdit } from 'react-icons/fi';
-import { getCircleById } from '../../services/data.service';
+import { useNavigate, useParams } from 'react-router-dom';
+
 import useNotificationContext from '../../hooks/useNotificationContext';
 import useUserData from '../../hooks/useUserData';
 import isAuth from '../../hoc/isAuth';
 
+import * as dataService from '../../services/data.service';
+import { toTitleCase } from '../../utils/stringUtils';
+
+import { FiEdit } from 'react-icons/fi';
+import RecentQuestionsList from '../feautures/RecentQuestionsList';
+import Feed from '../feed/Feed';
+import Modal from '../common/Modal';
+import CreateCircleForm from '../CirclesPage/CreateCircleForm/CreateCircleForm';
+
 const CircleDetails = () => {
-	const { _id } = useParams();
+	const { _id: circleId } = useParams();
 	const [data, setData] = useState(null);
 	const [loading, setLoading] = useState(true);
+	const [deleteLoading, setDeleteLoading] = useState(false);
 
 	const [openModal, SetOpenModal] = useState(false);
 	const handleNotifications = useNotificationContext();
+	const navigate = useNavigate();
 
 	const userData = useUserData();
 
@@ -29,8 +34,33 @@ const CircleDetails = () => {
 		setData(newData);
 	}
 
+	const handleDelete = (circleId) => {
+		setDeleteLoading(true);
+		dataService.getQuestionsInCircleCount(circleId)
+			.then(x => {
+				return Number(x.result) > 0
+			})
+			.then(c => {
+				if (c) {
+					handleNotifications('error', 'Circle cannot be deleted if there are posted questions!')
+					setDeleteLoading(false);
+				} else {
+					dataService.deleteCircle(circleId)
+						.then(x => {
+							handleNotifications('success', 'Circle deleted!');
+							setDeleteLoading(false);
+							navigate('/');
+						})
+						.catch(err => {
+							handleNotifications('error', 'Something unexpected happened!');
+							setDeleteLoading(false);
+						})
+				}
+			})
+	}
+
 	useEffect(() => {
-		getCircleById(_id)
+		dataService.getCircleById(circleId)
 			.then(x => {
 				setData(x.result);
 			})
@@ -41,7 +71,7 @@ const CircleDetails = () => {
 			.finally(() => {
 				setLoading(false);
 			})
-	}, [_id])
+	}, [circleId])
 
 	useEffect(() => {
 		document.title = "Circle Details"
@@ -66,7 +96,7 @@ const CircleDetails = () => {
 					</div>}
 
 				{/* Answers */}
-				<Feed urlOptions={`where=circle=${_id}`} />
+				<Feed urlOptions={`where=circle=${circleId}`} />
 
 			</div>
 			<div className='col-span-5 md:col-span-2 p-3 flex flex-col gap-2'>
@@ -83,6 +113,7 @@ const CircleDetails = () => {
 				{
 					openModal && <Modal handleModal={handleModal} >
 						<CreateCircleForm handleModal={handleModal} defaultVals={data} handleNewData={handleNewData} />
+						<button disabled={deleteLoading} onClick={() => handleDelete(circleId)} className='btn btn-error mt-2 w-full'>Delete</button>
 					</Modal>
 				}
 			</>}

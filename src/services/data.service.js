@@ -6,14 +6,19 @@ export const getData = (url) => get(url);
 export const getCoreCircles = () => get(`/collections/circles?where=type=core`);
 export const getUserCircles = () => get(`/collections/circles?where=type=user`);
 export const getCircleById = (_id) => get(`/collections/circles/${_id}`);
+
 export const createCircle = (data) => post('/collections/circles', data);
+
 export const editCircle = (_id, data) => put(`/collections/circles/${_id}`, data);
+
+export const deleteCircle = (_id) => del(`/collections/circles/${_id}`);
 
 // Questions
 export const getQuestion = (_id) => get(`/collections/questions/${_id}`);
 export const postQuestion = (data) => post('/collections/questions', data);
 export const getQuestionsByOwnerId = (ownerId) => get(`/collections/questions?where=owner=${ownerId}`);
 export const hideQuestionById = (_id, bool) => put(`/collections/questions/${_id}`, { isHidden: true });
+export const getQuestionsInCircleCount = (_id) => get(`/collections/questions?where=circle=${_id}&count=true`)
 
 // Answers
 export const getAnswer = (_id) => get(`/collections/answers/${_id}?populate=owner`);
