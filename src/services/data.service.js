@@ -15,10 +15,12 @@ export const deleteCircle = (_id) => del(`/collections/circles/${_id}`);
 
 // Questions
 export const getQuestion = (_id) => get(`/collections/questions/${_id}`);
-export const postQuestion = (data) => post('/collections/questions', data);
 export const getQuestionsByOwnerId = (ownerId) => get(`/collections/questions?where=owner=${ownerId}`);
-export const hideQuestionById = (_id, bool) => put(`/collections/questions/${_id}`, { isHidden: true });
 export const getQuestionsInCircleCount = (_id) => get(`/collections/questions?where=circle=${_id}&count=true`)
+
+export const postQuestion = (data) => post('/collections/questions', data);
+
+export const hideQuestionById = (_id, bool) => put(`/collections/questions/${_id}`, { isHidden: true });
 
 // Answers
 export const getAnswer = (_id) => get(`/collections/answers/${_id}?populate=owner`);
@@ -30,7 +32,6 @@ export const vote = (answerId, userVote) => post(`/collections/answers/${answerI
 
 // Comments
 export const getOneComment = (_id) => get(`/collections/comments/${_id}?populate=owner`)
-// TODO Add pagination
 export const getComments = (answerId) => get(`/collections/comments?where=answer=${answerId}&sortBy=createdAt asc&populate=owner&page=1&pageSize=100`);
 export const postComment = (data) => post('/collections/comments', data);
 export const editComment = (_id, data) => put(`/collections/comments/${_id}`, data);

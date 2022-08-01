@@ -16,8 +16,10 @@ import isAuth from '../../hoc/isAuth';
 const Profile = () => {
 	const [showQuestions, setShowQuestions] = useState(false);
 	const [showEditProfile, setShowEditProfile] = useState(false);
+
 	const [questions, setQuestions] = useState([]);
 	const [loadingQuestions, setLoadingQuestions] = useState(false)
+
 	const [isOwner, setIsOwner] = useState(false);
 
 	// Profile from data service
@@ -82,6 +84,7 @@ const Profile = () => {
 						<UserCard profile={profile} />
 						<div>
 							<div>
+								{/* Edit profile options */}
 								{isOwner && <button
 									onClick={() => setShowEditProfile((x) => !x)}
 									className='btn btn-primary btn-outline w-full mb-2'
@@ -101,6 +104,7 @@ const Profile = () => {
 									</div>
 								</div>}
 							</div>
+							{/* Show/hide user questions options */}
 							<div className='pb-2'>
 								<button
 									onClick={handleShowQuestions}

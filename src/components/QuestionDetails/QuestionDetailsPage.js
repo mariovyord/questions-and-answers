@@ -38,21 +38,21 @@ export default function QuestionDetailsPage() {
 			<div className='col-span-5 md:col-span-3 flex flex-col gap-2 '>
 
 				{loading && <>
-					<div className='p-3 bg-base-100 rounded-lg shadow animate-pulse'>
+					<div className='p-3 bg-base-100 rounded-lg shadow animate-pulse w-full'>
 						<div className='h-8 bg-slate-200 rounded w-full mb-2'></div>
 						<div className='h-4 bg-slate-200 rounded w-full mb-2'></div>
 					</div>
 				</>}
 
 				{!loading && question === null && <>
-					<div className='p-3 bg-base-100 rounded-lg shadow'>
+					<div className='p-3 bg-base-100 rounded-lg shadow  w-full'>
 						<h1 className='font-bold text-2xl mb-2 italic'>The question is missing or has been deleted</h1>
 					</div>
 
 				</>}
 
 				{!loading && question !== null && <>
-					<div className='h-fit p-3 bg-base-100 rounded-lg shadow'>
+					<div className='h-fit p-3 bg-base-100 rounded-lg shadow  w-full'>
 						<h1 className='font-bold text-2xl mb-2'>{question.body}</h1>
 						<p className='italic text-slate-500'>Circle: <Link className=' link-hover' to={`/circles/${question.circle}`}>{toTitleCase(question.meta.circle)}</Link></p>
 					</div>
