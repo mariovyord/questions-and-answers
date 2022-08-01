@@ -10,13 +10,15 @@ import useUserData from '../../hooks/useUserData';
 
 import CommentsSection from './comments/CommentsSection';
 import OwnerControls from './edit/OwnerControls';
+import useIsDesktop from '../../hooks/useIsDesktop';
 
 const AnswerDetails = () => {
 	const [isOpen, setIsOpen] = useState(false);
 	const handleNotification = useNotificationContext();
 	const navigate = useNavigate();
 
-	const [isDesktop, setDesktop] = useState(window.innerWidth > 768);
+	const [isDesktop] = useIsDesktop();
+
 	const userData = useUserData()
 
 	const { _id } = useParams();
@@ -64,15 +66,6 @@ const AnswerDetails = () => {
 				handleNotification('error', err[0].message || 'Something went wrong!');
 			})
 	}
-
-	useEffect(() => {
-		window.addEventListener("resize", updateMedia);
-		return () => window.removeEventListener("resize", updateMedia);
-	});
-
-	const updateMedia = () => {
-		setDesktop(window.innerWidth > 768);
-	};
 
 	const mainTemplate = <>
 		<div>

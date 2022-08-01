@@ -7,11 +7,13 @@ import FeedOptionsContainer from '../common/FeedOptionsContainer';
 import Spinner from '../common/Spinner';
 import NoContent from '../common/NoContent';
 import FeauturedCircle from '../feautures/FeauturedCircle';
+import useIsDesktop from '../../hooks/useIsDesktop';
 
 export default function QuestionsPage({ questions }) {
 	const pageSize = 20;
 
-	const [isDesktop, setDesktop] = useState(window.innerWidth > 768);
+	const [isDesktop] = useIsDesktop();
+
 	const [query, setQuery] = useSearchParams();
 
 	const [data, loading] = useFetch(`/collections/questions?sortBy=createdAt%20desc&page=${query.get('page') || 1}&pageSize=${pageSize}${query.get('where') ? `&where=${query.get('where')}` : ''}`);
@@ -22,14 +24,6 @@ export default function QuestionsPage({ questions }) {
 		document.title = "Questions"
 	}, []);
 
-	useEffect(() => {
-		window.addEventListener("resize", updateMedia);
-		return () => window.removeEventListener("resize", updateMedia);
-	});
-
-	const updateMedia = () => {
-		setDesktop(window.innerWidth > 768);
-	};
 	const handleQuery = (page, where) => setQuery({
 		page: page || 1,
 		where: where || '',
