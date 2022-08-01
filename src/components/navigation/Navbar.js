@@ -1,4 +1,4 @@
-import React, { useContext, useRef } from 'react';
+import React, { useContext } from 'react';
 import NavList from './NavList';
 import { Link } from 'react-router-dom';
 import AddQuestionModal from './addQuestionModal/AddQuestionModal';

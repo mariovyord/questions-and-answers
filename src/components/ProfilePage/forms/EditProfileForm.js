@@ -59,7 +59,7 @@ const EditProfileForm = ({ profile }) => {
 					handleNotification('success', 'Profile updated!');
 				})
 					.catch(err => {
-						handleNotification('error', err[0].message || 'Something went wrong');
+						handleNotification('error', err[0]?.message || 'Something went wrong');
 					})
 					.finally(() => {
 						setSubmitting(false);

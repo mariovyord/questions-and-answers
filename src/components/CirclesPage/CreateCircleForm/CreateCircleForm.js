@@ -63,7 +63,7 @@ const CreateCircleForm = ({ handleModal, defaultVals, handleNewData }) => {
 
 				handleNotification('info', 'Form send!')
 
-				// PUT request if there are default values; POST if there are not
+				// PATCH request if there are default values; POST if there are not
 				if (defaultVals) {
 					dataService.editCircle(defaultVals._id, data)
 						.then(x => {

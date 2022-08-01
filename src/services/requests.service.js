@@ -26,7 +26,7 @@ async function request(url, options) {
 	return data;
 }
 
-function createOptions(method = 'get', data) {
+function createOptions(method = 'GET', data) {
 	const options = {
 		'method': method,
 	};
@@ -51,17 +51,17 @@ export async function get(url) {
 }
 
 export async function post(url, data) {
-	return request(API_URL + url, createOptions('post', data));
+	return request(API_URL + url, createOptions('POST', data));
 }
 
 export async function put(url, data) {
-	return request(API_URL + url, createOptions('put', data));
+	return request(API_URL + url, createOptions('PUT', data));
 }
 
 export async function patch(url, data) {
-	return request(API_URL + url, createOptions('patch', data));
+	return request(API_URL + url, createOptions('PATCH', data));
 }
 
 export async function del(url, data) {
-	return request(API_URL + url, createOptions('delete', data));
+	return request(API_URL + url, createOptions('DELETE', data));
 }
