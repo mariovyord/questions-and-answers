@@ -1,23 +1,25 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 import { AuthProvider } from './contexts/AuthContext';
+import { NotificationProvider } from './contexts/NotificationContext';
 
-import Footer from './components/Footer/Footer';
 import HomePage from './components/HomePage/HomePage';
-import Navbar from './components/navigation/Navbar';
 import AboutPage from './components/AboutPage/AboutPage';
-import QuestionDetailsPage from './components/QuestionDetails/QuestionDetailsPage';
+import QuestionDetailsPage from './components/QuestionDetailsPage/QuestionDetailsPage';
 import Profile from './components/ProfilePage/ProfilePage';
 import CirclesPage from './components/CirclesPage/CirclesPage';
-import Auth from './components/auth/Auth';
+import CircleDetailsPage from './components/CircleDetailsPage/CircleDetailsPage';
+import AnswerDetails from './components/AnswerDetails/AnswerDetailsPage';
 import Signup from './components/auth/signup/Signup';
 import PageNotFound from './components/common/PageNotFound';
+import Auth from './components/auth/Auth';
 import Feed from './components/feed/Feed';
-import { NotificationProvider } from './contexts/NotificationContext';
-import CircleDetails from './components/CircleDetails/CircleDetails';
-import AnswerDetails from './components/AnswerDetails.js/AnswerDetails';
-import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary';
 import QuestionsPage from './components/QuestionsPage/QuestionsPage';
+
+import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary';
+
+import Navbar from './components/navigation/Navbar';
+import Footer from './components/Footer/Footer';
 
 function App() {
 	return (
@@ -39,7 +41,7 @@ function App() {
 									<Route path='/profile/:_id' element={<Profile />} />
 									<Route path='/answers/:_id' element={<AnswerDetails />} />
 									<Route path='/circles' element={<CirclesPage />} />
-									<Route path='/circles/:_id' element={<CircleDetails />} />
+									<Route path='/circles/:_id' element={<CircleDetailsPage />} />
 									<Route path='/auth/signup' element={<Signup />} />
 									<Route path='/auth' element={<Auth />} />
 									<Route path='/about' element={<AboutPage />} />
