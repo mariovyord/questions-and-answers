@@ -1,20 +1,44 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
+import * as dataService from '../../services/data.service';
+
+import useNotificationContext from '../../hooks/useNotificationContext';
+
 import CircleCard from '../cards/CircleCard';
 import Spinner from '../common/Spinner';
 import { BsPlus } from 'react-icons/bs';
 import Modal from '../common/Modal';
 import CreateCircleForm from './CreateCircleForm/CreateCircleForm';
-import * as dataService from '../../services/data.service';
-import useNotificationContext from '../../hooks/useNotificationContext';
-import mainCircles from '../../data/circles/circles.json';
 
 const CirclesPage = () => {
+	const [coreCircles, setCoreCircles] = useState(null);
+	const [loadingCoreCircles, setLoadingCoreCircles] = useState(true);
+
 	const [userCircles, setUserCircles] = useState(null);
 	const [loadingUserCircles, setLoadingUserCircles] = useState(false);
 
 	const handleNotifications = useNotificationContext();
+	const navigate = useNavigate()
 
 	const [openModal, SetOpenModal] = useState(false);
+
+	useEffect(() => {
+		setLoadingCoreCircles(true);
+
+		dataService.getCoreCircles()
+			.then(x => {
+				setCoreCircles(x.result)
+			})
+			.catch(err => {
+				handleNotifications('error', 'Error fetching data from server');
+				navigate('/');
+			})
+			.finally(() => {
+				setLoadingCoreCircles(false);
+			})
+	}, [])
+
 
 	const handleModal = () => {
 		SetOpenModal(!openModal);
@@ -45,7 +69,9 @@ const CirclesPage = () => {
 			<div className='grid gap-2 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 max-w-5xl p-2'>
 
 				{/* Main Feed */}
-				{mainCircles.map(x => <div key={x._id} className='col-span-1 h-72'><CircleCard data={x}></CircleCard></div>)}
+				{loadingCoreCircles
+					? <Spinner />
+					: coreCircles.map(x => <div key={x._id} className='col-span-1 h-72'><CircleCard data={x}></CircleCard></div>)}
 
 			</div>
 

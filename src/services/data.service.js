@@ -3,6 +3,7 @@ import { get, post, del, put } from "./requests.service";
 export const getData = (url) => get(url);
 
 // Circles
+export const getCoreCircles = () => get(`/collections/circles?where=type=core`);
 export const getUserCircles = () => get(`/collections/circles?where=type=user`);
 export const getCircleById = (_id) => get(`/collections/circles/${_id}`);
 export const createCircle = (data) => post('/collections/circles', data);
