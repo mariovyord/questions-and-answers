@@ -55,27 +55,6 @@ export default function QuestionsPage({ questions }) {
 
 	const content = <>
 		{data.map(x => <QuestionCard key={x._id} data={x} />)}
-
-		<FeedOptionsContainer
-			handlePage={handlePage}
-			isDisabled={(query.get('page') || 1) >= Math.ceil(docsCount / pageSize)}
-			page={query.get('page')}
-		>
-			<select
-				className="select w-full max-w-xs btn-outline"
-				onChange={handleSort}
-				value={query.get('where')?.split('=')[1] || 'all'}
-			>
-				<option value="all">All</option>
-				{
-					loadingCircles
-						? null
-						: <>
-							{ciclesData.map(x => <option key={x._id} value={x._id}>{x.title}</option>)}
-						</>
-				}
-			</select>
-		</FeedOptionsContainer>
 	</>
 
 

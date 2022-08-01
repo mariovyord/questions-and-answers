@@ -37,22 +37,6 @@ export default function Feed({ urlOptions = '' }) {
 
 	const content = <>
 		{data.map(x => <AnswerCard key={x._id} answer={x} />)}
-
-		< FeedOptionsContainer
-			handlePage={handlePage}
-			isDisabled={(query.get('page') || 1) >= Math.ceil(docsCount / pageSize)}
-			page={query.get('page')}
-			sort={query.get('sortBy')}
-		>
-			<select
-				className="select w-full max-w-xs btn-outline"
-				value={query.get('sortBy') || 'score%20desc'}
-				onChange={handleSort}
-			>
-				<option value={'score%20desc'}>Sort by score</option>
-				<option value={'createdAt%20desc'}>Sort by most recent</option>
-			</select>
-		</FeedOptionsContainer>
 	</>
 
 	return (
