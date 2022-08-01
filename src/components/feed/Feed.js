@@ -26,7 +26,6 @@ export default function Feed({ urlOptions = '' }) {
 		if (sort) handleQuery(page, sort)
 	}
 
-	// TODO Remove query string from jsx!!!
 	const handlePage = (changeNum) => {
 		let page = query.get('page');
 		if (page) page = parseInt(page) + changeNum;
@@ -35,10 +34,6 @@ export default function Feed({ urlOptions = '' }) {
 		handleQuery(page, sort);
 	}
 
-	const content = <>
-		{data.map(x => <AnswerCard key={x._id} answer={x} />)}
-	</>
-
 	return (
 		<>
 			<div className='col-span-5 md:col-span-3 grid gap-2 w-full h-fit'>
@@ -46,6 +41,7 @@ export default function Feed({ urlOptions = '' }) {
 					isDisabled={(query.get('page') || 1) >= Math.ceil(docsCount / pageSize)}
 					page={query.get('page')}
 					sort={query.get('sortBy')}
+					handlePage={handlePage}
 				>
 					<select
 						className="select w-full max-w-xs btn-outline"
@@ -59,7 +55,10 @@ export default function Feed({ urlOptions = '' }) {
 				{loading
 					? <Spinner />
 					: <>
-						{data.length > 0 ? content : <NoContent content='answers' />}
+						{data.length > 0
+							? data.map(x => <AnswerCard key={x._id} answer={x} />)
+							: <NoContent content='answers' />
+						}
 					</>
 				}
 			</div>
