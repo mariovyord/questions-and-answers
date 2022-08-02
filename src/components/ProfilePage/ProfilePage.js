@@ -23,7 +23,7 @@ const Profile = () => {
 	const [isOwner, setIsOwner] = useState(false);
 
 	// Profile from data service
-	const [profile, setProfile] = useState([]);
+	const [profile, setProfile] = useState({});
 	const [loading, setLoading] = useState(true);
 
 	// Params
@@ -60,6 +60,10 @@ const Profile = () => {
 
 	}, [profileId])
 
+	const handleSetProfile = (values) => {
+		setProfile((p) => ({ ...p, ...values }))
+	}
+
 	const handleShowQuestions = () => {
 		setLoadingQuestions(true);
 		getQuestionsByOwnerId(profileId)
@@ -95,12 +99,12 @@ const Profile = () => {
 									<div className='border border-primary rounded-lg p-4 bg-base-100 shadow'>
 										<h3 className='font-bold text-2xl'>Profile picture</h3>
 										<div className='py-4'>
-											<UploadImageForm userId={userData._id} />
+											<UploadImageForm userId={userData._id} handleSetProfile={handleSetProfile} />
 										</div>
 									</div>
 									<div className='border border-primary rounded-lg p-4 bg-base-100 shadow'>
 										<h3 className='font-bold text-2xl'>Edit info</h3>
-										<EditProfileForm profile={profile} />
+										<EditProfileForm profile={profile} handleSetProfile={handleSetProfile} />
 									</div>
 								</div>}
 							</div>

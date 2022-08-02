@@ -1,14 +1,9 @@
-import React, { useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { Formik } from 'formik';
 import useNotificationContext from '../../../hooks/useNotificationContext';
-import { AuthContext } from '../../../contexts/AuthContext';
 import { uploadPicture } from '../../../services/data.service';
 
-const UploadImageForm = ({ userId, handleNewPicture }) => {
+const UploadImageForm = ({ userId, handleSetProfile }) => {
 	const handleNotification = useNotificationContext();
-	const { handleLogin } = useContext(AuthContext);
-	const navigate = useNavigate();
 
 	const validate = values => {
 		const errors = {};
@@ -16,7 +11,7 @@ const UploadImageForm = ({ userId, handleNewPicture }) => {
 		return errors;
 	};
 
-	const handleSubmit = (values) => {
+	const handleSubmit = (values, { setSubmitting }) => {
 		// Convert to base64 and upload
 		const file = values.file;
 
@@ -28,9 +23,13 @@ const UploadImageForm = ({ userId, handleNewPicture }) => {
 			uploadPicture(userId, reader.result)
 				.then(x => {
 					handleNotification('success', 'Image uploaded!')
+					handleSetProfile({ imageUrl: x.result.imageUrl })
 				})
 				.catch(err => {
 					handleNotification('error', 'Upload failed!')
+				})
+				.finally(() => {
+					setSubmitting(false);
 				})
 		}
 		reader.readAsDataURL(file);
@@ -46,7 +45,7 @@ const UploadImageForm = ({ userId, handleNewPicture }) => {
 		>
 			{formik => (
 				<form onSubmit={formik.handleSubmit} className='form-control'>
-					<div>
+					<div className='overflow-hidden'>
 						<input
 							id="file"
 							name="file"

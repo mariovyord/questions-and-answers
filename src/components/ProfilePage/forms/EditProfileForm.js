@@ -4,7 +4,7 @@ import FormInput from '../../form/FormInput';
 import useNotificationContext from '../../../hooks/useNotificationContext';
 import { editUser } from '../../../services/data.service';
 
-const EditProfileForm = ({ profile }) => {
+const EditProfileForm = ({ profile, handleSetProfile }) => {
 	const handleNotification = useNotificationContext();
 
 	const validate = values => {
@@ -55,9 +55,11 @@ const EditProfileForm = ({ profile }) => {
 			validate={validate}
 			onSubmit={(values, { setSubmitting }) => {
 				handleNotification('info', 'Form send!')
-				editUser(profile._id, values).then(x => {
-					handleNotification('success', 'Profile updated!');
-				})
+				editUser(profile._id, values)
+					.then(x => {
+						handleNotification('success', 'Profile updated!');
+						handleSetProfile(x.result)
+					})
 					.catch(err => {
 						handleNotification('error', err[0]?.message || 'Something went wrong');
 					})
