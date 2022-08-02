@@ -95,13 +95,10 @@ const AnswerDetailsPage = () => {
 			</div>
 
 			{/* Sidebar Right */}
-			{
-				isDesktop
-					? <div className={'col-span-1'}>
-						<RecentQuestionsList />
-					</div>
-					: null
-			}
+			<div className={'col-span-5 md:col-span-1'}>
+				<RecentQuestionsList />
+			</div>
+
 		</div >
 	)
 }

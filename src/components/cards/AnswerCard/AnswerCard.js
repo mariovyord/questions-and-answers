@@ -9,7 +9,6 @@ import { toTitleCase } from '../../../utils/stringUtils';
 
 export default function AnswerCard({ isHiddenBtn, answer: data }) {
 	const { userData } = useContext(AuthContext);
-	const [isCardOpen, setIsCardOpen] = useState(false);
 	const [answer, setAnswer] = useState(data);
 	const [userVote, setUserVote] = useState({
 		"upvote": false,
@@ -58,12 +57,8 @@ export default function AnswerCard({ isHiddenBtn, answer: data }) {
 
 	}
 
-	useEffect(() => {
-		setIsCardOpen(true);
-	}, [])
-
 	return (
-		<div className={isCardOpen ? 'w-full bg-base-100 shadow p-4 rounded-lg transition-all' : 'opacity-0 h-0 transition-all'}>
+		<div className={'w-full bg-base-100 shadow p-4 rounded-lg transition-all'}>
 
 			{/* User info */}
 			{answer.owner._id && <>
