@@ -4,7 +4,7 @@ import { deleteAnswerById, getAnswer } from '../../services/data.service';
 import Spinner from '../common/Spinner';
 import CirlclesList from '../feautures/CirclesList';
 import RecentQuestionsList from '../feautures/RecentQuestionsList';
-import AnswerCard from '../feed/AnswerCard/AnswerCard';
+import AnswerCard from '../cards/AnswerCard/AnswerCard';
 import useNotificationContext from '../../hooks/useNotificationContext';
 import useUserData from '../../hooks/useUserData';
 
@@ -12,7 +12,7 @@ import CommentsSection from './comments/CommentsSection';
 import OwnerControls from './edit/OwnerControls';
 import useIsDesktop from '../../hooks/useIsDesktop';
 
-const AnswerDetails = () => {
+const AnswerDetailsPage = () => {
 	const handleNotification = useNotificationContext();
 	const navigate = useNavigate();
 
@@ -106,4 +106,4 @@ const AnswerDetails = () => {
 	)
 }
 
-export default AnswerDetails
+export default AnswerDetailsPage

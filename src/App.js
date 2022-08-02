@@ -9,11 +9,11 @@ import QuestionDetailsPage from './components/QuestionDetailsPage/QuestionDetail
 import Profile from './components/ProfilePage/ProfilePage';
 import CirclesPage from './components/CirclesPage/CirclesPage';
 import CircleDetailsPage from './components/CircleDetailsPage/CircleDetailsPage';
-import AnswerDetails from './components/AnswerDetails/AnswerDetailsPage';
+import AnswerDetailsPage from './components/AnswerDetailsPage/AnswerDetailsPage';
 import Signup from './components/auth/signup/Signup';
 import PageNotFound from './components/common/PageNotFound';
 import Auth from './components/auth/Auth';
-import Feed from './components/feed/Feed';
+import AnswersFeed from './components/AnswersFeed/AnswersFeed';
 import QuestionsPage from './components/QuestionsPage/QuestionsPage';
 
 import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary';
@@ -35,12 +35,12 @@ function App() {
 							<main className="flex justify-center w-full " >
 								<Routes>
 									<Route path='/' element={<HomePage />} >
-										<Route path="/" element={<Feed />} />
+										<Route path="/" element={<AnswersFeed />} />
 									</Route>
 									<Route path='/questions' element={<QuestionsPage />} />
 									<Route path='/questions/:id' element={<QuestionDetailsPage />} />
 									<Route path='/profile/:_id' element={<Profile />} />
-									<Route path='/answers/:_id' element={<AnswerDetails />} />
+									<Route path='/answers/:_id' element={<AnswerDetailsPage />} />
 									<Route path='/circles' element={<CirclesPage />} />
 									<Route path='/circles/:_id' element={<CircleDetailsPage />} />
 									<Route path='/auth/signup' element={<Signup />} />

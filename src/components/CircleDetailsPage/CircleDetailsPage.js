@@ -10,7 +10,7 @@ import { toTitleCase } from '../../utils/stringUtils';
 
 import { FiEdit } from 'react-icons/fi';
 import RecentQuestionsList from '../feautures/RecentQuestionsList';
-import Feed from '../feed/Feed';
+import AnswersFeed from '../AnswersFeed/AnswersFeed';
 import Modal from '../common/Modal';
 import CreateCircleForm from '../CirclesPage/CreateCircleForm/CreateCircleForm';
 
@@ -97,7 +97,7 @@ const CircleDetails = () => {
 					</div>}
 
 				{/* Answers */}
-				<Feed urlOptions={`where=circle=${circleId}`} />
+				<AnswersFeed urlOptions={`where=circle=${circleId}`} />
 
 			</div>
 			<div className='col-span-5 md:col-span-2 p-3 flex flex-col gap-2'>

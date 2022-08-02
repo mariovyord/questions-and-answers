@@ -6,9 +6,9 @@ import useUserData from '../../hooks/useUserData';
 
 import { toTitleCase } from '../../utils/stringUtils';
 
-import Feed from '../feed/Feed';
+import AnswersFeed from '../AnswersFeed/AnswersFeed';
 import AddAnswerForm from './AddAnswerForm/AddAnswerForm';
-import AnswerCard from '../feed/AnswerCard/AnswerCard';
+import AnswerCard from '../cards/AnswerCard/AnswerCard';
 import RecentQuestionsList from '../feautures/RecentQuestionsList';
 
 
@@ -87,7 +87,7 @@ export default function QuestionDetailsPage() {
 				</div>}
 
 				{/* Answers */}
-				<Feed urlOptions={`where=question=${questionId}`} />
+				<AnswersFeed urlOptions={`where=question=${questionId}`} />
 
 			</div>
 			<div className='col-span-5 md:col-span-2 p-3 flex flex-col gap-2'>
