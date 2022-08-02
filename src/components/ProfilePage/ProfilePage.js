@@ -28,7 +28,7 @@ const Profile = () => {
 
 	// Params
 	const { _id: profileId } = useParams();
-	const filterQuery = `&where=owner=${profileId}`;
+	const filterQuery = `where=owner=${profileId}`;
 
 	// Logged user
 	const userData = useUserData();

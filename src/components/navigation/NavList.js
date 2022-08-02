@@ -52,7 +52,7 @@ export default function NavList({ isMobile, userData, handleLogout }) {
 				</NavLink>
 			</li>
 
-			{userData ? <LogoutBtn /> : null}
+			{userData ? <LogoutBtn isMobile={isMobile} /> : null}
 		</>
 	)
 }
