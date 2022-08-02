@@ -78,17 +78,17 @@ const CircleDetails = () => {
 	}, []);
 
 	return (
-		<div className='grid grid-cols-5 gap-2 max-w-5xl p-2'>
-			<div className='col-span-5 md:col-span-3 flex flex-col gap-2 '>
+		<div className='grid grid-cols-5 gap-2 max-w-5xl p-2 w-full'>
+			<div className='col-span-5 md:col-span-3 flex flex-col gap-2 w-full'>
 				{loading
-					? <div className='bg-primary p-8 rounded-lg shadow'>
+					? <div className='bg-primary p-8 rounded-lg shadow w-full' >
 						<div className='max-h-16 overflow-hidden rounded mb-4'>
 							<div className='h-16 bg-slate-200 w-full mb-2 animate-pulse'></div>
 						</div>
 						<div className='h-16 bg-slate-200 rounded w-full mb-2 animate-pulse'></div>
 						<div className='h-6 bg-slate-200 rounded w-full mb-2 animate-pulse'></div>
 					</div>
-					: <div className='bg-primary p-8 rounded-lg shadow'>
+					: <div className='bg-primary p-8 rounded-lg shadow w-full'>
 						<div className='max-h-16 overflow-hidden rounded-lg'>
 							<img src={data.imageUrl} alt="circle" />
 						</div>
@@ -97,7 +97,7 @@ const CircleDetails = () => {
 					</div>}
 
 				{/* Answers */}
-				<AnswersFeed urlOptions={`where=circle=${circleId}`} />
+				<AnswersFeed options={`where=circle=${circleId}`} />
 
 			</div>
 			<div className='col-span-5 md:col-span-2 p-3 flex flex-col gap-2'>

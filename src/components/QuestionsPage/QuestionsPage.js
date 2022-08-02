@@ -67,9 +67,10 @@ export default function QuestionsPage({ questions }) {
 			<div className='col-span-5 md:col-span-3 gap-2'>
 				<div className='grid gap-2'>
 					<FeedOptionsContainer
+						isDisabled={loading}
+						maxPage={Math.ceil(docsCount / pageSize)}
+						page={query.get('page') || 1}
 						handlePage={handlePage}
-						isDisabled={(query.get('page') || 1) >= Math.ceil(docsCount / pageSize)}
-						page={query.get('page')}
 					>
 						<select
 							className="select w-full max-w-xs btn-outline"

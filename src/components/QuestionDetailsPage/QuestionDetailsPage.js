@@ -38,8 +38,8 @@ export default function QuestionDetailsPage() {
 	}
 
 	return (
-		<div className='grid grid-cols-5 gap-2 max-w-5xl p-2'>
-			<div className='col-span-5 md:col-span-3 flex flex-col gap-2 '>
+		<div className='grid grid-cols-5 gap-2 max-w-5xl p-2 w-full'>
+			<div className='col-span-5 md:col-span-3 flex flex-col gap-2 w-full'>
 
 				{loading && <>
 					<div className='p-3 bg-base-100 rounded-lg shadow animate-pulse w-full'>
@@ -87,7 +87,7 @@ export default function QuestionDetailsPage() {
 				</div>}
 
 				{/* Answers */}
-				<AnswersFeed urlOptions={`where=question=${questionId}`} />
+				<AnswersFeed options={`where=question=${questionId}`} />
 
 			</div>
 			<div className='col-span-5 md:col-span-2 p-3 flex flex-col gap-2'>
