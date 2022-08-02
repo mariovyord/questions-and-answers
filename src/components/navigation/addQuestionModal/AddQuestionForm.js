@@ -38,8 +38,8 @@ const AddQuestionForm = ({ handleModal }) => {
 			errors.question = 'Required';
 		} else if (values.question.length < 6) {
 			errors.question = 'Minimum length is 6 characters'
-		} else if (values.question.length > 50) {
-			errors.question = 'Maximum length is 50 characters'
+		} else if (values.question.length > 150) {
+			errors.question = 'Maximum length is 150 characters'
 		} else if (!pattern.test(values.question)) {
 			errors.question = 'Special characters are not permitted'
 		}

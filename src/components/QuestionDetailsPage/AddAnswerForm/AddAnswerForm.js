@@ -21,10 +21,8 @@ const AddAnswerForm = ({ question, addAnswers, showTextarea }) => {
 		if (v.length < 30) {
 			setAnswerErrors('Must be 30 characters or more')
 			return false;
-		} else if (v.length > 1500) {
-			setAnswerErrors('Must be 1500 characters or less')
-			return false;
 		}
+
 		setAnswerErrors('')
 		return true;
 	}
@@ -55,7 +53,7 @@ const AddAnswerForm = ({ question, addAnswers, showTextarea }) => {
 				showTextarea();
 			})
 			.catch(err => {
-				handleNotification('error', err[0].message || 'Something went wrong');
+				handleNotification('error', err[0]?.message || 'Something went wrong');
 			})
 			.finally(() => {
 				setSubmitting(false);
