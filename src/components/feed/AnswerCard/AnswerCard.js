@@ -100,7 +100,6 @@ export default function AnswerCard({ isHiddenBtn, answer: data }) {
 				<MDEditor.Markdown
 					source={answer.body}
 					style={{
-						whiteSpace: 'pre-wrap',
 						backgroundColor: 'hsl(var(--b1))',
 						color: 'hsl(var(--bc))',
 					}}
