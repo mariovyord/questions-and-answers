@@ -21,3 +21,17 @@ Users can sign up, create circles (thematic sections), ask questions, answer que
 - [Formik](https://formik.org/) for React forms, without the tears
 - [React MD Editor](https://github.com/uiwjs/react-md-editor) for markdown
 - [Jest](https://jestjs.io/) for testing
+
+## **Requirements**
+The app works with Questions and Answers REST API: 
+- URL: https://questions-and-answers-rest.herokuapp.com/api
+- GitHub: https://github.com/mariovyord/questions-and-answers-rest-api
+
+### Start & watch
+```
+$ npm start
+```
+### Build for production
+```
+$ npm run build
+```
