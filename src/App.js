@@ -20,6 +20,7 @@ import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary';
 
 import Navbar from './components/navigation/Navbar';
 import Footer from './components/Footer/Footer';
+import ScrollToTopButton from './components/common/ScrollToTopButton';
 
 function App() {
 	return (
@@ -49,6 +50,7 @@ function App() {
 								</Routes>
 							</main>
 						</div>
+						<ScrollToTopButton />
 						<footer className='w-full'>
 							<Footer />
 						</footer>
