@@ -40,7 +40,7 @@ export default function AnswersFeed({ options = '' }) {
 			.finally(() => {
 				setLoading(false);
 			})
-	}, [handleNotification, query, options]);
+	}, [query, options]);
 
 
 	const handleSort = (e) => {

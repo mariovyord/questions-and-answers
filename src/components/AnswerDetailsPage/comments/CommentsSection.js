@@ -24,7 +24,7 @@ const CommentsSection = ({ answerId, userData }) => {
 				setLoading(false);
 			})
 
-	}, [answerId, handleNotification])
+	}, [answerId])
 
 	const addComment = (comment) => {
 		getOneComment(comment._id)
