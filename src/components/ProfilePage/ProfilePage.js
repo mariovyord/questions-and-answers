@@ -66,6 +66,12 @@ const Profile = () => {
 
 	const handleShowQuestions = () => {
 		setLoadingQuestions(true);
+
+		if (showQuestions) {
+			setLoadingQuestions(false);
+			return setShowQuestions(!showQuestions)
+		};
+
 		getQuestionsByOwnerId(profileId)
 			.then(x => {
 				// TODO Dont get hidden questions from server - but for now server doesnt handle multiple of the same query

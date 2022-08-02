@@ -6,7 +6,7 @@ import { AiOutlineCloseCircle } from 'react-icons/ai';
 const Modal = ({ handleModal, children }) => {
 	useEffect(() => {
 		setFillGapMethod('margin');
-		disablePageScroll('none');
+		disablePageScroll();
 		return () => enablePageScroll();
 	}, [])
 
