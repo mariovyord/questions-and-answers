@@ -5,12 +5,11 @@ import useUserData from '../../../hooks/useUserData';
 import useNotificationContext from '../../../hooks/useNotificationContext';
 import { editAnswer } from '../../../services/data.service';
 
-const EditAnswerForm = ({ answerId, question, showTextarea, values, handleSetNewBody }) => {
+const EditAnswerForm = ({ answerId, question, handleChange, values, handleSetNewBody }) => {
 	const [answerErrors, setAnswerErrors] = useState('')
 	const [isSubmitting, setSubmitting] = useState(false);
 	const [textValue, setTextValue] = useState("");
 
-	const userData = useUserData();
 	const handleNotification = useNotificationContext();
 
 	useEffect(() => {
@@ -51,10 +50,10 @@ const EditAnswerForm = ({ answerId, question, showTextarea, values, handleSetNew
 			.then(x => {
 				handleNotification('success', 'Answer update successful!');
 				handleSetNewBody(x.result.body)
-				showTextarea();
+				handleChange();
 			})
 			.catch(err => {
-				handleNotification('error', err[0].message || 'Something went wrong');
+				handleNotification('error', err[0]?.message || 'Something went wrong');
 			})
 			.finally(() => {
 				setSubmitting(false);

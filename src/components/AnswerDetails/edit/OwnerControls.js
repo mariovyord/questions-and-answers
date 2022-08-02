@@ -4,18 +4,21 @@ import EditAnswerForm from './EditAnswerForm';
 
 const OwnerControls = ({
 	data,
-	showTextarea,
 	handleSetNewBody,
 	handleDelete,
-	isOpen,
 	_id,
 	loading
 }) => {
 
 	const [openModal, SetOpenModal] = useState(false);
+	const [checked, setChecked] = useState(false);
+
+	const handleChange = () => {
+		setChecked(() => !checked)
+	};
 
 	const handleModal = () => {
-		SetOpenModal(!openModal);
+		SetOpenModal(() => !openModal);
 	}
 
 	return (
@@ -31,9 +34,13 @@ const OwnerControls = ({
 				}
 
 				<div className="collapse">
-					<input onClick={() => showTextarea()} type="checkbox" className='p-0 m-0' />
+					<input
+						checked={checked}
+						onChange={handleChange}
+						type="checkbox"
+						className='p-0 m-0' />
 					<div className="collapse-title text-base font-medium btn btn-secondary w-full min-h-0 p-0">
-						{isOpen ? 'Close' : 'Edit Answer'}
+						{checked ? 'Close' : 'Edit Answer'}
 					</div>
 					<div className="collapse-content">
 
@@ -49,7 +56,7 @@ const OwnerControls = ({
 										circle: data.meta.circle
 									}
 								}}
-								showTextarea={showTextarea}
+								handleChange={handleChange}
 								values={data.body} />
 						</>}
 

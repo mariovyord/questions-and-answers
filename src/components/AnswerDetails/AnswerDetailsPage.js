@@ -13,7 +13,6 @@ import OwnerControls from './edit/OwnerControls';
 import useIsDesktop from '../../hooks/useIsDesktop';
 
 const AnswerDetails = () => {
-	const [isOpen, setIsOpen] = useState(false);
 	const handleNotification = useNotificationContext();
 	const navigate = useNavigate();
 
@@ -47,10 +46,6 @@ const AnswerDetails = () => {
 			})
 	}, [_id])
 
-	const showTextarea = () => {
-		setIsOpen(!isOpen);
-	}
-
 	const handleSetNewBody = (body) => {
 		setData({ ...data, body: body });
 	}
@@ -72,10 +67,8 @@ const AnswerDetails = () => {
 			<AnswerCard isHiddenBtn={true} answer={data} />
 			{userData && userData._id == data?.owner?._id && <OwnerControls
 				data={data}
-				showTextarea={showTextarea}
 				handleSetNewBody={handleSetNewBody}
 				handleDelete={handleDelete}
-				isOpen={isOpen}
 				_id={_id}
 				loading={loading}
 			/>}
