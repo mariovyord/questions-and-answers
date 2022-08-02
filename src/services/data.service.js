@@ -23,6 +23,14 @@ export const postQuestion = (data) => post('/collections/questions', data);
 export const hideQuestionById = (_id, bool) => patch(`/collections/questions/${_id}`, { isHidden: true });
 
 // Answers
+export const getAllAnswers = ({
+	page = 1,
+	pageSize = 10,
+	options = '',
+	sortBy = 'score%20desc'
+}) => get(`/collections/answers?sortBy=${sortBy}&page=${page}&pageSize=${pageSize}&populate=owner&${options}`);
+
+export const countAnswers = (options = '') => get(`/collections/answers?${options}${options ? '&' : ''}count=true`)
 export const getAnswer = (_id) => get(`/collections/answers/${_id}?populate=owner`);
 export const postAnswer = (data) => post('/collections/answers', data);
 export const editAnswer = (_id, data) => patch(`/collections/answers/${_id}`, data);

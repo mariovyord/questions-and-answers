@@ -132,7 +132,7 @@ const Profile = () => {
 			}
 
 			{/* Feed */}
-			<AnswersFeed urlOptions={filterQuery} />
+			<AnswersFeed options={filterQuery} />
 		</div>
 	)
 }
