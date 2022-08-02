@@ -25,6 +25,10 @@ export default function QuestionDetailsPage() {
 		document.title = "Question Details"
 	}, []);
 
+	useEffect(() => {
+		setNewAnswers([]);
+	}, [questionId])
+
 	const showTextarea = (e) => {
 		setIsOpen(!isOpen);
 	}
