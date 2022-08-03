@@ -12,10 +12,12 @@ import UploadImageForm from './forms/UploadImageForm';
 import UserCard from './userCards/UserCard';
 import ShadowUserCard from './userCards/ShadowUserCard';
 import isAuth from '../../hoc/isAuth';
+import ThemeChanger from '../common/ThemeChanger';
 
 const Profile = () => {
 	const [showQuestions, setShowQuestions] = useState(false);
 	const [showEditProfile, setShowEditProfile] = useState(false);
+	const [showSettings, setShowSettings] = useState(false);
 
 	const [questions, setQuestions] = useState([]);
 	const [loadingQuestions, setLoadingQuestions] = useState(false)
@@ -93,6 +95,17 @@ const Profile = () => {
 					: <div className='col-span-5 md:col-span-2 w-full'>
 						<UserCard profile={profile} />
 						<div>
+							<div>
+								{isOwner && <button
+									onClick={() => setShowSettings((x) => !x)}
+									className='btn btn-warning btn-outline w-full mb-2'
+								>
+									{showSettings ? 'Close' : 'Settings'}
+								</button>}
+								{showSettings && <div className=''>
+									<ThemeChanger />
+								</div>}
+							</div>
 							<div>
 								{/* Edit profile options */}
 								{isOwner && <button
