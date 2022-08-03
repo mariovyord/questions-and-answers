@@ -88,7 +88,7 @@ const AnswerDetailsPage = () => {
 			}
 
 			{/* Main  */}
-			<div className='col-span-5 md:col-span-3 grid gap-2'>
+			<div className='col-span-5 md:col-span-3 flex flex-col gap-2'>
 				{loading
 					? <Spinner />
 					: mainTemplate}

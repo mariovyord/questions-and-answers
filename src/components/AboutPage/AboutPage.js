@@ -9,7 +9,7 @@ export default function AboutPage() {
 		<div className='grid grid-cols-5 max-w-5xl py-3'>
 			<div className='col-start-2 col-end-5'>
 				<h1 className='text-4xl font-bold my-4'>Questions and Answers</h1>
-				<p className='my-2'>Questions and Answers** is ReactJS web app where you can ask a question and have the other users answer. SoftUni Exam Project.</p>
+				<p className='my-2'><b>Questions and Answers</b> is ReactJS web app where you can ask a question and have the other users answer. SoftUni Exam Project.</p>
 
 				<img className='border-2 shadow rounded-lg' src="https://i.imgur.com/2AVjdkS.jpg" alt="screenshot" />
 

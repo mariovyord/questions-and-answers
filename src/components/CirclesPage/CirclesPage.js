@@ -90,7 +90,7 @@ const CirclesPage = () => {
 
 			<button
 				onClick={() => handleModal()}
-				className='btn btn-secondary fixed bottom-6 right-6 btn-circle text-5xl leading-20 tooltip tooltip-top'
+				className='btn btn-secondary fixed bottom-6 right-20 btn-circle text-5xl leading-20 tooltip tooltip-top'
 				data-tip='Create'
 			>
 				<BsPlus />

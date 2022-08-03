@@ -13,8 +13,9 @@ import RecentQuestionsList from '../feautures/RecentQuestionsList';
 
 
 export default function QuestionDetailsPage() {
-	const [isOpen, setIsOpen] = useState(false);
 	const [newAnswers, setNewAnswers] = useState([]);
+	const [checked, setChecked] = useState(false);
+
 	const userData = useUserData();
 
 	const { id: questionId } = useParams();
@@ -29,9 +30,9 @@ export default function QuestionDetailsPage() {
 		setNewAnswers([]);
 	}, [questionId])
 
-	const showTextarea = (e) => {
-		setIsOpen(!isOpen);
-	}
+	const handleChange = () => {
+		setChecked(() => !checked)
+	};
 
 	const addAnswers = (answer) => {
 		setNewAnswers((arr) => [answer, ...arr])
@@ -62,13 +63,22 @@ export default function QuestionDetailsPage() {
 					</div>
 					{userData && <div>
 						<div className="collapse">
-							<input onClick={() => showTextarea()} type="checkbox" className='p-0 m-0' />
+							<input
+								checked={checked}
+								onChange={handleChange}
+								type="checkbox"
+								className='p-0 m-0'
+							/>
 							<div className="collapse-title text-base font-medium btn btn-secondary w-full min-h-0 p-0">
-								{isOpen ? 'Close' : 'Add Answer'}
+								{checked ? 'Close' : 'Add Answer'}
 							</div>
 							<div className="collapse-content">
 
-								<AddAnswerForm question={question} addAnswers={addAnswers} showTextarea={showTextarea} />
+								<AddAnswerForm
+									question={question}
+									addAnswers={addAnswers}
+									handleChange={handleChange}
+								/>
 
 								<div className="alert shadow-lg">
 									<div>

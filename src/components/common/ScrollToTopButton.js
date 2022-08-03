@@ -26,7 +26,7 @@ const ScrollToTopButton = () => {
 	return (
 		visible && <button
 			onClick={scrollToTop}
-			className={`fixed bottom-6 right-20 btn-circle text-5xl leading-20 tooltip tooltip-top text-primary`}
+			className={`fixed bottom-6 right-6 btn-circle text-5xl leading-20 tooltip tooltip-top text-primary`}
 			data-tip='Back to top'
 		>
 			<FaArrowCircleUp />

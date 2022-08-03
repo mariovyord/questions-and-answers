@@ -62,22 +62,24 @@ export default function AnswersFeed({ options = '' }) {
 
 	return (
 		<>
-			<div className='col-span-5 md:col-span-3 grid gap-2 w-full h-fit'>
-				<FeedOptionsContainer
-					isDisabled={loading}
-					maxPage={Math.ceil(answersCount / pageSize)}
-					page={query.get('page') || 1}
-					handlePage={handlePage}
-				>
-					<select
-						className="select w-full max-w-xs btn-outline"
-						value={query.get('sortBy') || 'score%20desc'}
-						onChange={handleSort}
+			<div className='col-span-5 md:col-span-3 flex flex-col gap-2 w-full h-fit'>
+				<div>
+					<FeedOptionsContainer
+						isDisabled={loading}
+						maxPage={Math.ceil(answersCount / pageSize)}
+						page={query.get('page') || 1}
+						handlePage={handlePage}
 					>
-						<option value={'score%20desc'}>Sort by score</option>
-						<option value={'createdAt%20desc'}>Sort by most recent</option>
-					</select>
-				</FeedOptionsContainer>
+						<select
+							className="select w-full max-w-xs btn-outline"
+							value={query.get('sortBy') || 'score%20desc'}
+							onChange={handleSort}
+						>
+							<option value={'score%20desc'}>Sort by score</option>
+							<option value={'createdAt%20desc'}>Sort by most recent</option>
+						</select>
+					</FeedOptionsContainer>
+				</div>
 
 				{loading
 					? <Spinner />

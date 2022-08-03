@@ -81,12 +81,8 @@ const CircleDetails = () => {
 		<div className='grid grid-cols-5 gap-2 max-w-5xl p-2 w-full'>
 			<div className='col-span-5 md:col-span-3 flex flex-col gap-2 w-full'>
 				{loading
-					? <div className='bg-primary p-8 rounded-lg shadow w-full' >
-						<div className='max-h-16 overflow-hidden rounded mb-4'>
-							<div className='h-16 bg-slate-200 w-full mb-2 animate-pulse'></div>
-						</div>
-						<div className='h-16 bg-slate-200 rounded w-full mb-2 animate-pulse'></div>
-						<div className='h-6 bg-slate-200 rounded w-full mb-2 animate-pulse'></div>
+					? <div className='bg-primary h-56 rounded-lg shadow w-full animate-pulse' >
+
 					</div>
 					: <div className='bg-primary p-8 rounded-lg shadow w-full'>
 						<div className='max-h-16 overflow-hidden rounded-lg'>
@@ -106,7 +102,7 @@ const CircleDetails = () => {
 			{data && userData._id === data.owner && <>
 				<button
 					onClick={() => handleModal()}
-					className='btn btn-secondary fixed bottom-6 right-6 btn-circle text-5xl leading-20 tooltip tooltip-top flex justify-center'
+					className='btn btn-secondary fixed bottom-6 right-20 btn-circle text-5xl leading-20 tooltip tooltip-top flex justify-center'
 					data-tip='Edit'
 				>
 					<FiEdit size={'30px'} />

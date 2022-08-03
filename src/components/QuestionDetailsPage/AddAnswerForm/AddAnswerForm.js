@@ -6,7 +6,7 @@ import useNotificationContext from '../../../hooks/useNotificationContext';
 
 import { postAnswer } from '../../../services/data.service';
 
-const AddAnswerForm = ({ question, addAnswers, showTextarea }) => {
+const AddAnswerForm = ({ question, addAnswers, handleChange }) => {
 	const [answerErrors, setAnswerErrors] = useState('')
 	const [isSubmitting, setSubmitting] = useState(false);
 	const [textValue, setTextValue] = useState("");
@@ -50,7 +50,7 @@ const AddAnswerForm = ({ question, addAnswers, showTextarea }) => {
 				addAnswers(x.result);
 				handleNotification('success', 'Answer successful!');
 				handleOnClear();
-				showTextarea();
+				handleChange();
 			})
 			.catch(err => {
 				handleNotification('error', err[0]?.message || 'Something went wrong');

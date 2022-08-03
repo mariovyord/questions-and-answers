@@ -23,7 +23,7 @@ Users can sign up, create circles (thematic sections), ask questions, answer que
 - [Jest](https://jestjs.io/) for testing
 
 ## **Requirements**
-The app works with Questions and Answers REST API: 
+The app has its own dedicated REST API: 
 - URL: https://questions-and-answers-rest.herokuapp.com/api
 - GitHub: https://github.com/mariovyord/questions-and-answers-rest-api
 
