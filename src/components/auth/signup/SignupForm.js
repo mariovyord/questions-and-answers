@@ -83,7 +83,7 @@ const SignupForm = () => {
 				authService.signup(values)
 					.then(x => {
 						handleLogin(x.result);
-						handleNotification('success', 'Sign up successful!');
+						handleNotification('success', 'Success! You can upload a picture from your Profile page!');
 					})
 					.then(x => {
 						navigate('/');
