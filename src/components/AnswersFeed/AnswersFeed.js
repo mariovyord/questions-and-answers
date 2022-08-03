@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
+
+import useNotificationContext from '../../hooks/useNotificationContext';
+import { countAnswers, getAllAnswers } from '../../services/data.service';
+
 import AnswerCard from '../cards/AnswerCard/AnswerCard';
 import FeedOptionsContainer from '../common/FeedOptionsContainer';
 import Spinner from '../common/Spinner';
 import NoContent from '../common/NoContent';
-import { countAnswers, getAllAnswers } from '../../services/data.service';
-import useNotificationContext from '../../hooks/useNotificationContext';
 
 export default function AnswersFeed({ options = '' }) {
 	const [query, setQuery] = useSearchParams();

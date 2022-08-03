@@ -35,3 +35,5 @@ $ npm start
 ```
 $ npm run build
 ```
+### Configuration
+You can configure REST API connection string at `/src/constants`. By default in production it will connect to the live server and in dev mode - to local dev server.

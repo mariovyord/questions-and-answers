@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { toTitleCase } from '../../utils/stringUtils';
-import { BiHide } from 'react-icons/bi'
-import { hideQuestionById } from '../../services/data.service';
+
 import useNotificationContext from '../../hooks/useNotificationContext';
 import useUserData from '../../hooks/useUserData';
+
+import * as dataService from '../../services/data.service';
+
+import { toTitleCase } from '../../utils/stringUtils';
+
+import { BiHide } from 'react-icons/bi'
 import Modal from '../common/Modal';
 
 export default function QuestionCard({ data }) {
@@ -21,7 +25,7 @@ export default function QuestionCard({ data }) {
 	}
 
 	const handleHide = () => {
-		hideQuestionById(data._id, true)
+		dataService.hideQuestionById(data._id, true)
 			.then(x => {
 				handleNotification('success', 'Question hidden from profile!')
 			})

@@ -6,7 +6,7 @@ import { NotificationProvider } from './contexts/NotificationContext';
 import HomePage from './components/HomePage/HomePage';
 import AboutPage from './components/AboutPage/AboutPage';
 import QuestionDetailsPage from './components/QuestionDetailsPage/QuestionDetailsPage';
-import Profile from './components/ProfilePage/ProfilePage';
+import ProfilePage from './components/ProfilePage/ProfilePage';
 import CirclesPage from './components/CirclesPage/CirclesPage';
 import CircleDetailsPage from './components/CircleDetailsPage/CircleDetailsPage';
 import AnswerDetailsPage from './components/AnswerDetailsPage/AnswerDetailsPage';
@@ -39,7 +39,7 @@ function App() {
 									</Route>
 									<Route path='/questions' element={<QuestionsPage />} />
 									<Route path='/questions/:id' element={<QuestionDetailsPage />} />
-									<Route path='/profile/:_id' element={<Profile />} />
+									<Route path='/profile/:_id' element={<ProfilePage />} />
 									<Route path='/answers/:_id' element={<AnswerDetailsPage />} />
 									<Route path='/circles' element={<CirclesPage />} />
 									<Route path='/circles/:_id' element={<CircleDetailsPage />} />

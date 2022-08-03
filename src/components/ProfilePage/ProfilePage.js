@@ -14,7 +14,7 @@ import ShadowUserCard from './userCards/ShadowUserCard';
 import isAuth from '../../hoc/isAuth';
 import ThemeChanger from '../common/ThemeChanger';
 
-const Profile = () => {
+const ProfilePage = () => {
 	const [showQuestions, setShowQuestions] = useState(false);
 	const [showEditProfile, setShowEditProfile] = useState(false);
 	const [showSettings, setShowSettings] = useState(false);
@@ -84,7 +84,7 @@ const Profile = () => {
 	}
 
 	return (
-		<div className='grid grid-cols-5 gap-2 max-w-5xl p-2 w-full'>
+		<div className='grid grid-cols-5 gap-2 max-w-6xl p-2 w-full'>
 
 			{/* Sidebar Left */}
 			{
@@ -156,4 +156,4 @@ const Profile = () => {
 	)
 }
 
-export default isAuth(Profile);
+export default isAuth(ProfilePage);

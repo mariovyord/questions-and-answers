@@ -18,7 +18,7 @@ export default function Navbar() {
 	}
 	return (
 		<div className='bg-base-100 flex justify-center'>
-			<div className="navbar max-w-5xl">
+			<div className="navbar max-w-6xl">
 				<div className="navbar-start">
 					<div className="dropdown">
 						<label tabIndex="0" className="btn btn-ghost lg:hidden" onMouseDown={(e) => checkAndCloseDropDown(e)}>

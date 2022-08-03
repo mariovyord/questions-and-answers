@@ -78,7 +78,7 @@ const CircleDetails = () => {
 	}, []);
 
 	return (
-		<div className='grid grid-cols-5 gap-2 max-w-5xl p-2 w-full'>
+		<div className='grid grid-cols-5 gap-2 max-w-6xl p-2 w-full'>
 			<div className='col-span-5 md:col-span-3 flex flex-col gap-2 w-full'>
 				{loading
 					? <div className='bg-primary h-56 rounded-lg shadow w-full animate-pulse' >

@@ -1,10 +1,15 @@
 import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Formik } from 'formik';
-import FormInput from '../../form/FormInput';
-import { signup } from '../../../services/auth.service';
+
 import useNotificationContext from '../../../hooks/useNotificationContext';
 import { AuthContext } from '../../../contexts/AuthContext';
+
+import * as authService from '../../../services/auth.service';
+
+import { Formik } from 'formik';
+import FormInput from '../../form/FormInput';
+
+
 
 const SignupForm = () => {
 	const handleNotification = useNotificationContext();
@@ -75,7 +80,7 @@ const SignupForm = () => {
 			validate={validate}
 			onSubmit={(values, { setSubmitting }) => {
 				handleNotification('info', 'Form send!')
-				signup(values)
+				authService.signup(values)
 					.then(x => {
 						handleLogin(x.result);
 						handleNotification('success', 'Sign up successful!');

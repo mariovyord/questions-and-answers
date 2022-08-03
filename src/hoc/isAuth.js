@@ -8,7 +8,7 @@ export const isAuth = (Component) => {
 		const handleNotifications = useNotificationContext();
 
 		if (!userData) {
-			handleNotifications('warning', 'Please login.')
+			handleNotifications('warning', 'Please login first!')
 		}
 
 		return userData

@@ -1,5 +1,3 @@
-import React from 'react';
-
 const ShadowUserCard = () => {
 	return (
 		<div className='w-full'>

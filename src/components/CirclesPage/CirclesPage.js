@@ -66,7 +66,7 @@ const CirclesPage = () => {
 		<div >
 			<h2 className='font-bold text-center text-3xl my-5'>Main circles</h2>
 
-			<div className='grid gap-2 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 max-w-5xl p-2'>
+			<div className='grid gap-2 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 max-w-6xl p-2'>
 
 				{/* Main Feed */}
 				{loadingCoreCircles
@@ -81,7 +81,7 @@ const CirclesPage = () => {
 				<button onClick={handleLoadUserCircles} className='btn btn-primary max-w-xs'>Load user circles</button>
 			</div>}
 
-			<div className='grid gap-2 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 max-w-5xl p-2'>
+			<div className='grid gap-2 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 max-w-6xl p-2'>
 				{loadingUserCircles
 					? <Spinner />
 					: userCircles && userCircles.map(x => <div key={x._id} className='col-span-1 h-72'><CircleCard data={x}></CircleCard></div>)

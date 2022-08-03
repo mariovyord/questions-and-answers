@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+
 import { deleteAnswerById, getAnswer } from '../../services/data.service';
-import Spinner from '../common/Spinner';
+import useIsDesktop from '../../hooks/useIsDesktop';
+import useUserData from '../../hooks/useUserData';
+import useNotificationContext from '../../hooks/useNotificationContext';
+
 import CirlclesList from '../feautures/CirclesList';
 import RecentQuestionsList from '../feautures/RecentQuestionsList';
+import Spinner from '../common/Spinner';
 import AnswerCard from '../cards/AnswerCard/AnswerCard';
-import useNotificationContext from '../../hooks/useNotificationContext';
-import useUserData from '../../hooks/useUserData';
-
 import CommentsSection from './comments/CommentsSection';
 import OwnerControls from './edit/OwnerControls';
-import useIsDesktop from '../../hooks/useIsDesktop';
 
 const AnswerDetailsPage = () => {
 	const handleNotification = useNotificationContext();
@@ -58,7 +59,7 @@ const AnswerDetailsPage = () => {
 				navigate('/');
 			})
 			.catch(err => {
-				handleNotification('error', err[0].message || 'Something went wrong!');
+				handleNotification('error', err[0]?.message || 'Something went wrong!');
 			})
 	}
 
@@ -77,7 +78,7 @@ const AnswerDetailsPage = () => {
 	</>
 
 	return (
-		<div className='grid grid-cols-5 gap-2 max-w-5xl p-2 w-full'>
+		<div className='grid grid-cols-5 gap-2 max-w-6xl p-2 w-full'>
 
 			{/* Sidebar Left */}
 			{isDesktop

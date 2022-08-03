@@ -1,13 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import CirlclesList from '../feautures/CirclesList';
-import QuestionCard from '../cards/QuestionCard';
+
 import useFetch from '../../hooks/useFetch';
+import useIsDesktop from '../../hooks/useIsDesktop';
+
+import QuestionCard from '../cards/QuestionCard';
 import FeedOptionsContainer from '../common/FeedOptionsContainer';
 import Spinner from '../common/Spinner';
 import NoContent from '../common/NoContent';
+import CirlclesList from '../feautures/CirclesList';
 import FeauturedCircle from '../feautures/FeauturedCircle';
-import useIsDesktop from '../../hooks/useIsDesktop';
 
 export default function QuestionsPage({ questions }) {
 	const pageSize = 20;
@@ -53,7 +55,7 @@ export default function QuestionsPage({ questions }) {
 
 
 	return (
-		<div className='grid grid-cols-5 gap-2 max-w-5xl p-2 w-full'>
+		<div className='grid grid-cols-5 gap-2 max-w-6xl p-2 w-full'>
 
 			{/* Sidebar Left */}
 			{isDesktop

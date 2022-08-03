@@ -43,7 +43,7 @@ const AddComment = ({ answerId, addComment }) => {
 							addComment(x.result);
 						})
 						.catch(err => {
-							handleNotification('error', err[0].message || 'Something went wrong');
+							handleNotification('error', err[0]?.message || 'Something went wrong');
 						})
 						.finally(() => {
 							resetForm();

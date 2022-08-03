@@ -1,5 +1,3 @@
-import React from 'react'
-
 const UserCard = ({ profile }) => {
 	return (
 		<div className='w-full'>

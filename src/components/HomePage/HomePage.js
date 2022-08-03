@@ -13,7 +13,7 @@ export default function HomePage() {
 	}, []);
 
 	return (
-		<div className='grid grid-cols-5 gap-2 max-w-5xl p-2 w-full'>
+		<div className='grid grid-cols-5 gap-2 max-w-6xl p-2 w-full'>
 
 			{/* Sidebar Left */}
 			{isDesktop

@@ -20,7 +20,7 @@ export const getQuestionsInCircleCount = (_id) => get(`/collections/questions?wh
 
 export const postQuestion = (data) => post('/collections/questions', data);
 
-export const hideQuestionById = (_id, bool) => patch(`/collections/questions/${_id}`, { isHidden: true });
+export const hideQuestionById = (_id) => patch(`/collections/questions/${_id}`, { isHidden: true });
 
 // Answers
 export const getAllAnswers = ({

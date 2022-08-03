@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import MDEditor from '@uiw/react-md-editor';
 import rehypeSanitize from "rehype-sanitize";
-import useUserData from '../../../hooks/useUserData';
 import useNotificationContext from '../../../hooks/useNotificationContext';
 import { editAnswer } from '../../../services/data.service';
 

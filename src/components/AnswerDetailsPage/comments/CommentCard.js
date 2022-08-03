@@ -35,7 +35,7 @@ const CommentCard = ({ comment, handleChange }) => {
 				handleNotification('success', 'Comment deleted')
 			})
 			.catch(err => {
-				handleNotification(err[0].message || 'Something went wrong')
+				handleNotification(err[0]?.message || 'Something went wrong')
 			})
 	}
 
@@ -53,7 +53,7 @@ const CommentCard = ({ comment, handleChange }) => {
 				handleUnlockEdit();
 			})
 			.catch(err => {
-				handleNotification(err[0].message || 'Something went wrong')
+				handleNotification(err[0]?.message || 'Something went wrong')
 			})
 			.finally(() => {
 				setSubmitting(false);
