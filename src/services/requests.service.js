@@ -1,4 +1,4 @@
-import { API_URL } from "../constants";
+import { API_URL } from "../CONSTANTS";
 import { clearUserData, getUserData } from "../utils/userData";
 
 async function request(url, options) {

@@ -1,6 +1,8 @@
 # **Questions and Answers**
 **Questions and Answers** is ReactJS web app where you can ask a question and have the other users answer. SoftUni Exam Project. 
 
+**[GitHub](https://github.com/mariovyord/questions-and-answers)**
+
 ![screenshot](https://i.imgur.com/2AVjdkS.jpg)
 
 ## **App Feautures**
