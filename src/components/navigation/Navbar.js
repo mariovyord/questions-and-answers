@@ -42,7 +42,7 @@ export default function Navbar() {
 					{userData
 						? < AddQuestionModal />
 						: <Link className="btn btn-secondary modal-button" to="/auth" >
-							Login
+							Login / Sign up
 						</Link>
 
 					}
