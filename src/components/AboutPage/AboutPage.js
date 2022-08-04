@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-import { BsGithub } from 'react-icons/bs';
 import MDEditor from '@uiw/react-md-editor';
 
 export default function AboutPage() {
