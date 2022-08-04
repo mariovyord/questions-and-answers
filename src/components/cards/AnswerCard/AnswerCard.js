@@ -91,7 +91,7 @@ export default function AnswerCard({ isHiddenBtn, answer: data }) {
 			</div>
 
 			{/* Answer */}
-			<div className='prose'>
+			<div className='prose max-w-2xl'>
 				<MDEditor.Markdown
 					source={answer.body}
 					style={{
