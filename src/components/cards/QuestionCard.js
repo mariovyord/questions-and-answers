@@ -42,7 +42,7 @@ export default function QuestionCard({ data }) {
 			<div className='w-full bg-base-100 shadow p-4 rounded-lg transition-all relative'>
 				{userData && userData._id === data.owner && <div
 					onClick={() => handleModal()}
-					className='absolute top-2 right-2 cursor-pointer link-hover tooltip tooltip-bottom'
+					className='absolute top-2 right-2 cursor-pointer link-hover tooltip tooltip-left'
 					data-tip="Hide from profile">
 					<BiHide />
 				</div>
