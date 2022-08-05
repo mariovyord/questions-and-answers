@@ -21,6 +21,7 @@ import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary';
 import Navbar from './components/navigation/Navbar';
 import Footer from './components/Footer/Footer';
 import ScrollToTopButton from './components/common/ScrollToTopButton';
+import LeaderboardPage from './components/LeaderboardPage/LeaderboardPage';
 
 function App() {
 	return (
@@ -45,6 +46,7 @@ function App() {
 									<Route path='/circles/:_id' element={<CircleDetailsPage />} />
 									<Route path='/auth/signup' element={<Signup />} />
 									<Route path='/auth' element={<Auth />} />
+									<Route path='/leaderboard' element={<LeaderboardPage />} />
 									<Route path='/about' element={<AboutPage />} />
 									<Route path="*" element={<PageNotFound />} />
 								</Routes>

@@ -49,3 +49,7 @@ export const deleteComment = (_id) => del(`/collections/comments/${_id}`);
 export const getUserDataById = (_id) => get(`/users/${_id}`);
 export const editUser = (_id, data) => patch(`/users/${_id}`, data);
 export const uploadPicture = (_id, base64img) => patch(`/users/${_id}`, { imageUrl: base64img });
+
+// Leaderboard
+export const getLeaderboard = () => get(`/users/leaderboard`);
+
