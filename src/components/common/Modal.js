@@ -13,7 +13,7 @@ const Modal = ({ handleModal, children }) => {
 	return (
 		<div
 			onClick={() => handleModal()}
-			className='overflow-hidden fixed w-full h-screen bg-slate-400 bg-opacity-70 z-40 top-0 left-0 flex flex-col items-center justify-center p-3 '>
+			className='overflow-hidden fixed w-screen h-screen bg-slate-400 bg-opacity-70 z-40 top-0 left-0 flex flex-col items-center justify-center p-3 '>
 			<div onClick={(e) => e.stopPropagation()} className='card bg-base-100 p-3 w-full max-w-md' >
 				<div className='flex justify-end'>
 					<button onClick={() => handleModal()}><AiOutlineCloseCircle size='25px' /></button>
