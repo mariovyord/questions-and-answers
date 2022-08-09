@@ -114,4 +114,25 @@ export const handlers = [
 			)
 		)
 	}),
+	// Vote
+	rest.post(`http://localhost:3030/api/collections/answers/*/vote`, async (req, res, ctx) => {
+		const votes = await req.json()
+		const result = {
+			upvotes: [],
+			downvotes: [],
+		}
+		if (votes.upvote) {
+			result.score = 123
+		} else {
+			result.score = 456
+		}
+
+		return res(
+			ctx.json(
+				{
+					result
+				}
+			)
+		)
+	}),
 ]

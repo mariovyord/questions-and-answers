@@ -1,4 +1,5 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { MemoryRouter } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthContext";
 import { NotificationProvider } from "../../contexts/NotificationContext";
@@ -22,8 +23,8 @@ describe('answers feed', () => {
 			</MemoryRouter>
 		)
 
-		const question = await screen.findAllByRole('heading');
-		expect(question).toHaveLength(2);
+		const questions = await screen.findAllByRole('heading');
+		expect(questions).toHaveLength(2);
 	});
 
 	test('all answer elements are displayed in card', async () => {
@@ -61,8 +62,8 @@ describe('answers feed', () => {
 		const score = await screen.findByText(/^5$/);
 		expect(score).toBeInTheDocument()
 
-		const detailsBtn = await screen.findAllByRole('link', { name: /details/i });
-		expect(detailsBtn).toHaveLength(2);
+		const detailsBtns = await screen.findAllByRole('link', { name: /details/i });
+		expect(detailsBtns).toHaveLength(2);
 	})
 
 	test('upvotes and downvote buttons are disabled for guests', async () => {
@@ -82,10 +83,10 @@ describe('answers feed', () => {
 			</MemoryRouter>
 		)
 
-		const upvoteBtn = await screen.findAllByTestId('upvoteBtn');
-		const downvoteBtn = await screen.findAllByTestId('downvoteBtn');
-		expect(upvoteBtn[0]).toBeDisabled()
-		expect(downvoteBtn[0]).toBeDisabled()
+		const upvoteBtns = await screen.findAllByTestId('upvoteBtn');
+		const downvoteBtns = await screen.findAllByTestId('downvoteBtn');
+		expect(upvoteBtns[0]).toBeDisabled()
+		expect(downvoteBtns[0]).toBeDisabled()
 	})
 
 	test('upvotes and downvote buttons are enabled for users', async () => {
@@ -109,11 +110,51 @@ describe('answers feed', () => {
 			</MemoryRouter>
 		)
 
-		const upvoteBtn = await screen.findAllByTestId('upvoteBtn');
-		const downvoteBtn = await screen.findAllByTestId('downvoteBtn');
-		expect(upvoteBtn[0]).toBeEnabled()
-		expect(downvoteBtn[0]).toBeEnabled()
+		const upvoteBtns = await screen.findAllByTestId('upvoteBtn');
+		const downvoteBtns = await screen.findAllByTestId('downvoteBtn');
+		expect(upvoteBtns[0]).toBeEnabled()
+		expect(downvoteBtns[0]).toBeEnabled()
 	})
 
-	// TODO Test likes on click
+	test.only('upvote and downvote click updates the score', async () => {
+		render(
+			<MemoryRouter>
+				<AuthContext.Provider value={
+					{
+						userData: {
+							_id: '12asdas3asdasd',
+							accessToken: '123asdasdasd',
+							refreshToken: '12asdasdasd',
+						},
+						handleLogin: jest.fn(),
+						handleLogout: jest.fn(),
+					}
+				}>
+					<NotificationProvider>
+						<AnswersFeed />
+					</NotificationProvider>
+				</AuthContext.Provider>
+			</MemoryRouter>
+		)
+
+		// Click on UPVOTE button
+		const upvoteBtns = await screen.findAllByTestId('upvoteBtn');
+
+		await userEvent.click(upvoteBtns[0]);
+
+		await waitFor(async () => {
+			const scores = await screen.findAllByTestId('score');
+			expect(scores[0]).toHaveTextContent('123');
+		})
+
+		// Click on DOWNVOTE button
+		const downvoteBtns = await screen.findAllByTestId('downvoteBtn');
+
+		await userEvent.click(downvoteBtns[0]);
+
+		await waitFor(async () => {
+			const scores = await screen.findAllByTestId('score');
+			expect(scores[0]).toHaveTextContent('456');
+		})
+	})
 })

@@ -17,7 +17,7 @@ export default function AnswerCardMenu({ isHiddenBtn, isLoggedIn, userVote, hand
 					{userVote.downvote ? <BsHandThumbsDownFill size={'25px'} /> : <BsHandThumbsDown size={'25px'} />}
 				</button>
 
-				<div className='pt-[13%] text-lg tooltip tooltip-bottom tooltip-info' data-tip={'Score'}>{score}</div>
+				<div data-testid="score" className='pt-[13%] text-lg tooltip tooltip-bottom tooltip-info' data-tip={'Score'}>{score}</div>
 			</div>
 			{!isHiddenBtn && <div className='w-1/2'>
 				<Link to={asnwerUrl} className='btn btn-primary w-full'>
