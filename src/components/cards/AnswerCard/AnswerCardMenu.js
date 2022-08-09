@@ -10,10 +10,10 @@ export default function AnswerCardMenu({ isHiddenBtn, isLoggedIn, userVote, hand
 		<div className='flex justify-between gap-2 border-t-2 pt-3 mt-3 h-16'>
 			<div className='flex justify-center gap-2'>
 
-				<button disabled={!isLoggedIn} onClick={() => handleVote('upvote')} className={`tooltip tooltip-bottom tooltip-info ${isLoggedIn ? null : 'opacity-30'}`} data-tip="Upvote">
+				<button data-testid="upvoteBtn" disabled={!isLoggedIn} onClick={() => handleVote('upvote')} className={`tooltip tooltip-bottom tooltip-info ${isLoggedIn ? null : 'opacity-30'}`} data-tip="Upvote">
 					{userVote.upvote ? <BsHandThumbsUpFill size={'25px'} /> : <BsHandThumbsUp size={'25px'} />}
 				</button>
-				<button disabled={!isLoggedIn} onClick={() => handleVote('downvote')} className={`tooltip tooltip-bottom tooltip-info ${isLoggedIn ? null : 'opacity-30'}`} data-tip="Downvote">
+				<button data-testid="downvoteBtn" disabled={!isLoggedIn} onClick={() => handleVote('downvote')} className={`tooltip tooltip-bottom tooltip-info ${isLoggedIn ? null : 'opacity-30'}`} data-tip="Downvote">
 					{userVote.downvote ? <BsHandThumbsDownFill size={'25px'} /> : <BsHandThumbsDown size={'25px'} />}
 				</button>
 

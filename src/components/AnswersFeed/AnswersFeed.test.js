@@ -1,6 +1,6 @@
-import { render, screen, logDOM, queryByRole } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
-import { AuthProvider } from "../../contexts/AuthContext";
+import { AuthContext } from "../../contexts/AuthContext";
 import { NotificationProvider } from "../../contexts/NotificationContext";
 import AnswersFeed from "./AnswersFeed";
 
@@ -8,11 +8,17 @@ describe('answers feed', () => {
 	test('renders answers from server', async () => {
 		render(
 			<MemoryRouter>
-				<AuthProvider>
+				<AuthContext.Provider value={
+					{
+						userData: null,
+						handleLogin: jest.fn(),
+						handleLogout: jest.fn(),
+					}
+				}>
 					<NotificationProvider>
 						<AnswersFeed />
 					</NotificationProvider>
-				</AuthProvider>
+				</AuthContext.Provider>
 			</MemoryRouter>
 		)
 
@@ -23,11 +29,17 @@ describe('answers feed', () => {
 	test('all answer elements are displayed in card', async () => {
 		render(
 			<MemoryRouter>
-				<AuthProvider>
+				<AuthContext.Provider value={
+					{
+						userData: null,
+						handleLogin: jest.fn(),
+						handleLogout: jest.fn(),
+					}
+				}>
 					<NotificationProvider>
 						<AnswersFeed />
 					</NotificationProvider>
-				</AuthProvider>
+				</AuthContext.Provider>
 			</MemoryRouter>
 		)
 
@@ -48,20 +60,60 @@ describe('answers feed', () => {
 
 		const score = await screen.findByText(/^5$/);
 		expect(score).toBeInTheDocument()
+
+		const detailsBtn = await screen.findAllByRole('link', { name: /details/i });
+		expect(detailsBtn).toHaveLength(2);
 	})
 
-	test('details button doesnt render for guests', () => {
+	test('upvotes and downvote buttons are disabled for guests', async () => {
 		render(
 			<MemoryRouter>
-				<AuthProvider>
+				<AuthContext.Provider value={
+					{
+						userData: null,
+						handleLogin: jest.fn(),
+						handleLogout: jest.fn(),
+					}
+				}>
 					<NotificationProvider>
 						<AnswersFeed />
 					</NotificationProvider>
-				</AuthProvider>
+				</AuthContext.Provider>
 			</MemoryRouter>
 		)
 
-		const detailsBtn = screen.queryByRole('button', { name: /details/i });
-		expect(detailsBtn).toBeNull();
+		const upvoteBtn = await screen.findAllByTestId('upvoteBtn');
+		const downvoteBtn = await screen.findAllByTestId('downvoteBtn');
+		expect(upvoteBtn[0]).toBeDisabled()
+		expect(downvoteBtn[0]).toBeDisabled()
 	})
+
+	test('upvotes and downvote buttons are enabled for users', async () => {
+		render(
+			<MemoryRouter>
+				<AuthContext.Provider value={
+					{
+						userData: {
+							_id: '12asdas3asdasd',
+							accessToken: '123asdasdasd',
+							refreshToken: '12asdasdasd',
+						},
+						handleLogin: jest.fn(),
+						handleLogout: jest.fn(),
+					}
+				}>
+					<NotificationProvider>
+						<AnswersFeed />
+					</NotificationProvider>
+				</AuthContext.Provider>
+			</MemoryRouter>
+		)
+
+		const upvoteBtn = await screen.findAllByTestId('upvoteBtn');
+		const downvoteBtn = await screen.findAllByTestId('downvoteBtn');
+		expect(upvoteBtn[0]).toBeEnabled()
+		expect(downvoteBtn[0]).toBeEnabled()
+	})
+
+	// TODO Test likes on click
 })
