@@ -5,6 +5,7 @@ todo.md
 .firebase
 .cache
 .github
+coverage
 
 # dependencies
 /node_modules
