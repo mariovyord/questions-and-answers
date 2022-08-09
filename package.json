@@ -22,7 +22,7 @@
 	"scripts": {
 		"start": "react-scripts start",
 		"build": "react-scripts build",
-		"test": "react-scripts test",
+		"test": "react-scripts test --maxWorkers=2 --transformIgnorePatterns \"node_modules/(?!react-markdown)/\" --env=jsdom",
 		"eject": "react-scripts eject",
 		"deploy": "react-scripts build && firebase deploy"
 	},

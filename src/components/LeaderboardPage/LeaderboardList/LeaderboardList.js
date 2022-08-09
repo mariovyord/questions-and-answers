@@ -15,26 +15,24 @@ const LeaderboardList = ({ list }) => {
 			</thead>
 			<tbody>
 				{list.map((x, i) => {
-					return <>
-						<tr key={x._id} className={`hover ${i === 0 ? 'bg-primary z-50' : ''}`}>
-							<td className="font-bold">{i + 1}</td>
-							<td>
-								<div class="flex items-center space-x-3">
-									<div>
-										<Link
-											to={`/profile/${x._id}`}
-											className={`flex font-bold link-hover ${i === 0 ? 'text-lg' : ''}`}
-										>
-											{x.user.firstName} {x.user.lastName} {i === 0 ? <div className="pl-2 text-amber-500"><AiOutlineCrown size="25px" /></div> : null}
-										</Link>
-										<div class="text-sm opacity-50">@{x.user.username}</div>
-									</div>
+					return <tr key={x._id} className={`hover ${i === 0 ? 'bg-primary z-50' : ''}`}>
+						<td className="font-bold">{i + 1}</td>
+						<td>
+							<div className="flex items-center space-x-3">
+								<div>
+									<Link
+										to={`/profile/${x._id}`}
+										className={`flex font-bold link-hover ${i === 0 ? 'text-lg' : ''}`}
+									>
+										{x.user.firstName} {x.user.lastName} {i === 0 ? <div className="pl-2 text-amber-500"><AiOutlineCrown size="25px" /></div> : null}
+									</Link>
+									<div className="text-sm opacity-50">@{x.user.username}</div>
 								</div>
-							</td>
-							<td>{x.totalScore}</td>
-							<td><Link to={`/profile/${x._id}`} className="link-hover">Details</Link></td>
-						</tr>
-					</>
+							</div>
+						</td>
+						<td>{x.totalScore}</td>
+						<td><Link to={`/profile/${x._id}`} className="link-hover">Details</Link></td>
+					</tr>
 				})}
 			</tbody>
 		</table >

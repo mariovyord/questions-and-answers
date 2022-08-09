@@ -80,10 +80,10 @@ export default function AnswerCard({ isHiddenBtn, answer: data }) {
 
 			{/* Question */}
 			<div className='py-2'>
-				<div className='font-bold'>
+				<h3 className='font-bold'>
 					{/* Link to question details */}
 					<Link to={"/questions/" + answer.question} className='link-hover'>{answer.meta.question}</Link>
-				</div>
+				</h3>
 				<div>
 					{/* Link to circle details */}
 					<span className='text-xs text-gray-500'>Circle: <Link to={"/circles/" + answer.circle} className='link-hover'>{toTitleCase(answer.meta.circle)}</Link></span>
