@@ -37,6 +37,12 @@ describe('answers feed', () => {
 		const circle = await screen.findByRole('link', { name: /programming/i })
 		expect(circle).toBeInTheDocument();
 
+		const user = await screen.findByRole('link', { name: /Mario Yordanov/i })
+		expect(user).toBeInTheDocument();
+
+		const profilePic = await screen.findByAltText('Profile of Mario')
+		expect(profilePic).toHaveAttribute('src', 'https://i.imgur.com/73kg6yl.png')
+
 		const answer = await screen.findByText(/Because it was designed for GUI/i);
 		expect(answer).toBeInTheDocument();
 

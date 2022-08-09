@@ -67,7 +67,7 @@ export default function AnswerCard({ isHiddenBtn, answer: data }) {
 						<div className="w-10 rounded-full">
 							{/* Link to user profile */}
 							<Link to={'/profile/' + answer.owner._id} className='place-self-center link-hover'>
-								<img src={answer.owner.imageUrl} alt='Profile' />
+								<img src={answer.owner.imageUrl} alt={`Profile of ${answer.owner.firstName}`} />
 							</Link>
 						</div>
 					</div>
