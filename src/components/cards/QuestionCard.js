@@ -14,6 +14,7 @@ import Modal from '../common/Modal';
 export default function QuestionCard({ data }) {
 	const questionUrl = '/questions/' + data._id;
 	const circleUrl = '/circles/' + data.circle;
+	const [isHidden, setIsHidden] = useState(false);
 
 	const handleNotification = useNotificationContext();
 	const userData = useUserData();
@@ -27,19 +28,20 @@ export default function QuestionCard({ data }) {
 	const handleHide = () => {
 		dataService.hideQuestionById(data._id, true)
 			.then(x => {
-				handleNotification('success', 'Question hidden from profile!')
-			})
-			.then(x => {
-				handleModal();
+				handleNotification('success', 'Question hidden from profile!');
+				setIsHidden(true);
 			})
 			.catch(err => {
 				handleNotification('error', 'Something went wrong!')
+			})
+			.finally(x => {
+				handleModal();
 			})
 	}
 
 	return (
 		<>
-			<div className='w-full bg-base-100 shadow p-4 rounded-lg transition-all relative'>
+			<div className={`w-full bg-base-100 shadow p-4 rounded-lg transition-all relative ${isHidden ? 'hidden' : ''}`}>
 				{userData && userData._id === data.owner && <div
 					onClick={() => handleModal()}
 					className='absolute top-2 right-2 cursor-pointer link-hover tooltip tooltip-left'
