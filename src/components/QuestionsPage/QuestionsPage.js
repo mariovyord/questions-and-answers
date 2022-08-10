@@ -49,11 +49,6 @@ export default function QuestionsPage({ questions }) {
 		handleQuery(page, where);
 	}
 
-	const content = <>
-		{data.map(x => <QuestionCard key={x._id} data={x} />)}
-	</>
-
-
 	return (
 		<div className='grid grid-cols-5 gap-2 max-w-6xl p-2 w-full'>
 
@@ -92,7 +87,11 @@ export default function QuestionsPage({ questions }) {
 					{
 						loading
 							? <Spinner />
-							: <> {data.length > 0 ? content : <NoContent content='questions' />} </>
+							: <> {data.length > 0
+								? data.map(x => <QuestionCard key={x._id} data={x} />)
+								: <NoContent content='questions'
+								/>}
+							</>
 					}
 				</div>
 			</div>
@@ -100,9 +99,7 @@ export default function QuestionsPage({ questions }) {
 			{/* Sidebar Right */}
 			{
 				isDesktop
-					? <div className={'col-span-1'}>
-						<FeauturedCircle />
-					</div>
+					? <div className={'col-span-1'}><FeauturedCircle /></div>
 					: null
 			}
 		</div >

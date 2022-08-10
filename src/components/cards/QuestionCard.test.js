@@ -1,8 +1,6 @@
-import { render, screen } from "@testing-library/react";
+import { render as renderWithGuest, screen } from "../../testUtils/renderWithGuest";
+import { render as renderWithUser } from "../../testUtils/renderWithUser";
 import userEvent from "@testing-library/user-event";
-import { MemoryRouter } from 'react-router-dom';
-import { AuthContext } from "../../contexts/AuthContext";
-import { NotificationProvider } from "../../contexts/NotificationContext";
 import QuestionCard from "./QuestionCard";
 
 const questionData = {
@@ -22,19 +20,7 @@ const questionData = {
 
 describe('question card', () => {
 	test('question displays correctly for guests', () => {
-		render(<MemoryRouter>
-			<AuthContext.Provider value={
-				{
-					userData: null,
-					handleLogin: jest.fn(),
-					handleLogout: jest.fn(),
-				}
-			}>
-				<NotificationProvider>
-					<QuestionCard data={questionData} />
-				</NotificationProvider>
-			</AuthContext.Provider>
-		</MemoryRouter>);
+		renderWithGuest(<QuestionCard data={questionData} />);
 
 		const questionBody = screen.getByRole('link', { name: 'Hello World?' });
 		expect(questionBody).toBeInTheDocument();
@@ -47,21 +33,7 @@ describe('question card', () => {
 	})
 
 	test('question displays correctly for owner', () => {
-		render(<MemoryRouter>
-			<AuthContext.Provider value={
-				{
-					userData: {
-						_id: '123abc'
-					},
-					handleLogin: jest.fn(),
-					handleLogout: jest.fn(),
-				}
-			}>
-				<NotificationProvider>
-					<QuestionCard data={questionData} />
-				</NotificationProvider>
-			</AuthContext.Provider>
-		</MemoryRouter>);
+		renderWithUser(<QuestionCard data={questionData} />);
 
 		// Check body
 		const questionBody = screen.getByRole('link', { name: 'Hello World?' });
@@ -77,21 +49,7 @@ describe('question card', () => {
 	})
 
 	test('owner can hide question from his profile', async () => {
-		render(<MemoryRouter>
-			<AuthContext.Provider value={
-				{
-					userData: {
-						_id: '123abc'
-					},
-					handleLogin: jest.fn(),
-					handleLogout: jest.fn(),
-				}
-			}>
-				<NotificationProvider>
-					<QuestionCard data={questionData} />
-				</NotificationProvider>
-			</AuthContext.Provider>
-		</MemoryRouter>);
+		renderWithUser(<QuestionCard data={questionData} />);
 
 
 		// Get hide btn and click it to hide question

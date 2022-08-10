@@ -1,48 +1,18 @@
-import { render, screen, waitFor } from "@testing-library/react";
+import { render as renderWithGuest, screen, waitFor } from "../../testUtils/renderWithGuest";
+import { render as renderWithUser } from "../../testUtils/renderWithUser";
 import userEvent from "@testing-library/user-event";
-import { MemoryRouter } from "react-router-dom";
-import { AuthContext } from "../../contexts/AuthContext";
-import { NotificationProvider } from "../../contexts/NotificationContext";
 import AnswersFeed from "./AnswersFeed";
 
 describe('answers feed', () => {
 	test('renders answers from server', async () => {
-		render(
-			<MemoryRouter>
-				<AuthContext.Provider value={
-					{
-						userData: null,
-						handleLogin: jest.fn(),
-						handleLogout: jest.fn(),
-					}
-				}>
-					<NotificationProvider>
-						<AnswersFeed />
-					</NotificationProvider>
-				</AuthContext.Provider>
-			</MemoryRouter>
-		)
+		renderWithGuest(<AnswersFeed />);
 
 		const questions = await screen.findAllByRole('heading');
 		expect(questions).toHaveLength(2);
 	});
 
 	test('all answer elements are displayed in card', async () => {
-		render(
-			<MemoryRouter>
-				<AuthContext.Provider value={
-					{
-						userData: null,
-						handleLogin: jest.fn(),
-						handleLogout: jest.fn(),
-					}
-				}>
-					<NotificationProvider>
-						<AnswersFeed />
-					</NotificationProvider>
-				</AuthContext.Provider>
-			</MemoryRouter>
-		)
+		renderWithGuest(<AnswersFeed />);
 
 		const question = await screen.findByRole('heading', { name: 'Why are we on this Earth?' });
 		expect(question).toBeInTheDocument();
@@ -67,21 +37,7 @@ describe('answers feed', () => {
 	})
 
 	test('upvotes and downvote buttons are disabled for guests', async () => {
-		render(
-			<MemoryRouter>
-				<AuthContext.Provider value={
-					{
-						userData: null,
-						handleLogin: jest.fn(),
-						handleLogout: jest.fn(),
-					}
-				}>
-					<NotificationProvider>
-						<AnswersFeed />
-					</NotificationProvider>
-				</AuthContext.Provider>
-			</MemoryRouter>
-		)
+		renderWithGuest(<AnswersFeed />);
 
 		const upvoteBtns = await screen.findAllByTestId('upvoteBtn');
 		const downvoteBtns = await screen.findAllByTestId('downvoteBtn');
@@ -90,25 +46,7 @@ describe('answers feed', () => {
 	})
 
 	test('upvotes and downvote buttons are enabled for users', async () => {
-		render(
-			<MemoryRouter>
-				<AuthContext.Provider value={
-					{
-						userData: {
-							_id: '12asdas3asdasd',
-							accessToken: '123asdasdasd',
-							refreshToken: '12asdasdasd',
-						},
-						handleLogin: jest.fn(),
-						handleLogout: jest.fn(),
-					}
-				}>
-					<NotificationProvider>
-						<AnswersFeed />
-					</NotificationProvider>
-				</AuthContext.Provider>
-			</MemoryRouter>
-		)
+		renderWithUser(<AnswersFeed />);
 
 		const upvoteBtns = await screen.findAllByTestId('upvoteBtn');
 		const downvoteBtns = await screen.findAllByTestId('downvoteBtn');
@@ -117,25 +55,7 @@ describe('answers feed', () => {
 	})
 
 	test('upvote and downvote click updates the score', async () => {
-		render(
-			<MemoryRouter>
-				<AuthContext.Provider value={
-					{
-						userData: {
-							_id: '12asdas3asdasd',
-							accessToken: '123asdasdasd',
-							refreshToken: '12asdasdasd',
-						},
-						handleLogin: jest.fn(),
-						handleLogout: jest.fn(),
-					}
-				}>
-					<NotificationProvider>
-						<AnswersFeed />
-					</NotificationProvider>
-				</AuthContext.Provider>
-			</MemoryRouter>
-		)
+		renderWithUser(<AnswersFeed />);
 
 		// Click on UPVOTE button
 		const upvoteBtns = await screen.findAllByTestId('upvoteBtn');

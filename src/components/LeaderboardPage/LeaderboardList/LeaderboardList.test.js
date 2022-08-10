@@ -34,17 +34,13 @@ const listOfUsers = [
 
 describe('leaderboard', () => {
 	test('all rows appear in leaderboard', async () => {
-		render(
-			<LeaderboardList list={listOfUsers} />, { wrapper: MemoryRouter }
-		)
+		render(<LeaderboardList list={listOfUsers} />, { wrapper: MemoryRouter })
 		const allRows = screen.getAllByRole('row');
 		expect(allRows).toHaveLength(4);
 	})
 
 	test('user data appear', () => {
-		render(
-			<LeaderboardList list={listOfUsers} />, { wrapper: MemoryRouter }
-		)
+		render(<LeaderboardList list={listOfUsers} />, { wrapper: MemoryRouter })
 		const user1 = screen.getByRole('link', { name: 'User1 Userson1' })
 		expect(user1).toBeInTheDocument();
 
@@ -53,9 +49,7 @@ describe('leaderboard', () => {
 	})
 
 	test('first user has proper hrefs on name and details btn', async () => {
-		render(
-			<LeaderboardList list={listOfUsers} />, { wrapper: MemoryRouter }
-		)
+		render(<LeaderboardList list={listOfUsers} />, { wrapper: MemoryRouter })
 
 		const user1name = screen.getByRole('link', { name: 'User1 Userson1' });
 		const user1DetailsBtn = screen.getAllByRole('link', { name: 'Details' })[0];

@@ -210,5 +210,30 @@ export const handlers = [
 				}
 			)
 		)
-	})
+	}),
+	// Questions
+	rest.get(`http://localhost:3030/api/collections/questions`, async (req, res, ctx) => {
+		return res(
+			ctx.json(
+				{
+					result: [
+						{
+							"meta": {
+								"circle": "history"
+							},
+							"_id": "62d2876ab15e38f389a873a4",
+							"body": "Why hello World?",
+							"owner": "123abc",
+							"circle": "62cd3571e2b51c2dae1516b5",
+							"isHidden": false,
+							"isEditDisabled": false,
+							"createdAt": "2022-07-16T09:39:54.439Z",
+							"updatedAt": "2022-07-29T08:37:37.622Z",
+							"__v": 0
+						}
+					]
+				}
+			)
+		)
+	}),
 ]

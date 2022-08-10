@@ -38,23 +38,22 @@ export default function QuestionDetailsPage() {
 		setNewAnswers((arr) => [answer, ...arr])
 	}
 
+	const shadowCard = <div className='p-3 bg-base-100 rounded-lg shadow animate-pulse w-full'>
+		<div className='h-8 bg-slate-200 rounded w-full mb-2'></div>
+		<div className='h-4 bg-slate-200 rounded w-full mb-2'></div>
+	</div>;
+
+	const noContent = <div className='p-3 bg-base-100 rounded-lg shadow  w-full'>
+		<h1 className='font-bold text-2xl mb-2 italic'>The question is missing or has been deleted</h1>
+	</div>;
+
 	return (
 		<div className='grid grid-cols-5 gap-2 max-w-6xl p-2 w-full'>
 			<div className='col-span-5 md:col-span-3 flex flex-col gap-2 w-full'>
 
-				{loading && <>
-					<div className='p-3 bg-base-100 rounded-lg shadow animate-pulse w-full'>
-						<div className='h-8 bg-slate-200 rounded w-full mb-2'></div>
-						<div className='h-4 bg-slate-200 rounded w-full mb-2'></div>
-					</div>
-				</>}
+				{loading && shadowCard}
 
-				{!loading && question === null && <>
-					<div className='p-3 bg-base-100 rounded-lg shadow  w-full'>
-						<h1 className='font-bold text-2xl mb-2 italic'>The question is missing or has been deleted</h1>
-					</div>
-
-				</>}
+				{!loading && question === null && noContent}
 
 				{!loading && question !== null && <>
 					<div className='h-fit p-3 bg-base-100 rounded-lg shadow  w-full'>
@@ -88,7 +87,8 @@ export default function QuestionDetailsPage() {
 								</div>
 							</div>
 						</div>
-					</div>}
+					</div>
+					}
 				</>}
 
 				{/* New Answers from User */}
