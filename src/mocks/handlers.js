@@ -135,4 +135,72 @@ export const handlers = [
 			)
 		)
 	}),
+	// Get all comments
+	rest.get(`http://localhost:3030/api/collections/comments`, async (req, res, ctx) => {
+		return res(
+			ctx.json(
+				{
+					result: [
+						{
+							"_id": "niceid",
+							"body": "Great answer!!! <3",
+							"owner": {
+								"_id": "123abc",
+								"firstName": "John",
+								"lastName": "Johnson",
+								"imageUrl": "https://i.imgur.com/73kg6yl.png"
+							},
+							"answer": "123jkm",
+							"createdAt": "2022-07-16T09:30:15.152Z",
+							"updatedAt": "2022-07-27T13:30:51.830Z",
+							"__v": 0
+						}
+					]
+				}
+			)
+		)
+	}),
+	// Post comment
+	rest.post(`http://localhost:3030/api/collections/comments`, async (req, res, ctx) => {
+		const comment = await req.json()
+		return res(
+			ctx.json(
+				{
+					result: {
+						"_id": "niceid2",
+						"body": comment.body,
+						"owner": comment.owner,
+						"answer": comment.answer,
+						"createdAt": "2022-07-16T09:30:15.152Z",
+						"updatedAt": "2022-07-27T13:30:51.830Z",
+						"__v": 0
+					}
+				}
+			)
+		)
+	}),
+	// Get one comment
+	rest.get(`http://localhost:3030/api/collections/comments/*`, async (req, res, ctx) => {
+		return res(
+			ctx.json(
+				{
+					result: {
+						"_id": "niceid2",
+						"body": 'Hello World!',
+						"owner": {
+							"_id": "123abc",
+							"firstName": "John",
+							"lastName": "Johnson",
+							"imageUrl": "https://i.imgur.com/73kg6yl.png"
+						},
+						"answer": '123jkm',
+						"createdAt": "2022-07-16T09:30:15.152Z",
+						"updatedAt": "2022-07-27T13:30:51.830Z",
+						"__v": 0
+					}
+				}
+			)
+		)
+	}),
+
 ]

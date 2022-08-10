@@ -43,7 +43,7 @@ const CommentsSection = ({ answerId, userData }) => {
 	return (
 		<>
 			{userData && <div className='p-4'>
-				<AddComment answerId={answerId} addComment={addComment} />
+				<AddComment answerId={answerId} addComment={addComment} userData={userData} />
 			</div>}
 			<div className='p-4'>
 				<h2 className='font-bold text-2xl mb-2'>Comments</h2>
@@ -51,7 +51,7 @@ const CommentsSection = ({ answerId, userData }) => {
 					{loading && 'Loading'}
 					{!loading && data.length === 0 && 'No comments'}
 					{!loading && data.length > 0 && <>
-						{data.map(x => <div key={x._id}>{<CommentCard comment={x} handleChange={handleChange} />}</div>)}
+						{data.map(x => <div key={x._id}>{<CommentCard comment={x} handleChange={handleChange} userData={userData} />}</div>)}
 					</>}
 				</div>
 			</div>

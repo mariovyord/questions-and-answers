@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import useUserData from '../../../hooks/useUserData';
 import { Formik } from 'formik';
 import FormTextarea from '../../form/FormTextarea';
 import { BsTrash } from 'react-icons/bs';
@@ -11,8 +10,7 @@ import Modal from '../../common/Modal';
 
 
 
-const CommentCard = ({ comment, handleChange }) => {
-	const userData = useUserData();
+const CommentCard = ({ comment, handleChange, userData }) => {
 	const [lockComment, setLockComment] = useState(true);
 	const [openModal, SetOpenModal] = useState(false);
 

@@ -1,13 +1,10 @@
-import React, { useState } from 'react';
 import { Formik } from 'formik';
 import FormTextarea from '../../form/FormTextarea';
 import useNotificationContext from '../../../hooks/useNotificationContext';
 import { postComment } from '../../../services/data.service';
-import useUserData from '../../../hooks/useUserData';
 
-const AddComment = ({ answerId, addComment }) => {
+const AddComment = ({ answerId, addComment, userData }) => {
 
-	const userData = useUserData();
 	const handleNotification = useNotificationContext();
 
 	const validate = values => {
