@@ -1,27 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 
-import { getQuestionsByOwnerId, getUserDataById } from '../../services/data.service';
+import { getUserDataById } from '../../services/data.service';
 import useUserData from '../../hooks/useUserData';
 
-import QuestionCard from '../cards/QuestionCard';
 import AnswersFeed from '../AnswersFeed/AnswersFeed';
 import useNotificationContext from '../../hooks/useNotificationContext';
-import EditProfileForm from './forms/EditProfileForm';
-import UploadImageForm from './forms/UploadImageForm';
 import UserCard from './userCards/UserCard';
 import ShadowUserCard from './userCards/ShadowUserCard';
 import isAuth from '../../hoc/isAuth';
-import ThemeChanger from '../common/ThemeChanger';
+import UserQuestions from './sidebars/UserQuestions';
+import Settings from './sidebars/Settings';
+import EditProfile from './sidebars/EditProfile';
 
 const ProfilePage = () => {
-	const [showQuestions, setShowQuestions] = useState(false);
-	const [showEditProfile, setShowEditProfile] = useState(false);
-	const [showSettings, setShowSettings] = useState(false);
-
-	const [questions, setQuestions] = useState([]);
-	const [loadingQuestions, setLoadingQuestions] = useState(false)
-
 	const [isOwner, setIsOwner] = useState(false);
 
 	// Profile from data service
@@ -66,23 +58,6 @@ const ProfilePage = () => {
 		setProfile((p) => ({ ...p, ...values }))
 	}
 
-	const handleShowQuestions = () => {
-		setLoadingQuestions(true);
-
-		if (showQuestions) {
-			setLoadingQuestions(false);
-			return setShowQuestions(!showQuestions)
-		};
-
-		getQuestionsByOwnerId(profileId)
-			.then(x => {
-				// TODO Dont get hidden questions from server - but for now server doesnt handle multiple of the same query
-				setQuestions(x.result.filter(x => x.isHidden !== true));
-				setShowQuestions(!showQuestions)
-				setLoadingQuestions(false);
-			});
-	}
-
 	return (
 		<div className='grid grid-cols-5 gap-2 max-w-6xl p-2 w-full'>
 
@@ -94,59 +69,16 @@ const ProfilePage = () => {
 					</div>
 					: <div className='col-span-5 md:col-span-2 w-full'>
 						<UserCard profile={profile} />
-						<div>
-							<div>
-								{isOwner && <button
-									onClick={() => setShowSettings((x) => !x)}
-									className='btn btn-warning btn-outline w-full mb-2'
-								>
-									{showSettings ? 'Close' : 'Settings'}
-								</button>}
-								{showSettings && <div className=''>
-									<ThemeChanger />
-								</div>}
-							</div>
-							<div>
-								{/* Edit profile options */}
-								{isOwner && <button
-									onClick={() => setShowEditProfile((x) => !x)}
-									className='btn btn-primary btn-outline w-full mb-2'
-								>
-									{showEditProfile ? 'Close' : 'Edit Profile'}
-								</button>}
-								{showEditProfile && <div className='flex flex-col gap-2 mb-4'>
-									<div className='border border-primary rounded-lg p-4 bg-base-100 shadow'>
-										<h3 className='font-bold text-2xl'>Profile picture</h3>
-										<div className='py-4'>
-											<UploadImageForm userId={userData._id} handleSetProfile={handleSetProfile} />
-										</div>
-									</div>
-									<div className='border border-primary rounded-lg p-4 bg-base-100 shadow'>
-										<h3 className='font-bold text-2xl'>Edit info</h3>
-										<EditProfileForm profile={profile} handleSetProfile={handleSetProfile} />
-									</div>
-								</div>}
-							</div>
+						{isOwner && <>
+							{/* User settings */}
+							<Settings isOwner={isOwner} />
+
+							{/* Edit profile options */}
+							<EditProfile handleSetProfile={handleSetProfile} profile={profile} userData={userData} />
+
 							{/* Show/hide user questions options */}
-							<div className='pb-2'>
-								<button
-									onClick={handleShowQuestions}
-									className='btn btn-secondary btn-outline w-full'
-									disabled={loadingQuestions}
-								>
-									{showQuestions ? 'Hide questions' : 'Show questions'}
-								</button>
-							</div>
-							{showQuestions && <>
-								{questions.length > 0
-									? <div className='grid gap-2 max-h-[500px] overflow-y-auto overflow-x-hidden'>
-										{questions.map(x => <QuestionCard key={x._id} data={x} />)}
-									</div>
-									: <h2>No questions</h2>
-								}
-							</>
-							}
-						</div>
+							<UserQuestions profileId={profileId} />
+						</>}
 					</div>
 			}
 
