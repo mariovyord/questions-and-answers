@@ -41,11 +41,13 @@ export default function QuestionCard({ data }) {
 
 	return (
 		<>
-			<div className={`w-full bg-base-100 shadow p-4 rounded-lg transition-all relative ${isHidden ? 'hidden' : ''}`}>
+			<div data-testid="question-card" className={`w-full bg-base-100 shadow p-4 rounded-lg transition-all relative ${isHidden ? 'hidden' : ''}`}>
 				{userData && userData._id === data.owner && <div
 					onClick={() => handleModal()}
 					className='absolute top-2 right-2 cursor-pointer link-hover tooltip tooltip-left'
-					data-tip="Hide from profile">
+					data-tip="Hide from profile"
+					data-testid="hide-btn"
+				>
 					<BiHide />
 				</div>
 				}

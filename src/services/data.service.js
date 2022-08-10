@@ -15,6 +15,7 @@ export const deleteCircle = (_id) => del(`/collections/circles/${_id}`);
 
 // Questions
 export const getQuestion = (_id) => get(`/collections/questions/${_id}`);
+// TODO filter out hidden questions
 export const getQuestionsByOwnerId = (ownerId) => get(`/collections/questions?where=owner=${ownerId}`);
 export const getQuestionsInCircleCount = (_id) => get(`/collections/questions?where=circle=${_id}&count=true`)
 

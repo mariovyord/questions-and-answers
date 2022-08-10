@@ -202,5 +202,13 @@ export const handlers = [
 			)
 		)
 	}),
-
+	rest.patch('http://localhost:3030/api/collections/questions/*', (req, res, ctx) => {
+		return res(
+			ctx.json(
+				{
+					result: {},
+				}
+			)
+		)
+	})
 ]

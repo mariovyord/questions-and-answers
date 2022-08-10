@@ -116,7 +116,7 @@ describe('answers feed', () => {
 		expect(downvoteBtns[0]).toBeEnabled()
 	})
 
-	test.only('upvote and downvote click updates the score', async () => {
+	test('upvote and downvote click updates the score', async () => {
 		render(
 			<MemoryRouter>
 				<AuthContext.Provider value={
