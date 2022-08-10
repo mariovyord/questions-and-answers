@@ -17,4 +17,4 @@ const UserCard = ({ profile }) => {
 	)
 }
 
-export default UserCard
+export default UserCard;
