@@ -1,5 +1,4 @@
-import { render as renderWithGuest, screen, waitFor } from "../../testUtils/renderWithGuest";
-import { render as renderWithUser } from "../../testUtils/renderWithUser";
+import { renderWithGuest, renderWithUser, screen, waitFor } from "../../testUtils/customRender";
 import userEvent from "@testing-library/user-event";
 import AnswersFeed from "./AnswersFeed";
 

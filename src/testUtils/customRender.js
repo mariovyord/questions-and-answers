@@ -3,7 +3,27 @@ import { MemoryRouter } from 'react-router-dom';
 import { AuthContext } from '../contexts/AuthContext';
 import { NotificationProvider } from '../contexts/NotificationContext';
 
-const AllTheProviders = ({ children }) => {
+const ProvidersWithGuest = ({ children }) => {
+	return (
+		<MemoryRouter>
+			<AuthContext.Provider value={
+				{
+					userData: null,
+					handleLogin: jest.fn(),
+					handleLogout: jest.fn(),
+				}
+			}>
+				<NotificationProvider>
+
+					{children}
+
+				</NotificationProvider>
+			</AuthContext.Provider>
+		</MemoryRouter>
+	)
+}
+
+const ProvidersWithUser = ({ children }) => {
 	return (
 		<MemoryRouter>
 			<AuthContext.Provider value={
@@ -27,11 +47,17 @@ const AllTheProviders = ({ children }) => {
 	)
 }
 
-const customRender = (ui, options) =>
-	render(ui, { wrapper: AllTheProviders, ...options })
+const renderWithGuest = (ui, options) =>
+	render(ui, { wrapper: ProvidersWithGuest, ...options })
+
+const renderWithUser = (ui, options) =>
+	render(ui, { wrapper: ProvidersWithUser, ...options })
 
 // re-export everything
 export * from '@testing-library/react'
 
 // override render method
-export { customRender as render }
+export {
+	renderWithGuest,
+	renderWithUser,
+}
