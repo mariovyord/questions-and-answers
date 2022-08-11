@@ -69,6 +69,7 @@ const ProfilePage = () => {
 					</div>
 					: <div className='col-span-5 md:col-span-2 w-full'>
 						<UserCard profile={profile} />
+
 						{isOwner && <>
 							{/* User settings */}
 							<Settings isOwner={isOwner} />
@@ -76,9 +77,10 @@ const ProfilePage = () => {
 							{/* Edit profile options */}
 							<EditProfile handleSetProfile={handleSetProfile} profile={profile} userData={userData} />
 
-							{/* Show/hide user questions options */}
-							<UserQuestions profileId={profileId} />
 						</>}
+
+						{/* Show/hide user questions options */}
+						<UserQuestions profileId={profileId} />
 					</div>
 			}
 

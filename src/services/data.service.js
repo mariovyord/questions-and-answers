@@ -1,4 +1,4 @@
-import { get, post, del, put, patch } from "./requests.service";
+import { get, post, del, patch } from "./requests.service";
 
 export const getData = (url) => get(url);
 

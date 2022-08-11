@@ -236,4 +236,45 @@ export const handlers = [
 			)
 		)
 	}),
+	// User profile
+	rest.get(`http://localhost:3030/api/users/*`, async (req, res, ctx) => {
+		return res(
+			ctx.json(
+				{
+					"result": {
+						_id: "123abc",
+						username: 'user123',
+						firstName: 'John',
+						lastName: 'Johnson',
+						description: 'Cool human',
+						imageUrl: 'https://i.imgur.com/73kg6yl.png',
+						role: "user",
+						createdAt: "2022-07-16T16:39:03.176Z",
+						updatedAt: "2022-07-28T11:02:34.703Z"
+					}
+				}
+			)
+		)
+	}),
+	rest.patch(`http://localhost:3030/api/users/*`, async (req, res, ctx) => {
+		const data = await req.json();
+
+		return res(
+			ctx.json(
+				{
+					result: {
+						_id: "123abc",
+						username: data.username,
+						firstName: data.firstName,
+						lastName: data.lastName,
+						description: data.description,
+						imageUrl: 'https://i.imgur.com/73kg6yl.png',
+						role: "user",
+						createdAt: "2022-07-16T16:39:03.176Z",
+						updatedAt: "2022-07-28T11:02:34.703Z"
+					}
+				}
+			)
+		)
+	}),
 ]
