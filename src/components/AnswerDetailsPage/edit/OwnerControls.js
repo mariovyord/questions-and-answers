@@ -7,7 +7,6 @@ const OwnerControls = ({
 	handleSetNewBody,
 	handleDelete,
 	_id,
-	loading
 }) => {
 
 	const [openModal, SetOpenModal] = useState(false);
@@ -44,21 +43,20 @@ const OwnerControls = ({
 					</div>
 					<div className="collapse-content">
 
-						{!loading && <>
-							<EditAnswerForm
-								answerId={_id}
-								handleSetNewBody={handleSetNewBody}
-								question={{
-									body: data.meta.question,
-									owner: data._id,
-									circle: data.circle,
-									meta: {
-										circle: data.meta.circle
-									}
-								}}
-								handleChange={handleChange}
-								values={data.body} />
-						</>}
+						<EditAnswerForm
+							answerId={_id}
+							handleSetNewBody={handleSetNewBody}
+							question={{
+								body: data.meta.question,
+								owner: data._id,
+								circle: data.circle,
+								meta: {
+									circle: data.meta.circle
+								}
+							}}
+							handleChange={handleChange}
+							values={data.body}
+						/>
 
 						<div className="alert shadow-lg">
 							<div>

@@ -118,4 +118,4 @@ const CircleDetails = () => {
 	)
 }
 
-export default isAuth(CircleDetails)
+export default isAuth(CircleDetails);

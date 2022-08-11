@@ -14,18 +14,16 @@ import CommentsSection from './comments/CommentsSection';
 import OwnerControls from './edit/OwnerControls';
 
 const AnswerDetailsPage = () => {
-	const handleNotification = useNotificationContext();
-	const navigate = useNavigate();
-
-	const [isDesktop] = useIsDesktop();
-
-	const userData = useUserData()
-
-	const { _id } = useParams();
-
+	// Answer details
 	const [data, setData] = useState([]);
 	const [loading, setLoading] = useState(true);
 
+	// Doesnt render left sidebar on mobile and right sidebar goes on bottom
+	const [isDesktop] = useIsDesktop();
+
+	const userData = useUserData()
+	const { _id } = useParams();
+	const navigate = useNavigate();
 	const handleNotifications = useNotificationContext();
 
 	useEffect(() => {
@@ -33,7 +31,7 @@ const AnswerDetailsPage = () => {
 	}, []);
 
 	useEffect(() => {
-		setLoading(true)
+		setLoading(true);
 
 		getAnswer(_id)
 			.then(result => {
@@ -52,30 +50,16 @@ const AnswerDetailsPage = () => {
 	}
 
 	const handleDelete = () => {
-		handleNotification('info', 'Deleting answer!');
+		handleNotifications('info', 'Deleting answer!');
 		deleteAnswerById(_id)
 			.then(x => {
-				handleNotification('success', 'Answer deleted!');
+				handleNotifications('success', 'Answer deleted!');
 				navigate('/');
 			})
 			.catch(err => {
-				handleNotification('error', err[0]?.message || 'Something went wrong!');
+				handleNotifications('error', err[0]?.message || 'Something went wrong!');
 			})
 	}
-
-	const mainTemplate = <>
-		<div>
-			<AnswerCard isHiddenBtn={true} answer={data} />
-			{userData && userData._id == data?.owner?._id && <OwnerControls
-				data={data}
-				handleSetNewBody={handleSetNewBody}
-				handleDelete={handleDelete}
-				_id={_id}
-				loading={loading}
-			/>}
-			<CommentsSection answerId={_id} userData={userData} />
-		</div>
-	</>
 
 	return (
 		<div className='grid grid-cols-5 gap-2 max-w-6xl p-2 w-full'>
@@ -92,7 +76,17 @@ const AnswerDetailsPage = () => {
 			<div className='col-span-5 md:col-span-3 flex flex-col gap-2'>
 				{loading
 					? <Spinner />
-					: mainTemplate}
+					: <div>
+						<AnswerCard isHiddenBtn={true} answer={data} />
+						{userData && userData._id == data?.owner?._id && <OwnerControls
+							data={data}
+							handleSetNewBody={handleSetNewBody}
+							handleDelete={handleDelete}
+							_id={_id}
+						/>}
+						<CommentsSection answerId={_id} userData={userData} />
+					</div>
+				}
 			</div>
 
 			{/* Sidebar Right */}
@@ -104,4 +98,4 @@ const AnswerDetailsPage = () => {
 	)
 }
 
-export default AnswerDetailsPage
+export default AnswerDetailsPage;
