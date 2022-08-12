@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, Navigate, useParams } from 'react-router-dom';
 
 import useFetch from '../../hooks/useFetch';
 import useUserData from '../../hooks/useUserData';
@@ -20,7 +20,9 @@ export default function QuestionDetailsPage() {
 
 	const { id: questionId } = useParams();
 
-	const [question, loading] = useFetch(`/collections/questions/${questionId}`);
+	const [question, loading, error] = useFetch(`/collections/questions/${questionId}`);
+
+
 
 	useEffect(() => {
 		document.title = "Question Details"
@@ -46,6 +48,10 @@ export default function QuestionDetailsPage() {
 	const noContent = <div className='p-3 bg-base-100 rounded-lg shadow  w-full'>
 		<h1 className='font-bold text-2xl mb-2 italic'>The question is missing or has been deleted</h1>
 	</div>;
+
+	if (error) {
+		return <Navigate to="404" />;
+	}
 
 	return (
 		<div className='grid grid-cols-5 gap-2 max-w-6xl p-2 w-full'>

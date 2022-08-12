@@ -38,7 +38,8 @@ const AnswerDetailsPage = () => {
 				setData(result.result);
 			})
 			.catch(err => {
-				handleNotifications('error', 'Error fetching data from server')
+				handleNotifications('error', 'Error fetching data from server');
+				navigate('/');
 			})
 			.finally(() => {
 				setLoading(false);
